@@ -1,7 +1,11 @@
 package tfar.bensfintasticsharkmod;
 
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.entity.EntityType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tfar.bensfintasticsharkmod.init.ModEntityTypes;
+import tfar.bensfintasticsharkmod.platform.Services;
 
 public class BensFintasticSharkMod {
 
@@ -10,5 +14,6 @@ public class BensFintasticSharkMod {
     public static final Logger LOG = LoggerFactory.getLogger(MOD_NAME);
 
     public static void init() {
+        Services.PLATFORM.registerAll(ModEntityTypes.class, BuiltInRegistries.ENTITY_TYPE, EntityType.class);
     }
 }

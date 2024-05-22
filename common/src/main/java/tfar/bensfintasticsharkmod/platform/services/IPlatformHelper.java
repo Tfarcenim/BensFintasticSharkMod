@@ -1,5 +1,10 @@
 package tfar.bensfintasticsharkmod.platform.services;
 
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.core.Registry;
+import net.minecraft.world.entity.EntityType;
+import tfar.bensfintasticsharkmod.entity.GreatWhiteSharkEntity;
+
 public interface IPlatformHelper {
 
     /**
@@ -30,7 +35,11 @@ public interface IPlatformHelper {
      * @return The name of the environment type.
      */
     default String getEnvironmentName() {
-
         return isDevelopmentEnvironment() ? "development" : "production";
     }
+
+    <F> void registerAll(Class<?> clazz, Registry<? extends F> registry, Class<F> filter);
+
+    EntityType<GreatWhiteSharkEntity> registerGreatWhite();
+
 }
