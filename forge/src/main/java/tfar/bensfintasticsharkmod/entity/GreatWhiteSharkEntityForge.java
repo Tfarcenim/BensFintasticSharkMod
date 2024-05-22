@@ -6,8 +6,11 @@ import net.minecraft.world.level.Level;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements GeoEntity {
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
     public GreatWhiteSharkEntityForge(EntityType<? extends WaterAnimal> $$0, Level $$1) {
         super($$0, $$1);
     }
@@ -19,6 +22,6 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return null;
+        return cache;
     }
 }
