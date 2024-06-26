@@ -1,9 +1,8 @@
 package tfar.bensfintasticsharkmod.platform.services;
 
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.EntityType;
-import tfar.bensfintasticsharkmod.entity.GreatWhiteSharkEntity;
+import tfar.bensfintasticsharkmod.entity.*;
 
 public interface IPlatformHelper {
 
@@ -40,6 +39,10 @@ public interface IPlatformHelper {
 
     <F> void registerAll(Class<?> clazz, Registry<? extends F> registry, Class<F> filter);
 
+    EntityType<GreatHammerheadSharkEntity> registerGreatHammerhead();
     EntityType<GreatWhiteSharkEntity> registerGreatWhite();
+    EntityType<HarborSealEntity> registerHarborSeal();
+    EntityType<CommonStingrayEntity> registerStingray();
+    EntityType<CommonThresherSharkEntity> registerThresherShark();
 
 }

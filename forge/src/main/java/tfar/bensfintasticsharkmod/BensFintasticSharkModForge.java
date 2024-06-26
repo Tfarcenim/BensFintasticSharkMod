@@ -11,7 +11,8 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.registries.RegisterEvent;
 import org.apache.commons.lang3.tuple.Pair;
 import tfar.bensfintasticsharkmod.client.ModClientForge;
-import tfar.bensfintasticsharkmod.entity.GreatWhiteSharkEntity;
+import tfar.bensfintasticsharkmod.datagen.ModDatagen;
+import tfar.bensfintasticsharkmod.entity.*;
 import tfar.bensfintasticsharkmod.init.ModEntityTypes;
 
 import java.util.HashMap;
@@ -31,6 +32,7 @@ public class BensFintasticSharkModForge {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         bus.addListener(this::register);
         bus.addListener(this::attributes);
+        bus.addListener(ModDatagen::start);
 
         if (FMLEnvironment.dist.isClient()) {
             ModClientForge.init(bus);
@@ -42,6 +44,10 @@ public class BensFintasticSharkModForge {
 
     private void attributes(EntityAttributeCreationEvent event) {
         event.put(ModEntityTypes.GREAT_WHITE, GreatWhiteSharkEntity.createAttributes().build());
+        event.put(ModEntityTypes.GREAT_HAMMERHEAD, GreatHammerheadSharkEntity.createAttributes().build());
+        event.put(ModEntityTypes.COMMON_THRESHER, CommonThresherSharkEntity.createAttributes().build());
+        event.put(ModEntityTypes.HARBOR_SEAL, HarborSealEntity.createAttributes().build());
+        event.put(ModEntityTypes.COMMON_STINGRAY, CommonStingrayEntityForge.createAttributes().build());
     }
 
     public static Map<Registry<?>, List<Pair<ResourceLocation, Supplier<?>>>> registerLater = new HashMap<>();

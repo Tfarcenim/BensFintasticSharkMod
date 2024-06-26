@@ -10,8 +10,7 @@ import net.minecraftforge.fml.loading.FMLLoader;
 import org.apache.commons.lang3.tuple.Pair;
 import tfar.bensfintasticsharkmod.BensFintasticSharkMod;
 import tfar.bensfintasticsharkmod.BensFintasticSharkModForge;
-import tfar.bensfintasticsharkmod.entity.GreatWhiteSharkEntity;
-import tfar.bensfintasticsharkmod.entity.GreatWhiteSharkEntityForge;
+import tfar.bensfintasticsharkmod.entity.*;
 import tfar.bensfintasticsharkmod.platform.services.IPlatformHelper;
 
 import java.lang.reflect.Field;
@@ -58,7 +57,27 @@ public class ForgePlatformHelper implements IPlatformHelper {
     }
 
     @Override
+    public EntityType<GreatHammerheadSharkEntity> registerGreatHammerhead() {
+        return EntityType.Builder.<GreatHammerheadSharkEntity>of(GreatHammerheadSharkEntityForge::new, MobCategory.WATER_CREATURE).sized(2, 2).build("");
+    }
+
+    @Override
     public EntityType<GreatWhiteSharkEntity> registerGreatWhite() {
         return EntityType.Builder.<GreatWhiteSharkEntity>of(GreatWhiteSharkEntityForge::new, MobCategory.WATER_CREATURE).sized(2, 2).build("");
+    }
+
+    @Override
+    public EntityType<HarborSealEntity> registerHarborSeal() {
+        return EntityType.Builder.<HarborSealEntity>of(HarborSealEntityForge::new, MobCategory.WATER_CREATURE).sized(2, 2).build("");
+    }
+
+    @Override
+    public EntityType<CommonStingrayEntity> registerStingray() {
+        return EntityType.Builder.<CommonStingrayEntity>of(CommonStingrayEntityForge::new, MobCategory.WATER_CREATURE).sized(2, 2).build("");
+    }
+
+    @Override
+    public EntityType<CommonThresherSharkEntity> registerThresherShark() {
+        return EntityType.Builder.<CommonThresherSharkEntity>of(CommonThresherSharkEntityForge::new, MobCategory.WATER_CREATURE).sized(2, 2).build("");
     }
 }
