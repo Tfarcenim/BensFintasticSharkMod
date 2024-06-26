@@ -44,8 +44,8 @@ public class BensFintasticSharkModForge {
 
     private void attributes(EntityAttributeCreationEvent event) {
         event.put(ModEntityTypes.GREAT_WHITE, GreatWhiteSharkEntity.createAttributes().build());
-        event.put(ModEntityTypes.GREAT_HAMMERHEAD, GreatHammerheadSharkEntity.createAttributes().build());
-        event.put(ModEntityTypes.COMMON_THRESHER, CommonThresherSharkEntity.createAttributes().build());
+        event.put(ModEntityTypes.GREAT_HAMMERHEAD_SHARK, GreatHammerheadSharkEntity.createAttributes().build());
+        event.put(ModEntityTypes.COMMON_THRESHER_SHARK, CommonThresherSharkEntity.createAttributes().build());
         event.put(ModEntityTypes.HARBOR_SEAL, HarborSealEntity.createAttributes().build());
         event.put(ModEntityTypes.COMMON_STINGRAY, CommonStingrayEntityForge.createAttributes().build());
     }

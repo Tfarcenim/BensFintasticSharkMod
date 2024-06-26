@@ -50,7 +50,7 @@ public class HarborSealEntity extends WaterAnimal {
 
     public enum Variant implements StringRepresentable {
         DEFAULT_1(0, "default_1", true),
-        DEAULT_2(1, "default_2", true),
+        DEFAULT_2(1, "default_2", true),
         DEFAULT_3(2, "default_3", true),
         MELANISTIC(3, "melanistic", true),
         ALBINO(4, "albino", false);

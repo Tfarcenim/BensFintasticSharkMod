@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
 import tfar.bensfintasticsharkmod.BensFintasticSharkMod;
 import tfar.bensfintasticsharkmod.entity.GreatWhiteSharkEntity;
 import tfar.bensfintasticsharkmod.entity.GreatWhiteSharkEntityForge;
@@ -29,13 +30,14 @@ public class GreatWhiteRenderer extends GeoEntityRenderer<GreatWhiteSharkEntityF
 
     public GreatWhiteRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new DefaultedEntityGeoModel<>(BensFintasticSharkMod.id("great_white"),true));
+        addRenderLayer(new AutoGlowingGeoLayer<>(this));
     }
 
     @Override
     public void actuallyRender(PoseStack poseStack, GreatWhiteSharkEntityForge animatable, BakedGeoModel model, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        if (animatable.isSharkinator()) {
-            packedLight = 0xffffff;
-        }
+      //  if (animatable.isSharkinator()) {
+      //      packedLight = 0xffffff;
+      //  }
         super.actuallyRender(poseStack, animatable, model, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
     }
 

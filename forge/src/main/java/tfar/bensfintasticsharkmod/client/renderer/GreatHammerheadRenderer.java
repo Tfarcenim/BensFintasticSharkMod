@@ -19,13 +19,13 @@ public class GreatHammerheadRenderer extends GeoEntityRenderer<GreatHammerheadSh
 
     private static final Map<GreatHammerheadSharkEntity.Variant, ResourceLocation> TEXTURE_BY_TYPE = Util.make(Maps.newHashMap(), (map) -> {
         for(GreatHammerheadSharkEntity.Variant variant : GreatHammerheadSharkEntity.Variant.values()) {
-            map.put(variant, BensFintasticSharkMod.id(String.format(Locale.ROOT, "textures/entity/great_hammerhead/%s.png", variant.getName())));
+            map.put(variant, BensFintasticSharkMod.id(String.format(Locale.ROOT, "textures/entity/great_hammerhead_shark/%s.png", variant.getName())));
         }
     });
 
 
     public GreatHammerheadRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new DefaultedEntityGeoModel<>(BensFintasticSharkMod.id("great_hammerhead"),true));
+        super(renderManager, new DefaultedEntityGeoModel<>(BensFintasticSharkMod.id("great_hammerhead_shark"),true));
     }
 
     @Override

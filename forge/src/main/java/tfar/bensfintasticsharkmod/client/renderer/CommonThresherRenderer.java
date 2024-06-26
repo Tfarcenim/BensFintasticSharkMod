@@ -18,13 +18,13 @@ public class CommonThresherRenderer extends GeoEntityRenderer<CommonThresherShar
 
     private static final Map<CommonThresherSharkEntity.Variant, ResourceLocation> TEXTURE_BY_TYPE = Util.make(Maps.newHashMap(), (map) -> {
         for(CommonThresherSharkEntity.Variant variant : CommonThresherSharkEntity.Variant.values()) {
-            map.put(variant,BensFintasticSharkMod.id(String.format(Locale.ROOT, "textures/entity/common_thresher/%s.png", variant.getName())));
+            map.put(variant,BensFintasticSharkMod.id(String.format(Locale.ROOT, "textures/entity/common_thresher_shark/%s.png", variant.getName())));
         }
     });
 
 
     public CommonThresherRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new DefaultedEntityGeoModel<>(BensFintasticSharkMod.id("common_thresher"),true));
+        super(renderManager, new DefaultedEntityGeoModel<>(BensFintasticSharkMod.id("common_thresher_shark"),true));
     }
 
     @Override

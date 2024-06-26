@@ -16,8 +16,8 @@ public class ModClientForge {
 
     static void renderers(final EntityRenderersEvent.RegisterRenderers event) {
         EntityRenderers.register((EntityType<GreatWhiteSharkEntityForge>) ModEntityTypes.GREAT_WHITE, GreatWhiteRenderer::new);
-        EntityRenderers.register((EntityType<GreatHammerheadSharkEntityForge>) ModEntityTypes.GREAT_HAMMERHEAD, GreatHammerheadRenderer::new);
-        EntityRenderers.register((EntityType<CommonThresherSharkEntityForge>) ModEntityTypes.COMMON_THRESHER, CommonThresherRenderer::new);
+        EntityRenderers.register((EntityType<GreatHammerheadSharkEntityForge>) ModEntityTypes.GREAT_HAMMERHEAD_SHARK, GreatHammerheadRenderer::new);
+        EntityRenderers.register((EntityType<CommonThresherSharkEntityForge>) ModEntityTypes.COMMON_THRESHER_SHARK, CommonThresherRenderer::new);
         EntityRenderers.register((EntityType<HarborSealEntityForge>) ModEntityTypes.HARBOR_SEAL, HarborSealRenderer::new);
         EntityRenderers.register((EntityType<CommonStingrayEntityForge>) ModEntityTypes.COMMON_STINGRAY, CommonStingrayRenderer::new);
 

@@ -57,7 +57,7 @@ public class ForgePlatformHelper implements IPlatformHelper {
     }
 
     @Override
-    public EntityType<GreatHammerheadSharkEntity> registerGreatHammerhead() {
+    public EntityType<GreatHammerheadSharkEntity> registerGreatHammerheadShark() {
         return EntityType.Builder.<GreatHammerheadSharkEntity>of(GreatHammerheadSharkEntityForge::new, MobCategory.WATER_CREATURE).sized(2, 2).build("");
     }
 

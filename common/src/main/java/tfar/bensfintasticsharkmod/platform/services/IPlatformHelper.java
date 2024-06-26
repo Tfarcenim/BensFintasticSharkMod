@@ -39,7 +39,7 @@ public interface IPlatformHelper {
 
     <F> void registerAll(Class<?> clazz, Registry<? extends F> registry, Class<F> filter);
 
-    EntityType<GreatHammerheadSharkEntity> registerGreatHammerhead();
+    EntityType<GreatHammerheadSharkEntity> registerGreatHammerheadShark();
     EntityType<GreatWhiteSharkEntity> registerGreatWhite();
     EntityType<HarborSealEntity> registerHarborSeal();
     EntityType<CommonStingrayEntity> registerStingray();
