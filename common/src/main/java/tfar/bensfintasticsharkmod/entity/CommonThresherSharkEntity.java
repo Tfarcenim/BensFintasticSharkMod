@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.function.IntFunction;
 
-public class CommonThresherSharkEntity extends WaterAnimal {
+public class CommonThresherSharkEntity extends WaterAnimal implements ConditionalGlowing {
     protected CommonThresherSharkEntity(EntityType<? extends WaterAnimal> $$0, Level $$1) {
         super($$0, $$1);
     }
@@ -48,12 +48,35 @@ public class CommonThresherSharkEntity extends WaterAnimal {
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }
 
+    @Override
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        setVariant(Variant.byId(tag.getInt("Variant")));
+    }
+
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putInt("Variant", getVariant().getId());
+    }
+
+
     public Variant getVariant() {
         return Variant.byId(this.entityData.get(DATA_VARIANT));
     }
 
     public void setVariant(Variant pVariant) {
         this.entityData.set(DATA_VARIANT, pVariant.getId());
+    }
+
+    public boolean isZippy() {
+        return false;
+    }
+
+    @Override
+    public boolean hasGlowingLayer() {
+        return isZippy();
     }
 
     //i. Default Skin 1 (Common Spawn Rate)

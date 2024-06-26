@@ -5,7 +5,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
@@ -22,12 +21,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.gameevent.GameEvent;
 
 import javax.annotation.Nullable;
 import java.util.function.IntFunction;
 
-public class GreatWhiteSharkEntity extends WaterAnimal {
+public class GreatWhiteSharkEntity extends WaterAnimal implements ConditionalGlowing {
     protected GreatWhiteSharkEntity(EntityType<? extends WaterAnimal> $$0, Level $$1) {
         super($$0, $$1);
     }
@@ -42,16 +40,8 @@ public class GreatWhiteSharkEntity extends WaterAnimal {
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(DATA_VARIANT, 0);
-        entityData.set(DATA_DEEP_BLUE,false);
-    }
-
-
-    @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
-        super.readAdditionalSaveData(tag);
-        setVariant(Variant.byId(tag.getInt("Variant")));
-        setBlue(tag.getBoolean("DeepBlue"));
+        entityData.define(DATA_VARIANT, 0);
+        entityData.define(DATA_DEEP_BLUE,false);
     }
 
     @Override
@@ -68,6 +58,15 @@ public class GreatWhiteSharkEntity extends WaterAnimal {
             return super.mobInteract(player, hand);
         }
     }
+
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        setVariant(Variant.byId(tag.getInt("Variant")));
+        setBlue(tag.getBoolean("DeepBlue"));
+    }
+
 
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
@@ -112,6 +111,11 @@ public class GreatWhiteSharkEntity extends WaterAnimal {
 
     public boolean hasBlue() {
         return entityData.get(DATA_DEEP_BLUE);
+    }
+
+    @Override
+    public boolean hasGlowingLayer() {
+        return isSharkinator();
     }
 
     //. Default Skin 1 (Common Spawn Rate)

@@ -13,6 +13,7 @@ import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
 import tfar.bensfintasticsharkmod.BensFintasticSharkMod;
+import tfar.bensfintasticsharkmod.client.renderer.layer.ConditionalAutoGlowingLayer;
 import tfar.bensfintasticsharkmod.entity.GreatWhiteSharkEntity;
 import tfar.bensfintasticsharkmod.entity.GreatWhiteSharkEntityForge;
 
@@ -30,7 +31,7 @@ public class GreatWhiteRenderer extends GeoEntityRenderer<GreatWhiteSharkEntityF
 
     public GreatWhiteRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new DefaultedEntityGeoModel<>(BensFintasticSharkMod.id("great_white"),true));
-        addRenderLayer(new AutoGlowingGeoLayer<>(this));
+        addRenderLayer(new ConditionalAutoGlowingLayer<>(this));
     }
 
     @Override

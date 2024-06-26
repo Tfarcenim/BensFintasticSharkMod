@@ -48,6 +48,20 @@ public class GreatHammerheadSharkEntity extends WaterAnimal {
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }
 
+    @Override
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        setVariant(Variant.byId(tag.getInt("Variant")));
+    }
+
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putInt("Variant", getVariant().getId());
+    }
+
+
     public Variant getVariant() {
         return Variant.byId(this.entityData.get(DATA_VARIANT));
     }

@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import tfar.bensfintasticsharkmod.BensFintasticSharkMod;
+import tfar.bensfintasticsharkmod.client.renderer.layer.ConditionalAutoGlowingLayer;
 import tfar.bensfintasticsharkmod.entity.CommonThresherSharkEntityForge;
 import tfar.bensfintasticsharkmod.entity.CommonThresherSharkEntity;
 import tfar.bensfintasticsharkmod.entity.CommonThresherSharkEntityForge;
@@ -25,6 +26,7 @@ public class CommonThresherRenderer extends GeoEntityRenderer<CommonThresherShar
 
     public CommonThresherRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new DefaultedEntityGeoModel<>(BensFintasticSharkMod.id("common_thresher_shark"),true));
+        addRenderLayer(new ConditionalAutoGlowingLayer<>(this));
     }
 
     @Override
