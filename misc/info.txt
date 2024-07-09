@@ -1,0 +1,102 @@
+Great White Shark
+Neutral towards players, will only attack players if they are provoked with an attack or if the player enters the water with less than half health:
+
+Animations:
+Swim: Normal Swimming
+
+Fast Swim: When mob is
+hunting or chasing a mob / player
+
+Idle Self-explanatory
+
+Bite: Singular bite when
+attacking mobs or players with jaws
+
+Thrash: Singular bite but with a small chance to grab mob or player and shake it in their mouth to deal more damage
+
+Beached: When shark is placed on land it will be beached and is immobile and cannot damage anything
+
+Death: Self-explanatory
+
+
+Mob will not drop anything.  (Skin, teeth and cartilage can be traded with Fisherman Villagers as a rare trade.)
+Mob will drown if not placed in a body of water
+
+Will attack medium-large mobs if hungry such as Cows, Pig, Sheep, Player, Villagers, etc. (Will ignore small mobs such as fish)
+Favorite prey is Harbor Seal
+Great Hammerhead Shark
+Neutral towards players, will only attack players if they are provoked with an attack or if the player enters the water with less than half health:
+
+Animations:
+Swim: Normal Swimming
+
+Fast Swim: When mob is hunting or chasing a mob / player
+
+Idle (Self-explanatory)
+
+Bite: Singular bite when attacking mobs or players with jaws
+
+Thrash: Singular bite but with a small chance to grab mob or player and shake it in their mouth to deal more damage
+
+Beached: When shark is placed on land it will be beached and is immobile and cannot damage anything
+
+Death: Self-explanatory
+
+
+Mob will not drop anything.  (Skin, teeth and cartilage can be traded with Fisherman Villagers as a rare trade.)
+Mob will drown if not placed in a body of water
+
+Will attack medium-large mobs if hungry such as Cows, Pig, Sheep, Player, Villagers, etc. (Will ignore small mobs such as fish)
+Favorite prey is Common  Stingray
+Common Thersher Shark
+Neutral towards players, will only attack players if they are provoked with an attack or if the player enters the water with less than half health:
+
+Animations:
+Swim: Normal Swimming
+
+Fast Swim: When mob is hunting or chasing a mob / player
+
+Idle (Self-explanatory)
+
+Bite: Singular bite when attacking mobs or players with jaws
+
+Tail Whip: Mob will use tail to do an AOE damage which can stun player by giving slowness
+
+Beached: When shark is placed on land it will be beached and is immobile and cannot damage anything
+
+Death: Self-explanatory
+
+
+Mob will not drop anything.  (Skin, teeth and cartilage can be traded with Fisherman Villagers as a rare trade.)
+Mob will drown if not placed in a body of water
+
+Will attack small-medium sized mobs such as fish, squid, etc.*
+Favorite prey Cod, Salmon
+
+Harbor Seal
+Passive towards players, swims and hangs out on beaches, will grant players dolphins grace if swimming near players.
+
+Animations:
+Swim (Normal Swimming)
+
+Fast Swim (When mob is harmed it will attempt to flee)
+
+Idle (Self-explanatory)
+
+Bask (When on sandy beaches mob will lay and bask in the sun)
+
+Death (Self-explanatory)
+
+Mob will not drop anything
+Will attack fish when hungry
+Favorite prey Cod, Salmon
+Common Stingray
+Neutral towards players, when provoked will act as a pufferfish and deal poison
+
+Animations:
+Swim (Normal Swimming)
+
+Idle (Self-explanatory)
+
+Mob will not drop anything
+Ambient mob
