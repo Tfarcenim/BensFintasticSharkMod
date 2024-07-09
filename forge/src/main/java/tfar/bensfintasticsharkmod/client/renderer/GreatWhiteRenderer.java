@@ -46,4 +46,11 @@ public class GreatWhiteRenderer extends GeoEntityRenderer<GreatWhiteSharkEntityF
     public ResourceLocation getTextureLocation(GreatWhiteSharkEntityForge animatable) {
         return TEXTURE_BY_TYPE.get(animatable.getVariant());
     }
+
+
+    @Override
+    protected float getDeathMaxRotation(GreatWhiteSharkEntityForge entityLivingBaseIn) {
+        return 0.0F;
+    }
+
 }

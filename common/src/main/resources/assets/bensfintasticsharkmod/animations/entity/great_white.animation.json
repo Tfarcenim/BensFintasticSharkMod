@@ -618,7 +618,7 @@
 				}
 			}
 		},
-		"animation.greatwhite.fast_swim": {
+		"move.fast_swim": {
 			"loop": true,
 			"animation_length": 1,
 			"bones": {
@@ -689,7 +689,7 @@
 				}
 			}
 		},
-		"animation.greatwhite.bite": {
+		"attack.bite": {
 			"loop": true,
 			"animation_length": 0.875,
 			"bones": {
@@ -1867,7 +1867,7 @@
 				}
 			}
 		},
-		"animation.greatwhite.death": {
+		"misc.death": {
 			"loop": true,
 			"animation_length": 1.33333,
 			"bones": {

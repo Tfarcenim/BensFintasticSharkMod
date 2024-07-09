@@ -1,12 +1,13 @@
 package tfar.bensfintasticsharkmod.entity;
 
-import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Pose;
+import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
-import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
-import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
+import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.WaterAnimal;
@@ -21,7 +22,6 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomSwimTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetWalkTargetToAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.InvalidateAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTarget;
@@ -34,6 +34,10 @@ import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.Animation;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
@@ -41,13 +45,44 @@ import java.util.List;
 public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements GeoEntity, SmartBrainOwner<GreatWhiteSharkEntityForge> {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
+    protected static final RawAnimation FAST_SWIM = RawAnimation.begin().thenLoop("move.fast_swim");
+    protected static final RawAnimation DEATH = RawAnimation.begin().thenPlayAndHold("misc.death");
+
+    private static final EntityDataAccessor<Boolean> BITING = SynchedEntityData.defineId(GreatWhiteSharkEntityForge.class, EntityDataSerializers.BOOLEAN);
+
+    protected int bitingTimer;
+
     public GreatWhiteSharkEntityForge(EntityType<? extends WaterAnimal> $$0, Level $$1) {
         super($$0, $$1);
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(DefaultAnimations.genericSwimIdleController(this));
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        boolean isAttacking = this.swinging;
+        boolean isDead = this.dead || this.getHealth() < 0.01 || this.isDeadOrDying();
+        boolean isFastMoving = getDeltaMovement().lengthSqr() > .01;
+        controllers.add(new AnimationController<>(this, "idle_controller", 0, event -> {
+            if (event.isMoving() && !isDead && !isAttacking) {
+                return event.setAndContinue(isFastMoving ? FAST_SWIM : DefaultAnimations.SWIM);
+            }
+            return event.setAndContinue(DefaultAnimations.IDLE);
+        })
+                .triggerableAnim("bite", RawAnimation.begin().then("attack.bite", Animation.LoopType.PLAY_ONCE))
+                .triggerableAnim("death", DEATH));
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        entityData.define(BITING, false);
+    }
+
+    public boolean isBiting() {
+        return entityData.get(BITING);
+    }
+
+    public void setBiting(boolean biting) {
+        entityData.set(BITING, biting);
     }
 
     @Override
@@ -58,13 +93,18 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
     @Override
     public List<? extends ExtendedSensor<GreatWhiteSharkEntityForge>> getSensors() {
         NearbyLivingEntitySensor<GreatWhiteSharkEntityForge> nearbyLivingEntitySensor = new NearbyLivingEntitySensor<>();
-        nearbyLivingEntitySensor.setPredicate((target,entity) -> canTarget(target));
+        nearbyLivingEntitySensor.setPredicate((target, entity) -> canTarget(target));
         return List.of(nearbyLivingEntitySensor, // This tracks nearby entities
                 new HurtBySensor<>());
     }
 
     public boolean canTarget(LivingEntity target) {
         if (target instanceof GreatWhiteSharkEntity) return false;
+        if (!isInWater()) return false;
+        if (target.getHealth() / target.getMaxHealth() <= .5) return true;
+
+        if (!target.isInWater()) return false;
+
         EntityDimensions dimensions = target.getDimensions(Pose.STANDING);
         return target.isAlive();
     }
@@ -93,8 +133,35 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
     public BrainActivityGroup<GreatWhiteSharkEntityForge> getFightTasks() { // These are the tasks that handle fighting
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>(), // Cancel fighting if the target is no longer valid
-                new SetWalkTargetToAttackTarget<>().speedMod((owner,target) -> 2f),      // Set the walk target to the attack target
-                new AnimatableMeleeAttack<>(2)); // Melee attack the target if close enough
+                new SetWalkTargetToAttackTarget<>().speedMod((owner, target) -> 2.5f),      // Set the walk target to the attack target
+
+
+                new OneRandomBehaviour<>(
+                        new AnimatableMeleeAttack<>(4) {
+                            @Override
+                            protected void start(Mob entity) {
+                                BehaviorUtils.lookAtEntity(entity, this.target);
+                                bitingTimer = 12;
+                                GreatWhiteSharkEntityForge.this.triggerAnim("idle_controller", "bite");
+
+                            }
+                        }
+                      /* , new AnimatableMeleeAttack<>(4) {
+                            @Override
+                            protected void start(Mob entity) {
+                                BehaviorUtils.lookAtEntity(entity, this.target);
+                                bitingTimer = 12;
+                                setBiting(true);
+                            }
+                        }*/)); // Melee attack the target if close enough
+    }
+
+    public void grabMob(LivingEntity entity) {
+        if (entity == this.getTarget() && !entity.hasPassenger(this) && this.isInWater()) {
+            entity.startRiding(this);
+            if (entity instanceof ServerPlayer serverPlayer)
+               serverPlayer.connection.send(new ClientboundSetPassengersPacket(entity));
+        }
     }
 
     @Override
@@ -116,5 +183,15 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
                 return true;
             }
         };
+    }
+
+    @Override
+    protected void tickDeath() {
+        ++this.deathTime;
+        this.triggerAnim("idle_controller", "death");
+        if (this.deathTime == 35) {
+            this.remove(Entity.RemovalReason.KILLED);
+            this.dropExperience();
+        }
     }
 }
