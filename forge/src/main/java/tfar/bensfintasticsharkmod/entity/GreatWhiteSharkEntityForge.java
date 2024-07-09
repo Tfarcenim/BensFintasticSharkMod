@@ -1,6 +1,9 @@
 package tfar.bensfintasticsharkmod.entity;
 
+import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
@@ -28,6 +31,7 @@ import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
 import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
@@ -43,7 +47,7 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-
+        controllerRegistrar.add(DefaultAnimations.genericSwimIdleController(this));
     }
 
     @Override
@@ -52,9 +56,17 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
     }
 
     @Override
-    public List<? extends ExtendedSensor<? extends GreatWhiteSharkEntityForge>> getSensors() {
-        return List.of(new NearbyLivingEntitySensor<>(), // This tracks nearby entities
+    public List<? extends ExtendedSensor<GreatWhiteSharkEntityForge>> getSensors() {
+        NearbyLivingEntitySensor<GreatWhiteSharkEntityForge> nearbyLivingEntitySensor = new NearbyLivingEntitySensor<>();
+        nearbyLivingEntitySensor.setPredicate((target,entity) -> canTarget(target));
+        return List.of(nearbyLivingEntitySensor, // This tracks nearby entities
                 new HurtBySensor<>());
+    }
+
+    public boolean canTarget(LivingEntity target) {
+        if (target instanceof GreatWhiteSharkEntity) return false;
+        EntityDimensions dimensions = target.getDimensions(Pose.STANDING);
+        return target.isAlive();
     }
 
     @Override
@@ -81,8 +93,8 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
     public BrainActivityGroup<GreatWhiteSharkEntityForge> getFightTasks() { // These are the tasks that handle fighting
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>(), // Cancel fighting if the target is no longer valid
-                new SetWalkTargetToAttackTarget<>(),      // Set the walk target to the attack target
-                new AnimatableMeleeAttack<>(0)); // Melee attack the target if close enough
+                new SetWalkTargetToAttackTarget<>().speedMod((owner,target) -> 2f),      // Set the walk target to the attack target
+                new AnimatableMeleeAttack<>(2)); // Melee attack the target if close enough
     }
 
     @Override
@@ -98,6 +110,11 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
 
     @Override
     protected PathNavigation createNavigation(Level pLevel) {
-        return new WaterBoundPathNavigation(this, pLevel);
+        return new WaterBoundPathNavigation(this, pLevel) {
+            @Override
+            protected boolean canUpdatePath() {
+                return true;
+            }
+        };
     }
 }

@@ -32,8 +32,8 @@ public class GreatWhiteSharkEntity extends WaterAnimal implements ConditionalGlo
     protected GreatWhiteSharkEntity(EntityType<? extends WaterAnimal> $$0, Level $$1) {
         super($$0, $$1);
 
-        this.moveControl = new SmoothSwimmingMoveControl(this,80,12,.1f,.1f,true);
-        this.lookControl = new SmoothSwimmingLookControl(this,10);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1/10f, .5f/10f, false);
+        this.lookControl = new SmoothSwimmingLookControl(this, 10);
     }
 
     private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(GreatWhiteSharkEntity.class, EntityDataSerializers.INT);
@@ -66,18 +66,18 @@ public class GreatWhiteSharkEntity extends WaterAnimal implements ConditionalGlo
     }
 
     @Override
-    public void travel(Vec3 pTravelVector) {
-        if (this.isEffectiveAi() && this.isInWater()) {
-            this.moveRelative(this.getSpeed(), pTravelVector);
-            this.move(MoverType.SELF, this.getDeltaMovement());
-            this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
-            if (this.getTarget() == null) {
-                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
-            }
-        } else {
-            super.travel(pTravelVector);
-        }
+    public void travel(Vec3 movementInput) {
+        if (this.tickCount % 10 == 0)
+            this.refreshDimensions();
 
+        if (isEffectiveAi() && this.isInWater()) {
+            moveRelative(getSpeed(), movementInput);
+            move(MoverType.SELF, getDeltaMovement());
+            setDeltaMovement(getDeltaMovement().scale(this.wasTouchingWater ? 0.65 : 0.25));
+            if (getTarget() == null)
+                setDeltaMovement(getDeltaMovement().add(0.0, -0.005, 0.0));
+        } else
+            super.travel(movementInput);
     }
 
 
@@ -109,6 +109,11 @@ public class GreatWhiteSharkEntity extends WaterAnimal implements ConditionalGlo
 
     public boolean isDeepBlue() {
         return hasCustomName() && getCustomName().getString().equals("Deep Blue") && hasBlue();
+    }
+
+    @Override
+    protected float getStandingEyeHeight(Pose $$0, EntityDimensions $$1) {
+        return $$1.height * 0.65F;
     }
 
 
