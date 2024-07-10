@@ -1,4 +1,4 @@
-package tfar.bensfintasticsharkmod.datagen;
+package tfar.bensfintasticsharkmod.datagen.data;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
@@ -7,6 +7,8 @@ import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import tfar.bensfintasticsharkmod.datagen.data.loot.ModBlockLoot;
+import tfar.bensfintasticsharkmod.datagen.data.loot.ModEntityLoot;
 
 import java.util.List;
 import java.util.Map;
@@ -19,7 +21,8 @@ public class ModLootTableProvider extends LootTableProvider {
     }
 
     public static LootTableProvider create(PackOutput pOutput) {
-        return new ModLootTableProvider(pOutput, BuiltInLootTables.all(), List.of(new SubProviderEntry(() -> new ModBlockLoot(), LootContextParamSets.BLOCK)));
+        return new ModLootTableProvider(pOutput, BuiltInLootTables.all(), List.of(new SubProviderEntry(ModBlockLoot::new, LootContextParamSets.BLOCK),
+                new SubProviderEntry(ModEntityLoot::new, LootContextParamSets.ENTITY)));
     }
 
     @Override

@@ -66,6 +66,14 @@ public class GreatWhiteSharkEntity extends WaterAnimal implements ConditionalGlo
     }
 
     @Override
+    protected void positionRider(Entity entity, MoveFunction function) {
+        double offsetX = 4 *Math.sin(getXRot() * Math.PI / 180);
+        double offsetY = 4 * Math.cos(getYRot() * Math.PI / 180);
+
+        function.accept(entity, getX() + offsetX, getY() - 0.15f, getZ() + offsetY);
+    }
+
+    @Override
     public void travel(Vec3 movementInput) {
         if (this.tickCount % 10 == 0)
             this.refreshDimensions();

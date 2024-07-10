@@ -1,4 +1,4 @@
-package tfar.bensfintasticsharkmod.datagen;
+package tfar.bensfintasticsharkmod.datagen.data.tags;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;

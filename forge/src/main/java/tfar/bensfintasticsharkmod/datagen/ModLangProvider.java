@@ -26,6 +26,9 @@ public class ModLangProvider extends LanguageProvider {
                 addDefaultItem(() -> item);
             }
         }
+        for (EntityType<?> type : ModDatagen.getKnownEntityTypes().toList()) {
+            addDefaultEntityType(() -> type);
+        }
     }
 
 

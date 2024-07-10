@@ -1,1 +1,6 @@
-// 1.20.1	2024-06-25T17:20:34.9472527	Loot Tables
+// 1.20.1	2024-07-09T22:35:48.3441786	Loot Tables
+3aaea1cba47d76af1a0c13c4f131bbd7fce98411 data/bensfintasticsharkmod/loot_tables/entities/common_stingray.json
+23a4165b711c65c293728fe8e679edd16cf6035f data/bensfintasticsharkmod/loot_tables/entities/common_thresher_shark.json
+8ae65ac65b2e04914ad7c5fea8fd01e9fb0db403 data/bensfintasticsharkmod/loot_tables/entities/great_hammerhead_shark.json
+37b85c913cdbb56b042f496f6d9eea7ec3056bec data/bensfintasticsharkmod/loot_tables/entities/great_white_shark.json
+664bccb9eb5d53d50e3959c9c1a6d8b82c2da8e4 data/bensfintasticsharkmod/loot_tables/entities/harbor_seal.json

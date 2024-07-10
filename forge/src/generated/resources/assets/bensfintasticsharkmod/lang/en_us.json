@@ -1,4 +1,9 @@
 {
+  "entity.bensfintasticsharkmod.common_stingray": "Common Stingray",
+  "entity.bensfintasticsharkmod.common_thresher_shark": "Common Thresher Shark",
+  "entity.bensfintasticsharkmod.great_hammerhead_shark": "Great Hammerhead Shark",
+  "entity.bensfintasticsharkmod.great_white_shark": "Great White Shark",
+  "entity.bensfintasticsharkmod.harbor_seal": "Harbor Seal",
   "item.bensfintasticsharkmod.common_stingray_spawn_egg": "Common Stingray Spawn Egg",
   "item.bensfintasticsharkmod.common_thresher_spawn_egg": "Common Thresher Spawn Egg",
   "item.bensfintasticsharkmod.great_hammerhead_spawn_egg": "Great Hammerhead Spawn Egg",
