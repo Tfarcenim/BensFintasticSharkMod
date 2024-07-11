@@ -73,7 +73,7 @@ public class ForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public EntityType<CommonStingrayEntity> registerStingray() {
-        return EntityType.Builder.<CommonStingrayEntity>of(CommonStingrayEntityForge::new, MobCategory.WATER_CREATURE).sized(2, 2).build("");
+        return EntityType.Builder.<CommonStingrayEntity>of(CommonStingrayEntityForge::new, MobCategory.WATER_CREATURE).sized(1, .25f).build("");
     }
 
     @Override

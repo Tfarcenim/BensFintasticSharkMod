@@ -23,7 +23,7 @@ public class CommonStingrayRenderer extends GeoEntityRenderer<CommonStingrayEnti
 
 
     public CommonStingrayRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new DefaultedEntityGeoModel<>(BensFintasticSharkMod.id("great_white"),true));
+        super(renderManager, new DefaultedEntityGeoModel<>(BensFintasticSharkMod.id("common_stingray"),true));
     }
 
     @Override

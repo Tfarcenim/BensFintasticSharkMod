@@ -33,4 +33,9 @@ public class CommonThresherRenderer extends GeoEntityRenderer<CommonThresherShar
     public ResourceLocation getTextureLocation(CommonThresherSharkEntityForge animatable) {
         return TEXTURE_BY_TYPE.get(animatable.getVariant());
     }
+
+    @Override
+    protected float getDeathMaxRotation(CommonThresherSharkEntityForge animatable) {
+        return 0;
+    }
 }

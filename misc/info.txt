@@ -74,7 +74,7 @@ Mob will drown if not placed in a body of water
 
 Will attack small-medium sized mobs such as fish, squid, etc.*
 Favorite prey Cod, Salmon
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Harbor Seal
 Passive towards players, swims and hangs out on beaches, will grant players dolphins grace if swimming near players.
 
@@ -92,6 +92,7 @@ Death (Self-explanatory)
 Mob will not drop anything
 Will attack fish when hungry
 Favorite prey Cod, Salmon
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Common Stingray
 Neutral towards players, when provoked will act as a pufferfish and deal poison
 
