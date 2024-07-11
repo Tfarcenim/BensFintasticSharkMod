@@ -1,9 +1,11 @@
 package tfar.bensfintasticsharkmod.entity;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -13,6 +15,7 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomSwimTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
@@ -60,8 +63,23 @@ public class HarborSealEntityForge extends HarborSealEntity implements GeoEntity
                         new SetPlayerLookTarget<>(),          // Set the look target for the nearest player
                         new SetRandomLookTarget<>()),         // Set a random look target
                 new OneRandomBehaviour<>(                 // Run a random task from the below options
-                        new SetRandomSwimTarget<>(),          // Set a random walk target to a nearby position
+                        new SetRandomWalkTarget<>(),          // Set a random walk target to a nearby position
                         new Idle<>().runFor(entity -> entity.getRandom().nextInt(30, 60)))); // Do nothing for 1.5->3 seconds
+    }
+
+    @Override
+    public float getWalkTargetValue(BlockPos pPos, LevelReader pLevel) {
+        return 0.0F;
+    }
+
+    @Override
+    public BrainActivityGroup<? extends HarborSealEntityForge> getFightTasks() {
+        return SmartBrainOwner.super.getFightTasks();
+    }
+
+    @Override
+    protected void handleAirSupply(int pAirSupply) {
+
     }
 
     @Override

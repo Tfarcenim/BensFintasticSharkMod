@@ -17,6 +17,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
+import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.WaterAnimal;
@@ -35,8 +36,10 @@ public class HarborSealEntity extends WaterAnimal {
     protected HarborSealEntity(EntityType<? extends WaterAnimal> $$0, Level $$1) {
         super($$0, $$1);
 
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1 / 10f, .5f / 10f, false);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1 / 10f, .25f, false);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
+
+        this.setMaxUpStep(1);
     }
 
     private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(HarborSealEntity.class, EntityDataSerializers.INT);
@@ -156,19 +159,7 @@ public class HarborSealEntity extends WaterAnimal {
 
     @Override
     protected PathNavigation createNavigation(Level pLevel) {
-        return new WaterBoundPathNavigation(this, pLevel) {
-            @Override
-            protected boolean canUpdatePath() {
-                return true;
-            }
-
-            @Override
-            protected PathFinder createPathFinder(int pMaxVisitedNodes) {
-                nodeEvaluator = new AmphibiousNodeEvaluator(true);
-                nodeEvaluator.setCanOpenDoors(false);
-                return new PathFinder(this.nodeEvaluator, pMaxVisitedNodes);
-            }
-        };
+        return new AmphibiousPathNavigation(this, pLevel);
     }
 
 
