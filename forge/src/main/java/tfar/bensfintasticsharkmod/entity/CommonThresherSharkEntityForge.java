@@ -116,19 +116,21 @@ public class CommonThresherSharkEntityForge extends CommonThresherSharkEntity im
     @Override
     public BrainActivityGroup<CommonThresherSharkEntityForge> getFightTasks() { // These are the tasks that handle fighting
         return BrainActivityGroup.fightTasks(
-                new InvalidateAttackTarget<>(), // Cancel fighting if the target is no longer valid
+                new InvalidateAttackTarget<>()
+                        .invalidateIf((entity, target) -> !isInWaterOrBubble() || target instanceof Player pl && (pl.isCreative() || pl.isSpectator())) // Cancel fighting if the target is no longer valid
+                , // Cancel fighting if the target is no longer valid
                 new SetWalkTargetToAttackTarget<>().speedMod((owner, target) -> 1.5f),      // Set the walk target to the attack target
 
 
                 new OneRandomBehaviour<>(
-                   /*     Pair.of(new AnimatableMeleeAttack<>(4) {
+                        Pair.of(new AnimatableMeleeAttack<>(4) {
                             @Override
                             protected void start(Mob entity) {
                                 BehaviorUtils.lookAtEntity(entity, this.target);
                                 triggerAnim("idle_controller", "bite");
 
                             }
-                        },9),*/
+                        },9),
                         Pair.of(new AnimatableMeleeAttack<>(4) {
                             @Override
                             protected void start(Mob entity) {

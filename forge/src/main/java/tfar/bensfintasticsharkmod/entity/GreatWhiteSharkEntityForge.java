@@ -127,7 +127,8 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
     @Override
     public BrainActivityGroup<GreatWhiteSharkEntityForge> getFightTasks() { // These are the tasks that handle fighting
         return BrainActivityGroup.fightTasks(
-                new InvalidateAttackTarget<>(), // Cancel fighting if the target is no longer valid
+                new InvalidateAttackTarget<>()
+                        .invalidateIf((entity, target) -> !isInWaterOrBubble() || target instanceof Player pl && (pl.isCreative() || pl.isSpectator())), // Cancel fighting if the target is no longer valid
                 new SetWalkTargetToAttackTarget<>().speedMod((owner, target) -> 1.5f),      // Set the walk target to the attack target
 
 
