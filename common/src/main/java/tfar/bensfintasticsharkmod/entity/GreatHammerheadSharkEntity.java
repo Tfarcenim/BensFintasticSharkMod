@@ -17,9 +17,11 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
+import tfar.bensfintasticsharkmod.init.ModTags;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -42,6 +44,20 @@ public class GreatHammerheadSharkEntity extends WaterAnimal {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_VARIANT, 0);
+    }
+
+    public boolean canTarget(LivingEntity target) {
+        if (target instanceof GreatHammerheadSharkEntity) return false;
+        if (target instanceof Player player && player.isCreative()) return false;
+        if (!isInWater()) return false;
+        if (target.isDeadOrDying()) return false;
+        if (target.getVehicle() == this) return false;
+
+        if (getType().is(ModTags.EntityTypes.GREAT_HAMMERHEAD_SHARK_ALWAYS_ATTACKS)) return true;
+
+        if (target.getHealth() / target.getMaxHealth() <= .5) return true;
+
+        return false;
     }
 
     @Override

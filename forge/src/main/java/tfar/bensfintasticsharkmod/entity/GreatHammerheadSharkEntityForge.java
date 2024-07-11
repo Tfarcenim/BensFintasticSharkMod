@@ -13,6 +13,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
 import net.minecraft.world.level.pathfinder.PathFinder;
@@ -98,19 +99,6 @@ public class GreatHammerheadSharkEntityForge extends GreatHammerheadSharkEntity 
                 new HurtBySensor<>());
     }
 
-    public boolean canTarget(LivingEntity target) {
-        if (target instanceof GreatWhiteSharkEntity) return false;
-        if (!isInWater()) return false;
-        if (target.isDeadOrDying()) return false;
-        if (target.getVehicle() == this) return false;
-
-        if (getType().is(ModTags.EntityTypes.GREAT_HAMMERHEAD_SHARK_ALWAYS_ATTACKS)) return true;
-
-        if (target.getHealth() / target.getMaxHealth() <= .5) return true;
-
-        return false;
-    }
-
     @Override
     public BrainActivityGroup<GreatHammerheadSharkEntityForge> getCoreTasks() {
         return BrainActivityGroup.coreTasks(
@@ -120,15 +108,18 @@ public class GreatHammerheadSharkEntityForge extends GreatHammerheadSharkEntity 
 
     @Override
     public BrainActivityGroup<GreatHammerheadSharkEntityForge> getIdleTasks() {
+
+
         // These are the tasks that run when the mob isn't doing anything else (usually)
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<>(      // Run only one of the below behaviours, trying each one in order. Include the generic type because JavaC is silly
-                        new TargetOrRetaliate<>(),            // Set the attack target and walk target based on nearby entities
+                        new TargetOrRetaliate<>()
+                                .attackablePredicate(entity -> this.isInWaterOrBubble() && entity.isAlive() && (!(entity instanceof Player player) || !player.isCreative())),            // Set the attack target and walk target based on nearby entities
                         new SetPlayerLookTarget<>(),          // Set the look target for the nearest player
                         new SetRandomLookTarget<>()),         // Set a random look target
-                new OneRandomBehaviour<>(                 // Run a random task from the below options
-                        new SetRandomSwimTarget<>(),          // Set a random walk target to a nearby position
-                        new Idle<>().runFor(entity -> entity.getRandom().nextInt(30, 60)))); // Do nothing for 1.5->3 seconds
+                        new OneRandomBehaviour<>(                 // Run a random task from the below options
+                                new SetRandomSwimTarget<>(),          // Set a random walk target to a nearby position
+                                new Idle<>().runFor(entity -> entity.getRandom().nextInt(30, 60)))); // Do nothing for 1.5->3 seconds
     }
 
     @Override
@@ -146,7 +137,7 @@ public class GreatHammerheadSharkEntityForge extends GreatHammerheadSharkEntity 
                                 triggerAnim("idle_controller", "bite_right");
 
                             }
-                        },9),
+                        }, 9),
                         Pair.of(new AnimatableMeleeAttack<>(4) {
                             @Override
                             protected void start(Mob entity) {
@@ -164,7 +155,7 @@ public class GreatHammerheadSharkEntityForge extends GreatHammerheadSharkEntity 
                                     BrainUtils.clearMemory(getBrain(), MemoryModuleType.LOOK_TARGET);
                                 }
                             }
-                        },1))
+                        }, 1))
         ); // Melee attack the target if close enough
     }
 

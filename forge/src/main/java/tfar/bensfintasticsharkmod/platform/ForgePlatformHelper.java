@@ -78,6 +78,6 @@ public class ForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public EntityType<CommonThresherSharkEntity> registerThresherShark() {
-        return EntityType.Builder.<CommonThresherSharkEntity>of(CommonThresherSharkEntityForge::new, MobCategory.WATER_CREATURE).sized(2, 2).build("");
+        return EntityType.Builder.<CommonThresherSharkEntity>of(CommonThresherSharkEntityForge::new, MobCategory.WATER_CREATURE).sized(1.25f, 1).build("");
     }
 }

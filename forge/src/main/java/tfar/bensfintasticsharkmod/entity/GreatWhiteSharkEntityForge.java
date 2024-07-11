@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
 import net.minecraft.world.level.pathfinder.PathFinder;
@@ -101,19 +102,6 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
                 new HurtBySensor<>());
     }
 
-    public boolean canTarget(LivingEntity target) {
-        if (target instanceof GreatWhiteSharkEntity) return false;
-        if (!isInWater()) return false;
-        if (target.isDeadOrDying()) return false;
-        if (target.getVehicle() == this) return false;
-
-        if (getType().is(ModTags.EntityTypes.GREAT_WHITE_SHARK_ALWAYS_ATTACKS)) return true;
-
-        if (target.getHealth() / target.getMaxHealth() <= .5) return true;
-
-        return false;
-    }
-
     @Override
     public BrainActivityGroup<? extends GreatWhiteSharkEntityForge> getCoreTasks() {
         return BrainActivityGroup.coreTasks(
@@ -126,7 +114,9 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
         // These are the tasks that run when the mob isn't doing anything else (usually)
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<>(      // Run only one of the below behaviours, trying each one in order. Include the generic type because JavaC is silly
-                        new TargetOrRetaliate<>(),            // Set the attack target and walk target based on nearby entities
+                        new TargetOrRetaliate<>()
+                                .attackablePredicate(entity -> this.isInWaterOrBubble() && entity.isAlive() && (!(entity instanceof Player player) || !player.isCreative())),            // Set the attack target and walk target based on nearby entities
+                                    // Set the attack target and walk target based on nearby entities
                         new SetPlayerLookTarget<>(),          // Set the look target for the nearest player
                         new SetRandomLookTarget<>()),         // Set a random look target
                 new OneRandomBehaviour<>(                 // Run a random task from the below options

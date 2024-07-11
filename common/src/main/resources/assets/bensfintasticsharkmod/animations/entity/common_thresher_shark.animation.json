@@ -116,7 +116,7 @@
 				}
 			}
 		},
-		"animation.threshershark.bite": {
+		"attack.bite": {
 			"loop": true,
 			"animation_length": 0.5,
 			"bones": {
@@ -217,7 +217,7 @@
 				}
 			}
 		},
-		"animation.threshershark.idle": {
+		"misc.idle": {
 			"loop": true,
 			"animation_length": 3,
 			"bones": {
@@ -907,7 +907,7 @@
 				}
 			}
 		},
-		"animation.threshershark.swim": {
+		"move.swim": {
 			"loop": true,
 			"animation_length": 1.5,
 			"bones": {
@@ -1399,7 +1399,7 @@
 				}
 			}
 		},
-		"animation.threshershark.swim2": {
+		"move.fast_swim": {
 			"loop": true,
 			"animation_length": 2,
 			"bones": {
@@ -1520,7 +1520,7 @@
 				}
 			}
 		},
-		"animation.threshershark.tail_whip": {
+		"attack.tail_whip": {
 			"loop": true,
 			"animation_length": 1.25,
 			"bones": {
@@ -2165,7 +2165,7 @@
 				}
 			}
 		},
-		"animation.threshershark.beached": {
+		"misc.beached": {
 			"loop": true,
 			"animation_length": 4,
 			"bones": {
@@ -2289,7 +2289,7 @@
 				}
 			}
 		},
-		"animation.threshershark.death": {
+		"misc.death": {
 			"loop": true,
 			"animation_length": 2.25,
 			"bones": {

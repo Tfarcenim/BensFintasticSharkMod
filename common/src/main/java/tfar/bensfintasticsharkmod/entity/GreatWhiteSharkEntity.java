@@ -24,6 +24,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
+import tfar.bensfintasticsharkmod.init.ModTags;
 
 import javax.annotation.Nullable;
 import java.util.function.IntFunction;
@@ -64,6 +65,21 @@ public class GreatWhiteSharkEntity extends WaterAnimal implements ConditionalGlo
             return super.mobInteract(player, hand);
         }
     }
+
+    public boolean canTarget(LivingEntity target) {
+        if (target instanceof GreatWhiteSharkEntity) return false;
+        if (target instanceof Player player && player.isCreative()) return false;
+        if (!isInWater()) return false;
+        if (target.isDeadOrDying()) return false;
+        if (target.getVehicle() == this) return false;
+
+        if (getType().is(ModTags.EntityTypes.GREAT_WHITE_SHARK_ALWAYS_ATTACKS)) return true;
+
+        if (target.getHealth() / target.getMaxHealth() <= .5) return true;
+
+        return false;
+    }
+
 
     @Override
     protected void positionRider(Entity entity, MoveFunction function) {

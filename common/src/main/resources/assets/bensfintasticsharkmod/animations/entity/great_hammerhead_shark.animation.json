@@ -13418,7 +13418,7 @@
 				}
 			}
 		},
-		"animation.GreatHammerHead.beached": {
+		"misc.beached": {
 			"loop": true,
 			"animation_length": 4,
 			"bones": {
@@ -13490,7 +13490,7 @@
 				}
 			}
 		},
-		"animation.GreatHammerHead.beached2": {
+		"misc.beached2": {
 			"loop": true,
 			"animation_length": 4,
 			"bones": {

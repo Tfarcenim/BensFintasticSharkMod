@@ -11,15 +11,17 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.phys.Vec3;
+import tfar.bensfintasticsharkmod.init.ModTags;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -28,6 +30,9 @@ import java.util.function.IntFunction;
 public class CommonThresherSharkEntity extends WaterAnimal implements ConditionalGlowing {
     protected CommonThresherSharkEntity(EntityType<? extends WaterAnimal> $$0, Level $$1) {
         super($$0, $$1);
+
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1/10f, .5f/10f, false);
+        this.lookControl = new SmoothSwimmingLookControl(this, 10);
     }
 
     private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(CommonThresherSharkEntity.class, EntityDataSerializers.INT);
@@ -39,6 +44,34 @@ public class CommonThresherSharkEntity extends WaterAnimal implements Conditiona
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_VARIANT, 0);
+    }
+
+    public boolean canTarget(LivingEntity target) {
+        if (target instanceof CommonThresherSharkEntity) return false;
+        if (target instanceof Player player && player.isCreative()) return false;
+        if (!isInWater()) return false;
+        if (target.isDeadOrDying()) return false;
+
+        if (getType().is(ModTags.EntityTypes.COMMON_THRESHER_SHARK_ALWAYS_ATTACKS)) return true;
+
+        if (target.getHealth() / target.getMaxHealth() <= .5) return true;
+
+        return false;
+    }
+
+    @Override
+    public void travel(Vec3 movementInput) {
+        if (this.tickCount % 10 == 0)
+            this.refreshDimensions();
+
+        if (isEffectiveAi() && this.isInWater()) {
+            moveRelative(getSpeed(), movementInput);
+            move(MoverType.SELF, getDeltaMovement());
+            setDeltaMovement(getDeltaMovement().scale(this.wasTouchingWater ? 0.65 : 0.25));
+            if (getTarget() == null)
+                setDeltaMovement(getDeltaMovement().add(0.0, -0.005, 0.0));
+        } else
+            super.travel(movementInput);
     }
 
     @Override

@@ -29,5 +29,9 @@ public class ModEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 .add(EntityType.COD,EntityType.COW,EntityType.DOLPHIN,EntityType.GLOW_SQUID,EntityType.PIG,EntityType.SALMON,EntityType.SHEEP,EntityType.SQUID,
                         EntityType.TURTLE,
                         ModEntityTypes.HARBOR_SEAL);
+
+        tag(ModTags.EntityTypes.COMMON_THRESHER_SHARK_ALWAYS_ATTACKS)
+                .add(EntityType.COD,EntityType.GLOW_SQUID,EntityType.SALMON,EntityType.SHEEP,EntityType.SQUID,
+                        EntityType.TURTLE);
     }
 }
