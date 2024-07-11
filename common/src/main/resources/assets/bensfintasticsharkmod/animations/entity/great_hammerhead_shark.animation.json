@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.GreatHammerHead.walk": {
+		"move.swim": {
 			"loop": true,
 			"animation_length": 2,
 			"bones": {
@@ -1656,7 +1656,7 @@
 				}
 			}
 		},
-		"animation.GreatHammerHead.fast_swim": {
+		"move.fast_swim": {
 			"loop": true,
 			"animation_length": 1,
 			"bones": {
@@ -2596,7 +2596,7 @@
 				}
 			}
 		},
-		"animation.GreatHammerHead.idle": {
+		"misc.idle": {
 			"loop": true,
 			"animation_length": 3,
 			"bones": {
@@ -5031,7 +5031,7 @@
 				}
 			}
 		},
-		"animation.GreatHammerHead.death": {
+		"misc.death": {
 			"animation_length": 3.25,
 			"override_previous_animation": true,
 			"bones": {
@@ -7694,7 +7694,7 @@
 				}
 			}
 		},
-		"animation.GreatHammerHead.attack_left": {
+		"attack.bite_left": {
 			"animation_length": 1.1,
 			"override_previous_animation": true,
 			"bones": {
@@ -9224,7 +9224,7 @@
 				}
 			}
 		},
-		"animation.GreatHammerHead.attack_right": {
+		"attack.bite_right": {
 			"animation_length": 1.1,
 			"override_previous_animation": true,
 			"bones": {
@@ -10754,7 +10754,7 @@
 				}
 			}
 		},
-		"animation.GreatHammerHead.thrash": {
+		"attack.thrash": {
 			"animation_length": 2,
 			"override_previous_animation": true,
 			"bones": {

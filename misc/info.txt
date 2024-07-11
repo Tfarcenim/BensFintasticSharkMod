@@ -24,6 +24,7 @@ Mob will drown if not placed in a body of water
 
 Will attack medium-large mobs if hungry such as Cows, Pig, Sheep, Player, Villagers, etc. (Will ignore small mobs such as fish)
 Favorite prey is Harbor Seal
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Great Hammerhead Shark
 Neutral towards players, will only attack players if they are provoked with an attack or if the player enters the water with less than half health:
 
@@ -48,6 +49,7 @@ Mob will drown if not placed in a body of water
 
 Will attack medium-large mobs if hungry such as Cows, Pig, Sheep, Player, Villagers, etc. (Will ignore small mobs such as fish)
 Favorite prey is Common  Stingray
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Common Thersher Shark
 Neutral towards players, will only attack players if they are provoked with an attack or if the player enters the water with less than half health:
 

@@ -2,9 +2,6 @@ package tfar.bensfintasticsharkmod.entity;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
@@ -14,6 +11,8 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
+import net.minecraft.world.level.pathfinder.PathFinder;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -52,6 +51,7 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
     protected static final RawAnimation FAST_SWIM = RawAnimation.begin().thenLoop("move.fast_swim");
     protected static final RawAnimation DEATH = RawAnimation.begin().thenPlayAndHold("misc.death");
     protected static final RawAnimation THRASH = RawAnimation.begin().thenLoop("attack.thrash");
+    protected static final RawAnimation BEACHED = RawAnimation.begin().thenLoop("misc.beached");
 
 
 
@@ -59,21 +59,25 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
         super($$0, $$1);
     }
 
-    protected int grabCountdown = 20;
+    protected int grabCountdown;
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         boolean isAttacking = this.swinging;
         boolean isDead = this.dead || this.getHealth() < 0.01 || this.isDeadOrDying();
         boolean isFastMoving = getDeltaMovement().lengthSqr() > .01;
+        boolean isBeached = onGround() && !isInWaterOrBubble();
         controllers.add(new AnimationController<>(this, "idle_controller", 0, event -> {
+            if (isBeached) {
+                return event.setAndContinue(BEACHED);
+            }
+
             if (event.isMoving() && !isDead && !isAttacking) {
                 return event.setAndContinue(isFastMoving ? FAST_SWIM : DefaultAnimations.SWIM);
             }
             return event.setAndContinue(DefaultAnimations.IDLE);
         })
                 .triggerableAnim("bite", RawAnimation.begin().then("attack.bite", Animation.LoopType.PLAY_ONCE))
-                // .triggerableAnim("thrash", RawAnimation.begin().then("attack.thrash", Animation.LoopType.LOOP))
                 .triggerableAnim("death", DEATH));
 
         controllers.add(new AnimationController<>(this, "controller", 5, event -> {
@@ -103,7 +107,7 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
         if (target.isDeadOrDying()) return false;
         if (target.getVehicle() == this) return false;
 
-        if (getType().is(ModTags.EntityTypes.GREAT_WHITE_SHARK_ALWAYS_ATTACK)) return true;
+        if (getType().is(ModTags.EntityTypes.GREAT_WHITE_SHARK_ALWAYS_ATTACKS)) return true;
 
         if (target.getHealth() / target.getMaxHealth() <= .5) return true;
 
@@ -138,19 +142,19 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
 
 
                 new OneRandomBehaviour<>(
-                /*        Pair.of(new AnimatableMeleeAttack<>(4) {
+                        Pair.of(new AnimatableMeleeAttack<>(4) {
                             @Override
                             protected void start(Mob entity) {
                                 BehaviorUtils.lookAtEntity(entity, this.target);
-                                GreatWhiteSharkEntityForge.this.triggerAnim("idle_controller", "bite");
+                                triggerAnim("idle_controller", "bite");
 
                             }
-                        },9)*/
+                        },9),
                        Pair.of(new AnimatableMeleeAttack<>(4) {
                             @Override
                             protected void start(Mob entity) {
                                 BehaviorUtils.lookAtEntity(entity, target);
-                                GreatWhiteSharkEntityForge.this.triggerAnim("idle_controller", "bite");
+                                triggerAnim("idle_controller", "bite");
                             }
 
                            @Override
@@ -200,6 +204,13 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
             protected boolean canUpdatePath() {
                 return true;
             }
+
+            @Override
+            protected PathFinder createPathFinder(int pMaxVisitedNodes) {
+                nodeEvaluator = new AmphibiousNodeEvaluator(true);
+                nodeEvaluator.setCanOpenDoors(false);
+                return new PathFinder(this.nodeEvaluator, pMaxVisitedNodes);
+            }
         };
     }
 
@@ -207,7 +218,7 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
     protected void tickDeath() {
         ++this.deathTime;
         this.triggerAnim("idle_controller", "death");
-        if (this.deathTime == 35) {
+        if (this.deathTime == 30) {
             this.remove(Entity.RemovalReason.KILLED);
             this.dropExperience();
         }

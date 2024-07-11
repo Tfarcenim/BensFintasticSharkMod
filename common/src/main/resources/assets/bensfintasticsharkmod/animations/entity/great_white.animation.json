@@ -2173,7 +2173,7 @@
 				}
 			}
 		},
-		"animation.greatwhite.beached": {
+		"misc.beached": {
 			"loop": true,
 			"animation_length": 4,
 			"bones": {

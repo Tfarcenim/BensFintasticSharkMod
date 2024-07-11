@@ -50,7 +50,7 @@ public class GreatWhiteRenderer extends GeoEntityRenderer<GreatWhiteSharkEntityF
 
     @Override
     protected float getDeathMaxRotation(GreatWhiteSharkEntityForge entityLivingBaseIn) {
-        return 0.0F;
+        return 0;
     }
 
 }

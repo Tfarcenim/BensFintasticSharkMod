@@ -32,4 +32,9 @@ public class GreatHammerheadRenderer extends GeoEntityRenderer<GreatHammerheadSh
     public ResourceLocation getTextureLocation(GreatHammerheadSharkEntityForge animatable) {
         return TEXTURE_BY_TYPE.get(animatable.getVariant());
     }
+
+    @Override
+    protected float getDeathMaxRotation(GreatHammerheadSharkEntityForge animatable) {
+        return 0;
+    }
 }
