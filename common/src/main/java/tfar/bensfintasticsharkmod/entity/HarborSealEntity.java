@@ -12,17 +12,21 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
+import net.minecraft.world.level.pathfinder.PathFinder;
+import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.function.IntFunction;
@@ -30,6 +34,9 @@ import java.util.function.IntFunction;
 public class HarborSealEntity extends WaterAnimal {
     protected HarborSealEntity(EntityType<? extends WaterAnimal> $$0, Level $$1) {
         super($$0, $$1);
+
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1 / 10f, .5f / 10f, false);
+        this.lookControl = new SmoothSwimmingLookControl(this, 10);
     }
 
     private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(HarborSealEntity.class, EntityDataSerializers.INT);
@@ -61,6 +68,18 @@ public class HarborSealEntity extends WaterAnimal {
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.putInt("Variant", getVariant().getId());
+    }
+
+    @Override
+    public void travel(Vec3 $$0) {
+        if (this.isControlledByLocalInstance() && this.isInWater()) {
+            this.moveRelative(this.getSpeed(), $$0);
+            this.move(MoverType.SELF, this.getDeltaMovement());
+            this.setDeltaMovement(this.getDeltaMovement().scale(0.65));
+        } else {
+            super.travel($$0);
+        }
+
     }
 
 
@@ -132,6 +151,24 @@ public class HarborSealEntity extends WaterAnimal {
 
             return NATURAL_VARIANTS.getRandomValue(pRandom).orElseThrow();
         }
+    }
+
+
+    @Override
+    protected PathNavigation createNavigation(Level pLevel) {
+        return new WaterBoundPathNavigation(this, pLevel) {
+            @Override
+            protected boolean canUpdatePath() {
+                return true;
+            }
+
+            @Override
+            protected PathFinder createPathFinder(int pMaxVisitedNodes) {
+                nodeEvaluator = new AmphibiousNodeEvaluator(true);
+                nodeEvaluator.setCanOpenDoors(false);
+                return new PathFinder(this.nodeEvaluator, pMaxVisitedNodes);
+            }
+        };
     }
 
 

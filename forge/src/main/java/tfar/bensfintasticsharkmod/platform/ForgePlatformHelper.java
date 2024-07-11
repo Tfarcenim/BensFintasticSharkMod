@@ -68,7 +68,7 @@ public class ForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public EntityType<HarborSealEntity> registerHarborSeal() {
-        return EntityType.Builder.<HarborSealEntity>of(HarborSealEntityForge::new, MobCategory.WATER_CREATURE).sized(2, 2).build("");
+        return EntityType.Builder.<HarborSealEntity>of(HarborSealEntityForge::new, MobCategory.WATER_CREATURE).sized(1.5f, .75f).build("");
     }
 
     @Override
