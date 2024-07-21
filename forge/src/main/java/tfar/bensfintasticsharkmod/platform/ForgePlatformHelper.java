@@ -43,7 +43,7 @@ public class ForgePlatformHelper implements IPlatformHelper {
     public <F> void registerAll(Class<?> clazz, Registry<? extends F> registry, Class<F> filter) {
         List<Pair<ResourceLocation, Supplier<?>>> list = BensFintasticSharkModForge.registerLater.computeIfAbsent(registry, k -> new ArrayList<>());
         for (Field field : clazz.getFields()) {
-            MappedRegistry<? extends F> forgeRegistry = (MappedRegistry<F>) registry;
+            MappedRegistry<? extends F> forgeRegistry = (MappedRegistry<? extends F>) registry;
             forgeRegistry.unfreeze();
             try {
                 Object o = field.get(null);

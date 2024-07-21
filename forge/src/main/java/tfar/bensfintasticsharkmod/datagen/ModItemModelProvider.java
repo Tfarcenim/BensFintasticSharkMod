@@ -20,9 +20,18 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         makeOneLayerItem(ModItems.GREAT_WHITE_SHARK_SPAWN_EGG);
         makeOneLayerItem(ModItems.GREAT_HAMMERHEAD_SHARK_SPAWN_EGG);
-        makeOneLayerItem(ModItems.COMMON_THRESHER_SPAWN_EGG);
+        makeOneLayerItem(ModItems.COMMON_THRESHER_SHARK_SPAWN_EGG);
         makeOneLayerItem(ModItems.HARBOR_SEAL_SPAWN_EGG);
         makeOneLayerItem(ModItems.COMMON_STINGRAY_SPAWN_EGG);
+
+        makeOneLayerItem(ModItems.GREAT_WHITE_SHARK_SKIN);
+        makeOneLayerItem(ModItems.GREAT_HAMMERHEAD_SHARK_SKIN);
+        makeOneLayerItem(ModItems.COMMON_THRESHER_SHARK_SKIN);
+
+        makeOneLayerItem(ModItems.GREAT_WHITE_SHARK_TOOTH);
+        makeOneLayerItem(ModItems.GREAT_HAMMERHEAD_SHARK_TOOTH);
+        makeOneLayerItem(ModItems.COMMON_THRESHER_SHARK_TOOTH);
+        makeOneLayerItem(ModItems.CARTILAGE);
     }
 
     protected ModelFile.ExistingModelFile generated = getExistingFile(mcLoc("item/generated"));

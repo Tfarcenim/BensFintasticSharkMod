@@ -3,6 +3,7 @@ package tfar.bensfintasticsharkmod.init;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Item;
 import tfar.bensfintasticsharkmod.BensFintasticSharkMod;
 
 public class ModTags {
@@ -15,6 +16,14 @@ public class ModTags {
 
         private static TagKey<EntityType<?>> create(String pName) {
             return TagKey.create(Registries.ENTITY_TYPE, BensFintasticSharkMod.id(pName));
+        }
+    }
+
+    public static class Items {
+        public static final TagKey<Item> SHARK_TEETH = create("shark_teeth");
+
+        private static TagKey<Item> create(String pName) {
+            return TagKey.create(Registries.ITEM, BensFintasticSharkMod.id(pName));
         }
     }
 

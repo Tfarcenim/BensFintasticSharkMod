@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "bensfintasticsharkmod:item/common_thresher_spawn_egg"
-  }
-}
