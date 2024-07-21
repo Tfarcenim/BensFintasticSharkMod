@@ -1,0 +1,32 @@
+{
+  "base": {
+    "parent": "minecraft:item/generated",
+    "textures": {
+      "layer0": "bensfintasticsharkmod:item/shark_trident_gui"
+    }
+  },
+  "gui_light": "front",
+  "loader": "forge:separate_transforms",
+  "overrides": [
+    {
+      "model": "bensfintasticsharkmod:item/shark_trident_throwing",
+      "predicate": {
+        "minecraft:throwing": 1.0
+      }
+    }
+  ],
+  "perspectives": {
+    "firstperson_lefthand": {
+      "parent": "bensfintasticsharkmod:item/shark_trident_3d"
+    },
+    "firstperson_righthand": {
+      "parent": "bensfintasticsharkmod:item/shark_trident_3d"
+    },
+    "thirdperson_lefthand": {
+      "parent": "bensfintasticsharkmod:item/shark_trident_3d"
+    },
+    "thirdperson_righthand": {
+      "parent": "bensfintasticsharkmod:item/shark_trident_3d"
+    }
+  }
+}

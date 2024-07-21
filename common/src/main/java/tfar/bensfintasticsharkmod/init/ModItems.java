@@ -1,6 +1,7 @@
 package tfar.bensfintasticsharkmod.init;
 
 import net.minecraft.world.item.*;
+import tfar.bensfintasticsharkmod.item.SharkTridentItem;
 
 public class ModItems {
 
@@ -26,4 +27,5 @@ public class ModItems {
     public static final Item SHARK_AXE = new AxeItem(ModTiers.SHARK, 6.0F, -3.1F, new Item.Properties());
     public static final Item SHARK_HOE =  new HoeItem(ModTiers.SHARK, -2, -1.0F, new Item.Properties());
 
+    public static final Item SHARK_TRIDENT = new SharkTridentItem(new Item.Properties().durability(250));
 }

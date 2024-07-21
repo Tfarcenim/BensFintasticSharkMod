@@ -4,6 +4,7 @@
   "entity.bensfintasticsharkmod.great_hammerhead_shark": "Great Hammerhead Shark",
   "entity.bensfintasticsharkmod.great_white_shark": "Great White Shark",
   "entity.bensfintasticsharkmod.harbor_seal": "Harbor Seal",
+  "entity.bensfintasticsharkmod.shark_trident": "Shark Trident",
   "item.bensfintasticsharkmod.cartilage": "Cartilage",
   "item.bensfintasticsharkmod.common_stingray_spawn_egg": "Common Stingray Spawn Egg",
   "item.bensfintasticsharkmod.common_thresher_shark_skin": "Common Thresher Shark Skin",
@@ -20,5 +21,6 @@
   "item.bensfintasticsharkmod.shark_hoe": "Shark Hoe",
   "item.bensfintasticsharkmod.shark_pickaxe": "Shark Pickaxe",
   "item.bensfintasticsharkmod.shark_shovel": "Shark Shovel",
-  "item.bensfintasticsharkmod.shark_sword": "Shark Sword"
+  "item.bensfintasticsharkmod.shark_sword": "Shark Sword",
+  "item.bensfintasticsharkmod.shark_trident": "Shark Trident"
 }

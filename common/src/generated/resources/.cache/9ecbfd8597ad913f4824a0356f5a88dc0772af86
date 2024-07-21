@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-21T16:48:14.9179693	Item Models: bensfintasticsharkmod
+// 1.20.1	2024-07-21T18:25:32.0075118	Item Models: bensfintasticsharkmod
 d996a8622a2e03d94c752545bf257197baaef22d assets/bensfintasticsharkmod/models/item/cartilage.json
 f1b43b4aa111eff314799c9e4dee22c441e65f1b assets/bensfintasticsharkmod/models/item/common_stingray_spawn_egg.json
 81a2e1d404a238aeac6166d7dc361f41ce4fb397 assets/bensfintasticsharkmod/models/item/common_thresher_shark_skin.json
@@ -16,3 +16,6 @@ a704db1415a8afd07ea7ff48a2a5d9de1d85a6c7 assets/bensfintasticsharkmod/models/ite
 6dd5fd55f0f810d4727ffcba122a9cf3a9ebad50 assets/bensfintasticsharkmod/models/item/shark_pickaxe.json
 1286117ff8a5a0f4994a19fca6a903d20a6f29a6 assets/bensfintasticsharkmod/models/item/shark_shovel.json
 30fd7016036a3cc0ab3b1fdacfe4e1b9ef37b276 assets/bensfintasticsharkmod/models/item/shark_sword.json
+65bccc9d240e4c1be323645d12cd251b0accc2a8 assets/bensfintasticsharkmod/models/item/shark_trident.json
+44c17a416d3d922bbee2f82805e5e2a6dfcf07b7 assets/bensfintasticsharkmod/models/item/shark_trident_gui.json
+445cceac9bd9a24bbcbfe1b19ba9ee1b76ef0190 assets/bensfintasticsharkmod/models/item/shark_trident_throwing.json
