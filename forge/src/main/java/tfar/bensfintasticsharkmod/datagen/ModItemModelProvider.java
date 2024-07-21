@@ -18,11 +18,11 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        spawnEgg(ModItems.GREAT_WHITE_SPAWN_EGG);
-        spawnEgg(ModItems.GREAT_HAMMERHEAD_SPAWN_EGG);
-        spawnEgg(ModItems.COMMON_THRESHER_SPAWN_EGG);
-        spawnEgg(ModItems.HARBOR_SEAL_SPAWN_EGG);
-        spawnEgg(ModItems.COMMON_STINGRAY_SPAWN_EGG);
+        makeOneLayerItem(ModItems.GREAT_WHITE_SHARK_SPAWN_EGG);
+        makeOneLayerItem(ModItems.GREAT_HAMMERHEAD_SHARK_SPAWN_EGG);
+        makeOneLayerItem(ModItems.COMMON_THRESHER_SPAWN_EGG);
+        makeOneLayerItem(ModItems.HARBOR_SEAL_SPAWN_EGG);
+        makeOneLayerItem(ModItems.COMMON_STINGRAY_SPAWN_EGG);
     }
 
     protected ModelFile.ExistingModelFile generated = getExistingFile(mcLoc("item/generated"));
