@@ -32,6 +32,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         makeOneLayerItem(ModItems.GREAT_HAMMERHEAD_SHARK_TOOTH);
         makeOneLayerItem(ModItems.COMMON_THRESHER_SHARK_TOOTH);
         makeOneLayerItem(ModItems.CARTILAGE);
+
+        makeOneLayerItem(ModItems.SHARK_AXE);
+        makeOneLayerItem(ModItems.SHARK_HOE);
+        makeOneLayerItem(ModItems.SHARK_PICKAXE);
+        makeOneLayerItem(ModItems.SHARK_SHOVEL);
+        makeOneLayerItem(ModItems.SHARK_SWORD);
     }
 
     protected ModelFile.ExistingModelFile generated = getExistingFile(mcLoc("item/generated"));

@@ -1,7 +1,6 @@
 package tfar.bensfintasticsharkmod.init;
 
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.*;
 
 public class ModItems {
 
@@ -20,5 +19,11 @@ public class ModItems {
     public static final Item COMMON_THRESHER_SHARK_TOOTH = new Item(new Item.Properties());
 
     public static final Item CARTILAGE = new Item(new Item.Properties());
+
+    public static final Item SHARK_SWORD = new SwordItem(ModTiers.SHARK, 3, -2.4F, new Item.Properties());
+    public static final Item SHARK_SHOVEL =  new ShovelItem(ModTiers.SHARK, 1.5F, -3.0F, new Item.Properties());
+    public static final Item SHARK_PICKAXE = new PickaxeItem(ModTiers.SHARK, 1, -2.8F, new Item.Properties());
+    public static final Item SHARK_AXE = new AxeItem(ModTiers.SHARK, 6.0F, -3.1F, new Item.Properties());
+    public static final Item SHARK_HOE =  new HoeItem(ModTiers.SHARK, -2, -1.0F, new Item.Properties());
 
 }
