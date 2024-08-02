@@ -9,7 +9,7 @@
   "loader": "forge:separate_transforms",
   "overrides": [
     {
-      "model": "bensfintasticsharkmod:item/shark_trident_throwing",
+      "model": "bensfintasticsharkmod:item/shark_trident_3d_throwing",
       "predicate": {
         "minecraft:throwing": 1.0
       }

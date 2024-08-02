@@ -106,13 +106,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         ItemModelBuilder throwingBuilder = nested()
                 .parent(getExistingFile(modLoc("item/shark_trident_3d")));
 
-        ItemModelBuilder end = getBuilder(name + "_throwing").guiLight(BlockModel.GuiLight.FRONT)
+      /*  ItemModelBuilder end = getBuilder(name + "_throwing").guiLight(BlockModel.GuiLight.FRONT)
                 .customLoader(SeparateTransformsModelBuilder::begin).base(rSpriteFile)
                 .perspective(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, throwingBuilder)
                 .perspective(ItemDisplayContext.FIRST_PERSON_LEFT_HAND, throwingBuilder)
                 .perspective(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, throwingBuilder)
                 .perspective(ItemDisplayContext.THIRD_PERSON_LEFT_HAND, throwingBuilder)
-                .end();
+                .end();*/
 
 
         getBuilder(name).guiLight(BlockModel.GuiLight.FRONT)
@@ -122,7 +122,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .perspective(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, r3dFile)
                 .perspective(ItemDisplayContext.THIRD_PERSON_LEFT_HAND, r3dFile)
                 .end()
-                .override().model(end).predicate(mcLoc("throwing"), 1).end();
+                .override().model(getExistingFile(modLoc("item/"+name+"_3d_throwing"))).predicate(mcLoc("throwing"), 1).end();
     }
 
 
