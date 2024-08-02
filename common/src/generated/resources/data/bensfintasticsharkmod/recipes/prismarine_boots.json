@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "d": {
+      "item": "minecraft:diamond"
+    },
+    "p": {
+      "item": "minecraft:prismarine_shard"
+    },
+    "s": {
+      "tag": "bensfintasticsharkmod:shark_teeth"
+    }
+  },
+  "pattern": [
+    "p p",
+    "d d",
+    "s s"
+  ],
+  "result": {
+    "item": "bensfintasticsharkmod:prismarine_boots"
+  },
+  "show_notification": true
+}
