@@ -10,6 +10,8 @@ import net.minecraftforge.common.data.LanguageProvider;
 import org.codehaus.plexus.util.StringUtils;
 import tfar.bensfintasticsharkmod.BensFintasticSharkMod;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Supplier;
 
 public class ModLangProvider extends LanguageProvider {
@@ -17,15 +19,12 @@ public class ModLangProvider extends LanguageProvider {
         super(gen, BensFintasticSharkMod.MOD_ID, "en_us");
     }
 
+    protected final Set<Item> exclude_items = new HashSet<>();
     @Override
     protected void addTranslations() {
-        for (Item item : ModDatagen.getKnownItems().toList()) {
-            if (item instanceof BlockItem) {
+        ModDatagen.getKnownItems().filter(item -> item instanceof BlockItem).forEach(exclude_items::add);
+        ModDatagen.getKnownItems().toList().stream().filter(item -> !exclude_items.contains(item)).<Supplier<? extends Item>>map(item -> () -> item).forEach(this::addDefaultItem);
 
-            } else {
-                addDefaultItem(() -> item);
-            }
-        }
         for (EntityType<?> type : ModDatagen.getKnownEntityTypes().toList()) {
             addDefaultEntityType(() -> type);
         }

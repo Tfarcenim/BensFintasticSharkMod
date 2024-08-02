@@ -5,12 +5,17 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLLoader;
 import org.apache.commons.lang3.tuple.Pair;
 import tfar.bensfintasticsharkmod.BensFintasticSharkMod;
 import tfar.bensfintasticsharkmod.BensFintasticSharkModForge;
 import tfar.bensfintasticsharkmod.entity.*;
+import tfar.bensfintasticsharkmod.item.PrismarineArmorItem;
+import tfar.bensfintasticsharkmod.item.PrismarineArmorMaterial;
 import tfar.bensfintasticsharkmod.platform.services.IPlatformHelper;
 
 import java.lang.reflect.Field;
@@ -79,5 +84,10 @@ public class ForgePlatformHelper implements IPlatformHelper {
     @Override
     public EntityType<CommonThresherSharkEntity> registerThresherShark() {
         return EntityType.Builder.<CommonThresherSharkEntity>of(CommonThresherSharkEntityForge::new, MobCategory.WATER_CREATURE).sized(1.25f, 1).build("");
+    }
+
+    @Override
+    public ArmorItem createPrismarineArmor(ArmorMaterial prismarine, ArmorItem.Type helmet, Item.Properties properties) {
+        return new PrismarineArmorItem(prismarine, helmet,properties);
     }
 }

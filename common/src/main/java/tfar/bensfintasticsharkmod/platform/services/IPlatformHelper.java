@@ -2,6 +2,9 @@ package tfar.bensfintasticsharkmod.platform.services;
 
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.Item;
 import tfar.bensfintasticsharkmod.entity.*;
 
 public interface IPlatformHelper {
@@ -44,5 +47,7 @@ public interface IPlatformHelper {
     EntityType<HarborSealEntity> registerHarborSeal();
     EntityType<CommonStingrayEntity> registerStingray();
     EntityType<CommonThresherSharkEntity> registerThresherShark();
+
+    ArmorItem createPrismarineArmor(ArmorMaterial prismarine, ArmorItem.Type helmet, Item.Properties properties);
 
 }
