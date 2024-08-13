@@ -1,4 +1,6 @@
 {
+  "advancements.bensfintasticsharkmod.root.description": "Achievement granted when logging in with the mod",
+  "advancements.bensfintasticsharkmod.root.title": "Ben’s Fintastic Sharks!",
   "entity.bensfintasticsharkmod.common_stingray": "Common Stingray",
   "entity.bensfintasticsharkmod.common_thresher_shark": "Common Thresher Shark",
   "entity.bensfintasticsharkmod.great_hammerhead_shark": "Great Hammerhead Shark",

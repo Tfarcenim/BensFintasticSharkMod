@@ -12,11 +12,14 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import tfar.bensfintasticsharkmod.BensFintasticSharkMod;
+import tfar.bensfintasticsharkmod.datagen.data.BensFintasticSharksAdvancements;
+import tfar.bensfintasticsharkmod.datagen.data.ModAdvancementProvider;
 import tfar.bensfintasticsharkmod.datagen.data.tags.ModBlockTagsProvider;
 import tfar.bensfintasticsharkmod.datagen.data.tags.ModEntityTypeTagsProvider;
 import tfar.bensfintasticsharkmod.datagen.data.tags.ModItemTagsProvider;
 import tfar.bensfintasticsharkmod.datagen.data.ModLootTableProvider;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
@@ -43,6 +46,7 @@ public class ModDatagen {
 
             generator.addProvider(true,new ModItemTagsProvider(output,lookupProvider,blockTags.contentsGetter(),helper));
             generator.addProvider(true,new ModEntityTypeTagsProvider(output,lookupProvider,helper));
+            generator.addProvider(true,new ModAdvancementProvider(output,lookupProvider,helper, List.of(new BensFintasticSharksAdvancements())));
         }
     }
 

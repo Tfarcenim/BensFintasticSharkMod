@@ -1,0 +1,30 @@
+{
+  "criteria": {
+    "unlock_right_away": {
+      "conditions": {},
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "translate": "advancements.bensfintasticsharkmod.root.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:map"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.bensfintasticsharkmod.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "unlock_right_away"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
