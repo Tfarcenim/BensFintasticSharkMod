@@ -3,13 +3,11 @@ package tfar.bensfintasticsharkmod.datagen.data;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.RequirementsStrategy;
-import net.minecraft.advancements.critereon.EntityEquipmentPredicate;
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.KilledTrigger;
-import net.minecraft.advancements.critereon.PlayerTrigger;
+import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.raid.Raid;
 import net.minecraft.world.item.Items;
@@ -62,6 +60,16 @@ public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider
                 .display(Blocks.RED_BED,TextComponents.HARBOR_SEAL_ENCOUNTER,TextComponents.HARBOR_SEAL_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
                 .addCriterion("player_found_entity", PlayerFoundEntityTrigger.TriggerInstance.located(harborSealPredicate))
                 .save(saver, BensFintasticSharkMod.id("harbor_seal_encounter").toString());
+
+        Advancement stingrayAttacksPlayer = Advancement.Builder.advancement().parent(advancement)
+                .display(Items.BOW, TextComponents.STINGRAY_ATTACKS_PLAYER, TextComponents.STINGRAY_ATTACKS_PLAYER_DESC, null, FrameType.TASK, true, true, false)
+                .addCriterion("entity_hurt_player",
+                        EntityHurtPlayerTrigger.TriggerInstance.entityHurtPlayer(
+                                DamagePredicate.Builder.damageInstance()
+                                        .type(DamageSourcePredicate.Builder.damageType()
+                                                .direct(EntityPredicate.Builder.entity().of(ModEntityTypes.COMMON_STINGRAY)))))
+                .save(saver, BensFintasticSharkMod.id("stingray_attacks_player").toString());
+
     }
 }
 //b. “You’re gonna need a bigger boat…” (Encounter a Great White)

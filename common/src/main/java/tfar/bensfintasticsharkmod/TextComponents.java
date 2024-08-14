@@ -19,4 +19,7 @@ public class TextComponents {
 
     public static final MutableComponent HARBOR_SEAL_ENCOUNTER = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".harbor_seal_encounter.title");
     public static final MutableComponent HARBOR_SEAL_ENCOUNTER_DESC = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".harbor_seal_encounter.description");
+
+    public static final MutableComponent STINGRAY_ATTACKS_PLAYER = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".stingray_attacks_player.title");
+    public static final MutableComponent STINGRAY_ATTACKS_PLAYER_DESC = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".stingray_attacks_player.description");
 }

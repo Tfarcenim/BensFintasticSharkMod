@@ -47,6 +47,9 @@ public class ModLangProvider extends LanguageProvider {
 
         addTextComponent(TextComponents.SLEEPING_WITH_THE_FISHES,"Sleeping with the fishes.");
         addTextComponent(TextComponents.SLEEPING_WITH_THE_FISHES_DESC,"Killed by a shark");
+
+        addTextComponent(TextComponents.STINGRAY_ATTACKS_PLAYER,"Crankey!");
+        addTextComponent(TextComponents.STINGRAY_ATTACKS_PLAYER_DESC,"Get stung by a Common Stingray");
     }
 
 
