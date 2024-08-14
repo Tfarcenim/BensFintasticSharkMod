@@ -38,4 +38,16 @@ public class TextComponents {
     public static final MutableComponent JUSTICE_FOR_STEVE = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".justice_for_steve.title");
     public static final MutableComponent JUSTICE_FOR_STEVE_DESC = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".justice_for_steve.description");
 
+    public static final MutableComponent PRISMARINE_ARMOR = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".prismarine_armor.title");
+    public static final MutableComponent PRISMARINE_ARMOR_DESC = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".prismarine_armor.description");
+
+    public static final MutableComponent ZIPPY_ENCOUNTER = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".zippy_encounter.title");
+    public static final MutableComponent ZIPPY_ENCOUNTER_DESC = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".zippy_encounter.description");
+
+    public static final MutableComponent SPECIMEN_8_ENCOUNTER = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".specimen_8_encounter.title");
+    public static final MutableComponent SPECIMEN_8_ENCOUNTER_DESC = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".specimen_8_encounter.description");
+
+    public static final MutableComponent DEEP_BLUE_ENCOUNTER = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".deep_blue_encounter.title");
+    public static final MutableComponent DEEP_BLUE_ENCOUNTER_DESC = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".deep_blue_encounter.description");
+
 }

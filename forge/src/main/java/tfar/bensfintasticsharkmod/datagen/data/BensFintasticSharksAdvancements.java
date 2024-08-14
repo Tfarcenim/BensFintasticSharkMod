@@ -1,10 +1,12 @@
 package tfar.bensfintasticsharkmod.datagen.data;
 
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.raid.Raid;
 import net.minecraft.world.item.Items;
@@ -19,6 +21,7 @@ import tfar.bensfintasticsharkmod.entity.GreatHammerheadSharkEntity;
 import tfar.bensfintasticsharkmod.entity.GreatWhiteSharkEntity;
 import tfar.bensfintasticsharkmod.init.EntityVariantPredicates;
 import tfar.bensfintasticsharkmod.init.ModEntityTypes;
+import tfar.bensfintasticsharkmod.init.ModItems;
 import tfar.bensfintasticsharkmod.init.ModTags;
 
 import java.util.function.Consumer;
@@ -93,7 +96,6 @@ public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider
                 .addCriterion("player_found_albino_great_white", PlayerFoundEntityTrigger.TriggerInstance.located(albinoGreatWhitePredicate))
                 .addCriterion("player_found_albino_hammerhead", PlayerFoundEntityTrigger.TriggerInstance.located(albinoGreatHammerheadPredicate))
                 .addCriterion("player_found_albino_thresher", PlayerFoundEntityTrigger.TriggerInstance.located(albinoCommonThresherPredicate))
-
                 .save(saver, BensFintasticSharkMod.id("albino_encounter").toString());
 
         Advancement illegalPoaching = Advancement.Builder.advancement().parent(root)
@@ -113,6 +115,37 @@ public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider
                 .addCriterion("player_killed_entity",
                         KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(ModEntityTypes.COMMON_STINGRAY)))
                 .save(saver, BensFintasticSharkMod.id("justice_for_steve").toString());
+
+        Advancement.Builder.advancement().parent(root)
+                .display(ModItems.PRISMARINE_CHESTPLATE,TextComponents.PRISMARINE_ARMOR,TextComponents.PRISMARINE_ARMOR_DESC, null, FrameType.CHALLENGE, true, true, false)
+                .rewards(AdvancementRewards.Builder.experience(100))
+                .addCriterion("prismarine_armor", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PRISMARINE_HELMET, ModItems.PRISMARINE_CHESTPLATE, ModItems.PRISMARINE_LEGGINGS,ModItems.PRISMARINE_BOOTS))
+                .save(saver, BensFintasticSharkMod.id("prismarine_armor").toString());
+
+
+        EntityPredicate zippyPredicate = EntityPredicate.Builder.entity().of(ModEntityTypes.COMMON_THRESHER_SHARK)
+                .subPredicate(EntityVariantPredicates.COMMON_THRESHER_SHARK.createPredicate(CommonThresherSharkEntity.Variant.ZIPPY)).build();
+
+        Advancement zippyAdvancement = Advancement.Builder.advancement().parent(root)
+                .display(Blocks.RED_BED,TextComponents.ZIPPY_ENCOUNTER,TextComponents.ZIPPY_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
+                .addCriterion("player_found_entity", PlayerFoundEntityTrigger.TriggerInstance.located(zippyPredicate))
+                .save(saver, BensFintasticSharkMod.id("zippy_encounter").toString());
+
+        EntityPredicate specimen8Predicate = EntityPredicate.Builder.entity().of(ModEntityTypes.GREAT_WHITE_SHARK)
+                .subPredicate(EntityVariantPredicates.GREAT_WHITE_SHARK.createPredicate(GreatWhiteSharkEntity.Variant.SPECIMEN_8)).build();
+
+        Advancement specimen8Advancement = Advancement.Builder.advancement().parent(root)
+                .display(Blocks.RED_BED,TextComponents.SPECIMEN_8_ENCOUNTER,TextComponents.SPECIMEN_8_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
+                .addCriterion("player_found_entity", PlayerFoundEntityTrigger.TriggerInstance.located(specimen8Predicate))
+                .save(saver, BensFintasticSharkMod.id("specimen_8_encounter").toString());
+
+        EntityPredicate deepBluePredicate = EntityPredicate.Builder.entity().of(ModEntityTypes.GREAT_WHITE_SHARK)
+                .subPredicate(EntityVariantPredicates.GREAT_WHITE_SHARK.createPredicate(GreatWhiteSharkEntity.Variant.DEEP_BLUE)).build();
+
+        Advancement deepBlueAdvancement = Advancement.Builder.advancement().parent(root)
+                .display(Blocks.RED_BED,TextComponents.DEEP_BLUE_ENCOUNTER,TextComponents.DEEP_BLUE_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
+                .addCriterion("player_found_entity", PlayerFoundEntityTrigger.TriggerInstance.located(deepBluePredicate))
+                .save(saver, BensFintasticSharkMod.id("deep_blue_encounter").toString());
 
     }
 }

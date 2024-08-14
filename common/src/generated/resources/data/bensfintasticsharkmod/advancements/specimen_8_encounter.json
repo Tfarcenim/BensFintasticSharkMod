@@ -1,0 +1,43 @@
+{
+  "parent": "bensfintasticsharkmod:root",
+  "criteria": {
+    "player_found_entity": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "bensfintasticsharkmod:great_white_shark",
+              "type_specific": {
+                "variant": "specimen-8"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "bensfintasticsharkmod:player_found_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.bensfintasticsharkmod.specimen_8_encounter.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:red_bed"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.bensfintasticsharkmod.specimen_8_encounter.title"
+    }
+  },
+  "requirements": [
+    [
+      "player_found_entity"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
