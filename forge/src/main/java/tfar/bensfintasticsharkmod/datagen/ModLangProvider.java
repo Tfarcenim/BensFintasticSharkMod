@@ -37,10 +37,13 @@ public class ModLangProvider extends LanguageProvider {
         addTextComponent(TextComponents.ROOT_DESC,"Achievement granted when logging in with the mod");
 
         addTextComponent(TextComponents.GREAT_WHITE_ENCOUNTER,"You’re gonna need a bigger boat…");
-        addTextComponent(TextComponents.GREAT_WHITE_ENCOUNTER_DESC,"Encounter a Great White");
+        addTextComponent(TextComponents.GREAT_WHITE_ENCOUNTER_DESC,"Encounter a Great White Shark");
 
         addTextComponent(TextComponents.GREAT_HAMMERHEAD_ENCOUNTER,"Stop! Hammer Time!");
-        addTextComponent(TextComponents.GREAT_HAMMERHEAD_ENCOUNTER_DESC,"Encounter a Great Hammerhead");
+        addTextComponent(TextComponents.GREAT_HAMMERHEAD_ENCOUNTER_DESC,"Encounter a Great Hammerhead Shark");
+
+        addTextComponent(TextComponents.COMMON_THRESHER_ENCOUNTER,"Whiplash!");
+        addTextComponent(TextComponents.COMMON_THRESHER_ENCOUNTER_DESC,"Encounter a Common Thresher Shark");
 
         addTextComponent(TextComponents.HARBOR_SEAL_ENCOUNTER,"Awkward.");
         addTextComponent(TextComponents.HARBOR_SEAL_ENCOUNTER_DESC,"Encounter a Harbor Seal");
@@ -50,6 +53,18 @@ public class ModLangProvider extends LanguageProvider {
 
         addTextComponent(TextComponents.STINGRAY_ATTACKS_PLAYER,"Crankey!");
         addTextComponent(TextComponents.STINGRAY_ATTACKS_PLAYER_DESC,"Get stung by a Common Stingray");
+
+        addTextComponent(TextComponents.ALBINO_ENCOUNTER,"It's a shiny!");
+        addTextComponent(TextComponents.ALBINO_ENCOUNTER_DESC,"Encounter an albino variant");
+
+        addTextComponent(TextComponents.ILLEGAL_POACHING,"Illegal Poaching");
+        addTextComponent(TextComponents.ILLEGAL_POACHING_DESC,"Kill a shark");
+
+        addTextComponent(TextComponents.UNETHICAL,"Unethical");
+        addTextComponent(TextComponents.UNETHICAL_DESC,"Kill a Harbor Seal");
+
+        addTextComponent(TextComponents.JUSTICE_FOR_STEVE,"Justice for Steve");
+        addTextComponent(TextComponents.JUSTICE_FOR_STEVE_DESC,"Kill a Common Stingray");
     }
 
 

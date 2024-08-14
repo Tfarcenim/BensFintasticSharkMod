@@ -1,39 +1,39 @@
 {
   "parent": "bensfintasticsharkmod:root",
   "criteria": {
-    "player_found_entity": {
+    "player_killed_entity": {
       "conditions": {
         "entity": [
           {
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "bensfintasticsharkmod:great_white_shark"
+              "type": "#bensfintasticsharkmod:sharks"
             }
           }
         ]
       },
-      "trigger": "bensfintasticsharkmod:player_found_entity"
+      "trigger": "minecraft:player_killed_entity"
     }
   },
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.bensfintasticsharkmod.great_white_encounter.description"
+      "translate": "advancements.bensfintasticsharkmod.illegal_poaching.description"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "minecraft:red_bed"
+      "item": "minecraft:paper"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.bensfintasticsharkmod.great_white_encounter.title"
+      "translate": "advancements.bensfintasticsharkmod.illegal_poaching.title"
     }
   },
   "requirements": [
     [
-      "player_found_entity"
+      "player_killed_entity"
     ]
   ],
   "sends_telemetry_event": true

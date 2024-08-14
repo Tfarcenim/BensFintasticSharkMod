@@ -9,7 +9,7 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import tfar.bensfintasticsharkmod.BensFintasticSharkMod;
 
 public class PlayerFoundEntityTrigger extends SimpleCriterionTrigger<PlayerFoundEntityTrigger.TriggerInstance> {
-    static final ResourceLocation ID = new ResourceLocation("player_found_entity");
+    static final ResourceLocation ID = BensFintasticSharkMod.id("player_found_entity");
 
 
     public PlayerFoundEntityTrigger() {

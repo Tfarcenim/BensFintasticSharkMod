@@ -8,7 +8,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "bensfintasticsharkmod:great_white_shark"
+              "type": "bensfintasticsharkmod:common_thresher_shark"
             }
           }
         ]
@@ -19,7 +19,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.bensfintasticsharkmod.great_white_encounter.description"
+      "translate": "advancements.bensfintasticsharkmod.common_thresher_encounter.description"
     },
     "frame": "task",
     "hidden": false,
@@ -28,7 +28,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.bensfintasticsharkmod.great_white_encounter.title"
+      "translate": "advancements.bensfintasticsharkmod.common_thresher_encounter.title"
     }
   },
   "requirements": [
