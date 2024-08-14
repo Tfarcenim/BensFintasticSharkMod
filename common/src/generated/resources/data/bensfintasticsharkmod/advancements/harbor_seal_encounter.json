@@ -1,0 +1,40 @@
+{
+  "parent": "bensfintasticsharkmod:root",
+  "criteria": {
+    "player_found_entity": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "bensfintasticsharkmod:harbor_seal"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_found_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.bensfintasticsharkmod.harbor_seal_encounter.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:red_bed"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.bensfintasticsharkmod.harbor_seal_encounter.title"
+    }
+  },
+  "requirements": [
+    [
+      "player_found_entity"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

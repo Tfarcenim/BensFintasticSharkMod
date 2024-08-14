@@ -33,5 +33,8 @@ public class ModEntityTypeTagsProvider extends EntityTypeTagsProvider {
         tag(ModTags.EntityTypes.COMMON_THRESHER_SHARK_ALWAYS_ATTACKS)
                 .add(EntityType.COD,EntityType.GLOW_SQUID,EntityType.SALMON,EntityType.SHEEP,EntityType.SQUID,
                         EntityType.TURTLE);
+
+        tag(ModTags.EntityTypes.SHARKS)
+                .add(ModEntityTypes.COMMON_THRESHER_SHARK,ModEntityTypes.GREAT_HAMMERHEAD_SHARK,ModEntityTypes.GREAT_WHITE_SHARK);
     }
 }

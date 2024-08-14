@@ -14,6 +14,8 @@ public class ModTags {
         public static final TagKey<EntityType<?>> GREAT_HAMMERHEAD_SHARK_ALWAYS_ATTACKS = create("great_hammerhead_shark/always_attacks");
         public static final TagKey<EntityType<?>> COMMON_THRESHER_SHARK_ALWAYS_ATTACKS = create("common_thresher_shark/always_attacks");
 
+        public static final TagKey<EntityType<?>> SHARKS = create("sharks");
+
         private static TagKey<EntityType<?>> create(String pName) {
             return TagKey.create(Registries.ENTITY_TYPE, BensFintasticSharkMod.id(pName));
         }
