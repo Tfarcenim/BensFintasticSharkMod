@@ -35,6 +35,9 @@ public class ModLangProvider extends LanguageProvider {
 
         addTextComponent(TextComponents.ROOT,"Ben’s Fintastic Sharks!");
         addTextComponent(TextComponents.ROOT_DESC,"Achievement granted when logging in with the mod");
+
+        addTextComponent(TextComponents.GREAT_WHITE_ENCOUNTER,"You’re gonna need a bigger boat…");
+        addTextComponent(TextComponents.GREAT_WHITE_ENCOUNTER_DESC,"Encounter a Great White");
     }
 
 

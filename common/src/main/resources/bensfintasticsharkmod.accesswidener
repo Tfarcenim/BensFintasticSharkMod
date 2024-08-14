@@ -10,3 +10,5 @@ accessible method net/minecraft/world/item/PickaxeItem <init> (Lnet/minecraft/wo
 accessible method net/minecraft/client/renderer/item/ItemProperties register (Lnet/minecraft/world/item/Item;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/client/renderer/item/ClampedItemPropertyFunction;)V
 
 accessible field net/minecraft/world/item/ArmorMaterials HEALTH_FUNCTION_FOR_TYPE Ljava/util/EnumMap;
+
+accessible method net/minecraft/advancements/CriteriaTriggers register (Lnet/minecraft/advancements/CriterionTrigger;)Lnet/minecraft/advancements/CriterionTrigger;
