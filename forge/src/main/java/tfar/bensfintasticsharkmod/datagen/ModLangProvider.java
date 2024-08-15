@@ -77,6 +77,18 @@ public class ModLangProvider extends LanguageProvider {
 
         addTextComponent(TextComponents.DEEP_BLUE_ENCOUNTER,"Shark of Zeus");
         addTextComponent(TextComponents.DEEP_BLUE_ENCOUNTER_DESC,"Mommy Shark");
+
+        addTextComponent(TextComponents.SHARK_CODEX,"Knowledge is power…");
+        addTextComponent(TextComponents.SHARK_CODEX_DESC,"Craft a Shark Codex");
+
+        addTextComponent(TextComponents.LOST_MANUSCRIPT,"Lost beneath the waves");
+        addTextComponent(TextComponents.LOST_MANUSCRIPT_DESC,"Find a lost manuscript");
+
+        addTextComponent(TextComponents.LEVEL_SHARK_CODEX,"Level Up!");
+        addTextComponent(TextComponents.LEVEL_SHARK_CODEX_DESC,"Combine 9 shark Codex Pages with a Shark Codex");
+
+        addTextComponent(TextComponents.SHARKS_GALORE,"Shark Galore!");
+        addTextComponent(TextComponents.SHARKS_GALORE_DESC,"Discover every species of sharks");
     }
 
 

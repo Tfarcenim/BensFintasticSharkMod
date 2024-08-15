@@ -1,0 +1,32 @@
+{
+  "parent": "bensfintasticsharkmod:shark_codex",
+  "criteria": {
+    "level_shark_codex": {
+      "conditions": {
+        "recipe_id": "bensfintasticsharkmod:shark_codex"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.bensfintasticsharkmod.level_shark_codex.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "bensfintasticsharkmod:shark_codex"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.bensfintasticsharkmod.level_shark_codex.title"
+    }
+  },
+  "requirements": [
+    [
+      "level_shark_codex"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

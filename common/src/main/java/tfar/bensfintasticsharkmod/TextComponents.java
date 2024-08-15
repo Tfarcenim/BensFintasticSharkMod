@@ -50,4 +50,16 @@ public class TextComponents {
     public static final MutableComponent DEEP_BLUE_ENCOUNTER = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".deep_blue_encounter.title");
     public static final MutableComponent DEEP_BLUE_ENCOUNTER_DESC = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".deep_blue_encounter.description");
 
+    public static final MutableComponent SHARK_CODEX = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".shark_codex.title");
+    public static final MutableComponent SHARK_CODEX_DESC = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".shark_codex.description");
+
+    public static final MutableComponent LOST_MANUSCRIPT = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".lost_manuscript.title");
+    public static final MutableComponent LOST_MANUSCRIPT_DESC = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".lost_manuscript.description");
+
+    public static final MutableComponent LEVEL_SHARK_CODEX = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".level_shark_codex.title");
+    public static final MutableComponent LEVEL_SHARK_CODEX_DESC = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".level_shark_codex.description");
+
+    public static final MutableComponent SHARKS_GALORE = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".sharks_galore.title");
+    public static final MutableComponent SHARKS_GALORE_DESC = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".sharks_galore.description");
+
 }

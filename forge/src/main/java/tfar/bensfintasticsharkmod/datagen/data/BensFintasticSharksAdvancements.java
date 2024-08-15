@@ -6,8 +6,10 @@ import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.raid.Raid;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
@@ -27,6 +29,10 @@ import tfar.bensfintasticsharkmod.init.ModTags;
 import java.util.function.Consumer;
 
 public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider.AdvancementGenerator {
+
+    private static final EntityType<?>[] MOBS_TO_DISCOVER = new EntityType[]{ModEntityTypes.GREAT_WHITE_SHARK,ModEntityTypes.GREAT_HAMMERHEAD_SHARK
+    ,ModEntityTypes.COMMON_THRESHER_SHARK};
+
 
     @Override
     public void generate(HolderLookup.Provider registries, Consumer<Advancement> saver, ExistingFileHelper existingFileHelper) {
@@ -147,7 +153,34 @@ public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider
                 .addCriterion("player_found_entity", PlayerFoundEntityTrigger.TriggerInstance.located(deepBluePredicate))
                 .save(saver, BensFintasticSharkMod.id("deep_blue_encounter").toString());
 
+        Advancement sharkCodex = Advancement.Builder.advancement().parent(root)
+                .display(ModItems.SHARK_CODEX,TextComponents.SHARK_CODEX, TextComponents.SHARK_CODEX_DESC, null, FrameType.TASK, false, false, false)
+                .addCriterion("shark_codex", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SHARK_CODEX))
+                .save(saver, BensFintasticSharkMod.id("shark_codex").toString());
+
+        Advancement lostManuscript = Advancement.Builder.advancement().parent(root)
+                .display(ModItems.LOST_MANUSCRIPT,TextComponents.LOST_MANUSCRIPT, TextComponents.LOST_MANUSCRIPT_DESC, null, FrameType.TASK, false, false, false)
+                .addCriterion("lost_manuscript", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.LOST_MANUSCRIPT))
+                .save(saver, BensFintasticSharkMod.id("lost_manuscript").toString());
+
+        Advancement levelSharkCodex = Advancement.Builder.advancement().parent(sharkCodex)
+                .display(ModItems.SHARK_CODEX,TextComponents.LEVEL_SHARK_CODEX, TextComponents.LEVEL_SHARK_CODEX_DESC, null, FrameType.TASK, false, false, false)
+                .addCriterion("level_shark_codex", RecipeCraftedTrigger.TriggerInstance.craftedItem(BensFintasticSharkMod.id("shark_codex")))
+                .save(saver, BensFintasticSharkMod.id("level_shark_codex").toString());
+
+        Advancement sharksGalore = addMobsToDiscover(Advancement.Builder.advancement().parent(sharkCodex)
+                .display(ModItems.SHARK_CODEX,TextComponents.SHARKS_GALORE, TextComponents.SHARKS_GALORE_DESC, null, FrameType.CHALLENGE, false, false, false))
+                .save(saver, BensFintasticSharkMod.id("sharks_galore").toString());
     }
+
+    private static Advancement.Builder addMobsToDiscover(Advancement.Builder pBuilder) {
+        for(EntityType<?> entitytype : MOBS_TO_DISCOVER) {
+            pBuilder.addCriterion(BuiltInRegistries.ENTITY_TYPE.getKey(entitytype).toString(), PlayerFoundEntityTrigger.TriggerInstance.located(EntityPredicate.Builder.entity().of(entitytype).build()));
+        }
+
+        return pBuilder;
+    }
+
 }
 //b. “You’re gonna need a bigger boat…” (Encounter a Great White)
 //c. “Stop! Hammer Time!” (Encounter a Great Hammerhead)
