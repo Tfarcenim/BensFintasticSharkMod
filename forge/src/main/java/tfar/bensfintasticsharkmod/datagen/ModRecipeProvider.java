@@ -1,10 +1,7 @@
 package tfar.bensfintasticsharkmod.datagen;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Items;
 import tfar.bensfintasticsharkmod.init.ModItems;
 import tfar.bensfintasticsharkmod.init.ModTags;
@@ -98,6 +95,12 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("p p")
                 .pattern("d d")
                 .pattern("s s")
+                .unlockedBy("has_shark_teeth",has(ModTags.Items.SHARK_TEETH))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.SHARK_CODEX)
+                .requires(Items.BOOK).requires(ModTags.Items.SHARK_TEETH)
+                .requires(Items.BLUE_DYE).requires(Items.TROPICAL_FISH_BUCKET)
                 .unlockedBy("has_shark_teeth",has(ModTags.Items.SHARK_TEETH))
                 .save(consumer);
     }

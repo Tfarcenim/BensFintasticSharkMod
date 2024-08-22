@@ -72,7 +72,7 @@ public class HarborSealEntityForge extends HarborSealEntity implements GeoEntity
     public float getWalkTargetValue(BlockPos pPos, LevelReader pLevel) {
         return 0.0F;
     }
-    
+
     @Override
     protected void handleAirSupply(int pAirSupply) {
 

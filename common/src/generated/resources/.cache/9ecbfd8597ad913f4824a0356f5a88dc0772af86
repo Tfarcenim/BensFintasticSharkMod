@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-02T13:23:16.7777361	Item Models: bensfintasticsharkmod
+// 1.20.1	2024-08-22T04:19:59.2729641	Item Models: bensfintasticsharkmod
 d996a8622a2e03d94c752545bf257197baaef22d assets/bensfintasticsharkmod/models/item/cartilage.json
 f1b43b4aa111eff314799c9e4dee22c441e65f1b assets/bensfintasticsharkmod/models/item/common_stingray_spawn_egg.json
 81a2e1d404a238aeac6166d7dc361f41ce4fb397 assets/bensfintasticsharkmod/models/item/common_thresher_shark_skin.json
@@ -16,6 +16,7 @@ cfb08c51690dd5908bfa7a42e15fed33227c174c assets/bensfintasticsharkmod/models/ite
 35eca69f2c1d473d99b22e5893a84a141a871e20 assets/bensfintasticsharkmod/models/item/prismarine_helmet.json
 fea2a7f9940c91ddee6489a418f7eb276e927792 assets/bensfintasticsharkmod/models/item/prismarine_leggings.json
 37a379e1b03fa1e40a6f180549ef8765e7bf6d8d assets/bensfintasticsharkmod/models/item/shark_axe.json
+3afd341edceaab4e9400579d8adc06f3e28dd727 assets/bensfintasticsharkmod/models/item/shark_codex.json
 5dbe3b7d1c4d3c54ae63c756b936f4ab9944ecc9 assets/bensfintasticsharkmod/models/item/shark_hoe.json
 6dd5fd55f0f810d4727ffcba122a9cf3a9ebad50 assets/bensfintasticsharkmod/models/item/shark_pickaxe.json
 1286117ff8a5a0f4994a19fca6a903d20a6f29a6 assets/bensfintasticsharkmod/models/item/shark_shovel.json

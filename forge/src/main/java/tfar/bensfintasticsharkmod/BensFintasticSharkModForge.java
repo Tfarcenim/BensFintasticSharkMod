@@ -4,9 +4,12 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
@@ -18,6 +21,7 @@ import tfar.bensfintasticsharkmod.client.ModClientForge;
 import tfar.bensfintasticsharkmod.datagen.ModDatagen;
 import tfar.bensfintasticsharkmod.entity.*;
 import tfar.bensfintasticsharkmod.init.ModEntityTypes;
+import tfar.bensfintasticsharkmod.init.ModItems;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +42,7 @@ public class BensFintasticSharkModForge {
         bus.addListener(this::attributes);
         bus.addListener(ModDatagen::start);
         MinecraftForge.EVENT_BUS.addListener(this::playerTick);
+        MinecraftForge.EVENT_BUS.addListener(this::trading);
 
         if (FMLEnvironment.dist.isClient()) {
             ModClientForge.init(bus);
@@ -50,6 +55,24 @@ public class BensFintasticSharkModForge {
     private void playerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.START && event.side == LogicalSide.SERVER) {
             BensFintasticSharkMod.playerTick((ServerPlayer) event.player);
+        }
+    }
+
+    private void trading(VillagerTradesEvent event) {
+        VillagerProfession type = event.getType();
+        if (type == VillagerProfession.FISHERMAN) {
+            event.getTrades().put(1,List.of(
+                    new VillagerTrades.ItemsForEmeralds(ModItems.GREAT_WHITE_SHARK_TOOTH,1,4,10),
+                    new VillagerTrades.ItemsForEmeralds(ModItems.GREAT_HAMMERHEAD_SHARK_TOOTH,1,4,10),
+                    new VillagerTrades.ItemsForEmeralds(ModItems.COMMON_THRESHER_SHARK_TOOTH,1,4,10),
+
+                    new VillagerTrades.ItemsForEmeralds(ModItems.GREAT_WHITE_SHARK_SKIN,1,4,10),
+                    new VillagerTrades.ItemsForEmeralds(ModItems.GREAT_HAMMERHEAD_SHARK_SKIN,1,4,10),
+                    new VillagerTrades.ItemsForEmeralds(ModItems.COMMON_THRESHER_SHARK_SKIN,1,4,10),
+
+                    new VillagerTrades.ItemsForEmeralds(ModItems.CARTILAGE,1,6,10)
+
+                    ));
         }
     }
 

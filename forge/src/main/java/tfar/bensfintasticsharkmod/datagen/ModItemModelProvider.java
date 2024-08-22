@@ -48,6 +48,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         makeOneLayerItem(ModItems.PRISMARINE_LEGGINGS);
         makeOneLayerItem(ModItems.PRISMARINE_BOOTS);
 
+        makeOneLayerItem(ModItems.SHARK_CODEX);
 
         trident(ModItems.SHARK_TRIDENT);
     }
