@@ -17,9 +17,7 @@ public class ModClientForge {
     }
 
     static void setup(FMLClientSetupEvent event) {
-        event.enqueueWork(() -> {
-            ModClient.registerRenderers();
-        });
+        event.enqueueWork(ModClient::registerRenderers);
     }
 
     static void renderers(final EntityRenderersEvent.RegisterRenderers event) {

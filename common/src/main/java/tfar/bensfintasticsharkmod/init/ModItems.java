@@ -7,11 +7,13 @@ import tfar.bensfintasticsharkmod.platform.Services;
 
 public class ModItems {
 
-    public static final Item GREAT_WHITE_SHARK_SPAWN_EGG = new SpawnEggItem(ModEntityTypes.GREAT_WHITE_SHARK,0,0,new Item.Properties());
-    public static final Item GREAT_HAMMERHEAD_SHARK_SPAWN_EGG = new SpawnEggItem(ModEntityTypes.GREAT_HAMMERHEAD_SHARK,0,0,new Item.Properties());
-    public static final Item COMMON_THRESHER_SHARK_SPAWN_EGG = new SpawnEggItem(ModEntityTypes.COMMON_THRESHER_SHARK,0,0,new Item.Properties());
-    public static final Item HARBOR_SEAL_SPAWN_EGG = new SpawnEggItem(ModEntityTypes.HARBOR_SEAL,0,0,new Item.Properties());
-    public static final Item COMMON_STINGRAY_SPAWN_EGG = new SpawnEggItem(ModEntityTypes.COMMON_STINGRAY,0,0,new Item.Properties());
+    static final int CLEAR = 0x00ffffff;
+
+    public static final Item GREAT_WHITE_SHARK_SPAWN_EGG = new SpawnEggItem(ModEntityTypes.GREAT_WHITE_SHARK,CLEAR,CLEAR,new Item.Properties());
+    public static final Item GREAT_HAMMERHEAD_SHARK_SPAWN_EGG = new SpawnEggItem(ModEntityTypes.GREAT_HAMMERHEAD_SHARK,CLEAR,CLEAR,new Item.Properties());
+    public static final Item COMMON_THRESHER_SHARK_SPAWN_EGG = new SpawnEggItem(ModEntityTypes.COMMON_THRESHER_SHARK,CLEAR,CLEAR,new Item.Properties());
+    public static final Item HARBOR_SEAL_SPAWN_EGG = new SpawnEggItem(ModEntityTypes.HARBOR_SEAL,CLEAR,CLEAR,new Item.Properties());
+    public static final Item COMMON_STINGRAY_SPAWN_EGG = new SpawnEggItem(ModEntityTypes.COMMON_STINGRAY,CLEAR,CLEAR,new Item.Properties());
 
     public static final Item GREAT_WHITE_SHARK_SKIN = new Item(new Item.Properties());
     public static final Item GREAT_HAMMERHEAD_SHARK_SKIN = new Item(new Item.Properties());

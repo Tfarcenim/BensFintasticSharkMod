@@ -52,7 +52,7 @@ public class CommonThresherSharkEntity extends WaterAnimal implements Conditiona
         if (!isInWater()) return false;
         if (target.isDeadOrDying()) return false;
 
-        if (getType().is(ModTags.EntityTypes.COMMON_THRESHER_SHARK_ALWAYS_ATTACKS)) return true;
+        if (target.getType().is(ModTags.EntityTypes.COMMON_THRESHER_SHARK_ALWAYS_ATTACKS)) return true;
 
         if (target.getHealth() / target.getMaxHealth() <= .5) return true;
 

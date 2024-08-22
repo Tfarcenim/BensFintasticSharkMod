@@ -3,6 +3,7 @@ package tfar.bensfintasticsharkmod.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.Brain;
+import net.minecraft.world.entity.ai.behavior.AnimalPanic;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -52,7 +53,7 @@ public class HarborSealEntityForge extends HarborSealEntity implements GeoEntity
     public BrainActivityGroup<? extends HarborSealEntityForge> getCoreTasks() {
         return BrainActivityGroup.coreTasks(
                 new LookAtTarget<>(),                      // Have the entity turn to face and look at its current look target
-                new MoveToWalkTarget<>());
+                new MoveToWalkTarget<>(),new AnimalPanic(2));
     }
 
     @Override
@@ -71,12 +72,7 @@ public class HarborSealEntityForge extends HarborSealEntity implements GeoEntity
     public float getWalkTargetValue(BlockPos pPos, LevelReader pLevel) {
         return 0.0F;
     }
-
-    @Override
-    public BrainActivityGroup<? extends HarborSealEntityForge> getFightTasks() {
-        return SmartBrainOwner.super.getFightTasks();
-    }
-
+    
     @Override
     protected void handleAirSupply(int pAirSupply) {
 

@@ -37,6 +37,15 @@ public class ModBiomeTagsProvider extends BiomeTagsProvider {
         // 2. DeepOcean
         tag(ModTags.Biomes.COMMON_THRESHER_SHARK_SPAWNS).add(Biomes.OCEAN,Biomes.DEEP_OCEAN);
 
+
+        // Will spawn in the following biomes
+        // 1. Ocean
+        // 2. Lukewarm Ocean
+        // 3. WarmOcean
+        // 4. Swamp
+        // 5. Mangrove
+        tag(ModTags.Biomes.COMMON_STINGRAY_SPAWNS).add(Biomes.OCEAN,Biomes.LUKEWARM_OCEAN,Biomes.WARM_OCEAN,Biomes.SWAMP,Biomes.MANGROVE_SWAMP);
+
         //Will spawn in the following biomes
         // 1.
         // Beach
