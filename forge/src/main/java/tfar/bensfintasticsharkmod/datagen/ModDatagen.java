@@ -1,16 +1,27 @@
 package tfar.bensfintasticsharkmod.datagen;
 
+import com.google.gson.JsonElement;
+import com.mojang.serialization.JsonOps;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.EntityTypeTagsProvider;
+import net.minecraft.resources.RegistryOps;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.common.data.JsonCodecProvider;
+import net.minecraftforge.common.world.ForgeBiomeModifiers;
 import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 import tfar.bensfintasticsharkmod.BensFintasticSharkMod;
 import tfar.bensfintasticsharkmod.datagen.data.BensFintasticSharksAdvancements;
 import tfar.bensfintasticsharkmod.datagen.data.ModAdvancementProvider;
@@ -20,6 +31,7 @@ import tfar.bensfintasticsharkmod.datagen.data.tags.ModItemTagsProvider;
 import tfar.bensfintasticsharkmod.datagen.data.ModLootTableProvider;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
@@ -47,7 +59,22 @@ public class ModDatagen {
             generator.addProvider(true,new ModItemTagsProvider(output,lookupProvider,blockTags.contentsGetter(),helper));
             generator.addProvider(true,new ModEntityTypeTagsProvider(output,lookupProvider,helper));
             generator.addProvider(true,new ModAdvancementProvider(output,lookupProvider,helper, List.of(new BensFintasticSharksAdvancements())));
+            biomeModifier(generator,helper,lookupProvider);
         }
+    }
+
+
+    protected static void biomeModifier(DataGenerator generator, ExistingFileHelper helper,
+                                        CompletableFuture<HolderLookup.Provider> lookupProvider) {
+    /*    final RegistryAccess registryAccess = lookupProvider.get();
+        final RegistryOps<JsonElement> jsonOps = RegistryOps.create(JsonOps.INSTANCE, registryAccess);
+        final Registry<Biome> biomeReg = registryAccess.registryOrThrow(Registries.BIOME);
+        HolderSet<Biome> biomes = new HolderSet.Named<>(biomeReg, WarriorEntity.BIOMES);
+        final ForgeBiomeModifiers.AddSpawnsBiomeModifier modifier = new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+                biomes, List.of(new MobSpawnSettings.SpawnerData(WarriorEntity.WARRIOR, 10, 1, 4)));
+
+        generator.addProvider(true, JsonCodecProvider.forDatapackRegistry(generator, helper, Warrior.MODID, jsonOps,
+                ForgeRegistries.Keys.BIOME_MODIFIERS, Map.of(new ResourceLocation(Warrior.MODID, Warrior.MODID), modifier)));*/
     }
 
     public static Stream<Block> getKnownBlocks() {

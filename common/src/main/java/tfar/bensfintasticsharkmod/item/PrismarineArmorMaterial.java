@@ -8,6 +8,7 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import tfar.bensfintasticsharkmod.BensFintasticSharkMod;
 
 import java.util.EnumMap;
 
@@ -48,7 +49,7 @@ public class PrismarineArmorMaterial implements ArmorMaterial {
 
     @Override
     public String getName() {
-        return "prismarine";
+        return BensFintasticSharkMod.id( "prismarine").toString();
     }
 
     @Override

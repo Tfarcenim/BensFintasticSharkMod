@@ -34,7 +34,7 @@ public class ModItems {
     public static final Item PRISMARINE_LEGGINGS = Services.PLATFORM.createPrismarineArmor(PrismarineArmorMaterial.PRISMARINE,ArmorItem.Type.LEGGINGS,new Item.Properties());
     public static final Item PRISMARINE_BOOTS = Services.PLATFORM.createPrismarineArmor(PrismarineArmorMaterial.PRISMARINE,ArmorItem.Type.BOOTS,new Item.Properties());
 
-    public static final Item SHARK_TRIDENT = new SharkTridentItem(new Item.Properties().durability(250));
+    public static final Item SHARK_TRIDENT = new SharkTridentItem(new Item.Properties().durability(500));
 
     public static final Item SHARK_CODEX = new Item(new Item.Properties());
     public static final Item LOST_MANUSCRIPT = new Item(new Item.Properties());

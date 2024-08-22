@@ -29,7 +29,7 @@ public class SharkTridentItem extends TridentItem {
         if (pEntityLiving instanceof Player player) {
             int i = this.getUseDuration(pStack) - pTimeLeft;
             if (i >= 10) {
-                int riptide = EnchantmentHelper.getRiptide(pStack);
+                int riptide = 3;//EnchantmentHelper.getRiptide(pStack);
                 if (riptide <= 0 || player.isInWaterOrRain()) {
                     if (!pLevel.isClientSide) {
                         pStack.hurtAndBreak(1, player, (p_43388_) -> {

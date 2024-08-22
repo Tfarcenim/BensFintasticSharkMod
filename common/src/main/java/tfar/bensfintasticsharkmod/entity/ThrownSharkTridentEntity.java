@@ -20,4 +20,9 @@ public class ThrownSharkTridentEntity extends ThrownTrident {
     public EntityType<?> getType() {
         return ModEntityTypes.SHARK_TRIDENT;
     }
+
+    @Override
+    public boolean isChanneling() {
+        return true;
+    }
 }

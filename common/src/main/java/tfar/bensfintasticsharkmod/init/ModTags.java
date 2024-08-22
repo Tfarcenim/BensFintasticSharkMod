@@ -4,6 +4,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.biome.Biome;
 import tfar.bensfintasticsharkmod.BensFintasticSharkMod;
 
 public class ModTags {
@@ -26,6 +27,14 @@ public class ModTags {
 
         private static TagKey<Item> create(String pName) {
             return TagKey.create(Registries.ITEM, BensFintasticSharkMod.id(pName));
+        }
+    }
+
+    public static class Biomes {
+
+
+        private static TagKey<Biome> create(String pName) {
+            return TagKey.create(Registries.BIOME, BensFintasticSharkMod.id(pName));
         }
     }
 

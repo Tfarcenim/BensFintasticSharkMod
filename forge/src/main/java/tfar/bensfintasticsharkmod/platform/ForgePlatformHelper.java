@@ -16,6 +16,7 @@ import tfar.bensfintasticsharkmod.BensFintasticSharkModForge;
 import tfar.bensfintasticsharkmod.entity.*;
 import tfar.bensfintasticsharkmod.item.PrismarineArmorItem;
 import tfar.bensfintasticsharkmod.item.PrismarineArmorMaterial;
+import tfar.bensfintasticsharkmod.item.VanillaPrismarineArmorItem;
 import tfar.bensfintasticsharkmod.platform.services.IPlatformHelper;
 
 import java.lang.reflect.Field;
