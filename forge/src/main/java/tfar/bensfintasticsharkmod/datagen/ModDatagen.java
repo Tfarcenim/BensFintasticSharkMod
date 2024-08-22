@@ -25,6 +25,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import tfar.bensfintasticsharkmod.BensFintasticSharkMod;
 import tfar.bensfintasticsharkmod.datagen.data.BensFintasticSharksAdvancements;
 import tfar.bensfintasticsharkmod.datagen.data.ModAdvancementProvider;
+import tfar.bensfintasticsharkmod.datagen.data.ModDataPackProvider;
+import tfar.bensfintasticsharkmod.datagen.data.tags.ModBiomeTagsProvider;
 import tfar.bensfintasticsharkmod.datagen.data.tags.ModBlockTagsProvider;
 import tfar.bensfintasticsharkmod.datagen.data.tags.ModEntityTypeTagsProvider;
 import tfar.bensfintasticsharkmod.datagen.data.tags.ModItemTagsProvider;
@@ -57,24 +59,12 @@ public class ModDatagen {
             generator.addProvider(true,blockTags);
 
             generator.addProvider(true,new ModItemTagsProvider(output,lookupProvider,blockTags.contentsGetter(),helper));
+            generator.addProvider(true,new ModBiomeTagsProvider(output,lookupProvider,helper));
+
             generator.addProvider(true,new ModEntityTypeTagsProvider(output,lookupProvider,helper));
             generator.addProvider(true,new ModAdvancementProvider(output,lookupProvider,helper, List.of(new BensFintasticSharksAdvancements())));
-            biomeModifier(generator,helper,lookupProvider);
+            generator.addProvider(true,new ModDataPackProvider(output,lookupProvider));
         }
-    }
-
-
-    protected static void biomeModifier(DataGenerator generator, ExistingFileHelper helper,
-                                        CompletableFuture<HolderLookup.Provider> lookupProvider) {
-    /*    final RegistryAccess registryAccess = lookupProvider.get();
-        final RegistryOps<JsonElement> jsonOps = RegistryOps.create(JsonOps.INSTANCE, registryAccess);
-        final Registry<Biome> biomeReg = registryAccess.registryOrThrow(Registries.BIOME);
-        HolderSet<Biome> biomes = new HolderSet.Named<>(biomeReg, WarriorEntity.BIOMES);
-        final ForgeBiomeModifiers.AddSpawnsBiomeModifier modifier = new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
-                biomes, List.of(new MobSpawnSettings.SpawnerData(WarriorEntity.WARRIOR, 10, 1, 4)));
-
-        generator.addProvider(true, JsonCodecProvider.forDatapackRegistry(generator, helper, Warrior.MODID, jsonOps,
-                ForgeRegistries.Keys.BIOME_MODIFIERS, Map.of(new ResourceLocation(Warrior.MODID, Warrior.MODID), modifier)));*/
     }
 
     public static Stream<Block> getKnownBlocks() {

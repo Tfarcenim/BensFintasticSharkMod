@@ -32,6 +32,7 @@ public class ModTags {
 
     public static class Biomes {
 
+        public static TagKey<Biome> GREAT_WHITE_SHARK_SPAWNS = create("great_white_shark_spawns");
 
         private static TagKey<Biome> create(String pName) {
             return TagKey.create(Registries.BIOME, BensFintasticSharkMod.id(pName));
