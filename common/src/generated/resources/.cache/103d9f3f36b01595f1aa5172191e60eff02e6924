@@ -1,2 +1,6 @@
-// 1.20.1	2024-08-21T23:06:33.5919263	Registries
-0e7ab523314d04a7eede5ef3e9c2ff6d31762637 data/bensfintasticsharkmod/forge/biome_modifier/great_white_spawns.json
+// 1.20.1	2024-08-22T00:21:35.07364	Registries
+e78d08430f4d7af9d022001062e4729a06ce20a9 data/bensfintasticsharkmod/forge/biome_modifier/common_stingray_spawns.json
+7ddd3ea96c994347d0419a4e275786babcd64b46 data/bensfintasticsharkmod/forge/biome_modifier/common_thresher_shark_spawns.json
+a4a3660ffc4d92f214013a1151091d997af38604 data/bensfintasticsharkmod/forge/biome_modifier/great_hammerhead_shark_spawns.json
+0e7ab523314d04a7eede5ef3e9c2ff6d31762637 data/bensfintasticsharkmod/forge/biome_modifier/great_white_shark_spawns.json
+a7777cc8f90293cdffa9b45c96ab17e711cd80eb data/bensfintasticsharkmod/forge/biome_modifier/harbor_seal_spawns.json
