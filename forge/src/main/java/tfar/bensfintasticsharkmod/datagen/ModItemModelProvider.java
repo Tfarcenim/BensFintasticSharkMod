@@ -15,6 +15,9 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import tfar.bensfintasticsharkmod.BensFintasticSharkMod;
 import tfar.bensfintasticsharkmod.init.ModItems;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(PackOutput generator, ExistingFileHelper existingFileHelper) {
         super(generator, BensFintasticSharkMod.MOD_ID, existingFileHelper);
@@ -22,6 +25,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
+
         makeOneLayerItem(ModItems.GREAT_WHITE_SHARK_SPAWN_EGG);
         makeOneLayerItem(ModItems.GREAT_HAMMERHEAD_SHARK_SPAWN_EGG);
         makeOneLayerItem(ModItems.COMMON_THRESHER_SHARK_SPAWN_EGG);
@@ -48,13 +52,28 @@ public class ModItemModelProvider extends ItemModelProvider {
         makeOneLayerItem(ModItems.PRISMARINE_LEGGINGS);
         makeOneLayerItem(ModItems.PRISMARINE_BOOTS);
 
+        makeOneLayerItem(ModItems.LOST_MANUSCRIPT);
         makeOneLayerItem(ModItems.SHARK_CODEX);
+        makeOneLayerItem(ModItems.CODEX_PAGE);
+        makeOneLayerItem(ModItems.CODEX_VOLUME);
+
+        makeOneLayerItem(ModItems.GREAT_WHITE_SHARK_PIXEL_ART);
+        makeOneLayerItem(ModItems.GREAT_HAMMERHEAD_SHARK_PIXEL_ART);
+        makeOneLayerItem(ModItems.COMMON_THRESHER_SHARK_PIXEL_ART);
+        makeOneLayerItem(ModItems.STINGRAY_PIXEL_ART);
+        makeOneLayerItem(ModItems.ILLEGAL_POACHING);
+        makeOneLayerItem(ModItems.ALBINO);
+        makeOneLayerItem(ModItems.ZIPPY_PIXEL_ART);
+        makeOneLayerItem(ModItems.JUSTICE_FOR_STEVE);
+        makeOneLayerItem(ModItems.UNETHICAL);
 
         trident(ModItems.SHARK_TRIDENT);
     }
 
     protected ModelFile.ExistingModelFile generated = getExistingFile(mcLoc("item/generated"));
     protected ModelFile.ExistingModelFile template_spawn_egg = getExistingFile(mcLoc("item/template_spawn_egg"));
+
+
 
     protected void makeSimpleBlockItem(Item item, ResourceLocation loc) {
         String s = BuiltInRegistries.ITEM.getKey(item).toString();
@@ -89,7 +108,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     protected ItemModelBuilder makeSpriteModel(String name) {
         return getBuilder("item/" + name+"_gui")
-                .parent(getExistingFile(mcLoc("item/generated")))
+                .parent(generated)
                 .texture("layer0", "item/" + name+"_gui");
 
     }

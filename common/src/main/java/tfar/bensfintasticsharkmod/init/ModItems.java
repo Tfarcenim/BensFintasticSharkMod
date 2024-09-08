@@ -1,6 +1,7 @@
 package tfar.bensfintasticsharkmod.init;
 
 import net.minecraft.world.item.*;
+import tfar.bensfintasticsharkmod.item.HiddenItem;
 import tfar.bensfintasticsharkmod.item.PrismarineArmorMaterial;
 import tfar.bensfintasticsharkmod.item.SharkTridentItem;
 import tfar.bensfintasticsharkmod.platform.Services;
@@ -40,4 +41,18 @@ public class ModItems {
 
     public static final Item SHARK_CODEX = new Item(new Item.Properties());
     public static final Item LOST_MANUSCRIPT = new Item(new Item.Properties());
+    public static final Item CODEX_PAGE = new Item(new Item.Properties());
+    public static final Item CODEX_VOLUME = new Item(new Item.Properties());
+
+    //these are only used for advancements
+    public static final Item GREAT_WHITE_SHARK_PIXEL_ART = new HiddenItem(new Item.Properties());
+    public static final Item GREAT_HAMMERHEAD_SHARK_PIXEL_ART = new HiddenItem(new Item.Properties());
+    public static final Item COMMON_THRESHER_SHARK_PIXEL_ART = new HiddenItem(new Item.Properties());
+    public static final Item HARBOR_SEAL_BLOCK = new HiddenItem(new Item.Properties());
+    public static final Item STINGRAY_PIXEL_ART = new HiddenItem(new Item.Properties());
+    public static final Item ILLEGAL_POACHING = new HiddenItem(new Item.Properties());
+    public static final Item ALBINO = new HiddenItem(new Item.Properties());
+    public static final Item ZIPPY_PIXEL_ART = new HiddenItem(new Item.Properties());
+    public static final Item JUSTICE_FOR_STEVE = new HiddenItem(new Item.Properties());
+    public static final Item UNETHICAL = new HiddenItem(new Item.Properties());
 }

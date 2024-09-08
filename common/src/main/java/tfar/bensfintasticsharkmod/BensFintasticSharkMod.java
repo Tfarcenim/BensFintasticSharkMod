@@ -1,6 +1,7 @@
 package tfar.bensfintasticsharkmod;
 
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,6 +19,7 @@ import tfar.bensfintasticsharkmod.init.ModItems;
 import tfar.bensfintasticsharkmod.platform.Services;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public class BensFintasticSharkMod {
 
@@ -45,4 +47,11 @@ public class BensFintasticSharkMod {
         }
     }
 
+    public static Stream<Item> getKnownItems() {
+        return getKnown(BuiltInRegistries.ITEM);
+    }
+
+    public static <V> Stream<V> getKnown(Registry<V> registry) {
+        return registry.stream().filter(o -> registry.getKey(o).getNamespace().equals(MOD_ID));
+    }
 }

@@ -26,8 +26,8 @@ public class ModLangProvider extends LanguageProvider {
     protected final Set<Item> exclude_items = new HashSet<>();
     @Override
     protected void addTranslations() {
-        ModDatagen.getKnownItems().filter(item -> item instanceof BlockItem).forEach(exclude_items::add);
-        ModDatagen.getKnownItems().toList().stream().filter(item -> !exclude_items.contains(item)).<Supplier<? extends Item>>map(item -> () -> item).forEach(this::addDefaultItem);
+        BensFintasticSharkMod.getKnownItems().filter(item -> item instanceof BlockItem).forEach(exclude_items::add);
+        BensFintasticSharkMod.getKnownItems().toList().stream().filter(item -> !exclude_items.contains(item)).<Supplier<? extends Item>>map(item -> () -> item).forEach(this::addDefaultItem);
 
         for (EntityType<?> type : ModDatagen.getKnownEntityTypes().toList()) {
             addDefaultEntityType(() -> type);
@@ -89,6 +89,8 @@ public class ModLangProvider extends LanguageProvider {
 
         addTextComponent(TextComponents.SHARKS_GALORE,"Shark Galore!");
         addTextComponent(TextComponents.SHARKS_GALORE_DESC,"Discover every species of sharks");
+
+        addTextComponent(TextComponents.TAB_TITLE,"Ben's Fintastic Sharks");
     }
 
 

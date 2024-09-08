@@ -37,7 +37,7 @@ public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider
     @Override
     public void generate(HolderLookup.Provider registries, Consumer<Advancement> saver, ExistingFileHelper existingFileHelper) {
         Advancement root = Advancement.Builder.advancement()
-                .display(Items.MAP, TextComponents.ROOT, TextComponents.ROOT_DESC,
+                .display(ModItems.SHARK_TRIDENT, TextComponents.ROOT, TextComponents.ROOT_DESC,
                 new ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
                 FrameType.TASK, false, false, false)
                 .requirements(RequirementsStrategy.OR)
@@ -47,26 +47,26 @@ public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider
         EntityPredicate greatWhiteSharkPredicate = EntityPredicate.Builder.entity().of(ModEntityTypes.GREAT_WHITE_SHARK).build();
 
         Advancement greatWhiteAdvancement = Advancement.Builder.advancement().parent(root)
-                .display(Blocks.RED_BED,TextComponents.GREAT_WHITE_ENCOUNTER,TextComponents.GREAT_WHITE_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
+                .display(ModItems.GREAT_WHITE_SHARK_PIXEL_ART,TextComponents.GREAT_WHITE_ENCOUNTER,TextComponents.GREAT_WHITE_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
                 .addCriterion("player_found_entity", PlayerFoundEntityTrigger.TriggerInstance.located(greatWhiteSharkPredicate))
                 .save(saver, BensFintasticSharkMod.id("great_white_encounter").toString());
 
         EntityPredicate greatHammerheadSharkPredicate = EntityPredicate.Builder.entity().of(ModEntityTypes.GREAT_HAMMERHEAD_SHARK).build();
 
         Advancement greatHammerHeadAdvancement = Advancement.Builder.advancement().parent(root)
-                .display(Blocks.RED_BED,TextComponents.GREAT_HAMMERHEAD_ENCOUNTER,TextComponents.GREAT_HAMMERHEAD_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
+                .display(ModItems.GREAT_HAMMERHEAD_SHARK_PIXEL_ART,TextComponents.GREAT_HAMMERHEAD_ENCOUNTER,TextComponents.GREAT_HAMMERHEAD_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
                 .addCriterion("player_found_entity", PlayerFoundEntityTrigger.TriggerInstance.located(greatHammerheadSharkPredicate))
                 .save(saver, BensFintasticSharkMod.id("great_hammerhead_encounter").toString());
 
         EntityPredicate commonThresherPredicate = EntityPredicate.Builder.entity().of(ModEntityTypes.COMMON_THRESHER_SHARK).build();
 
         Advancement commonThresherAdvancement = Advancement.Builder.advancement().parent(root)
-                .display(Blocks.RED_BED,TextComponents.COMMON_THRESHER_ENCOUNTER,TextComponents.COMMON_THRESHER_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
+                .display(ModItems.COMMON_THRESHER_SHARK_PIXEL_ART,TextComponents.COMMON_THRESHER_ENCOUNTER,TextComponents.COMMON_THRESHER_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
                 .addCriterion("player_found_entity", PlayerFoundEntityTrigger.TriggerInstance.located(commonThresherPredicate))
                 .save(saver, BensFintasticSharkMod.id("common_thresher_encounter").toString());
 
         Advancement killedByShark = Advancement.Builder.advancement().parent(root)
-                .display(Raid.getLeaderBannerInstance(),TextComponents.SLEEPING_WITH_THE_FISHES, TextComponents.SLEEPING_WITH_THE_FISHES_DESC, null, FrameType.TASK, true, true, true)
+                .display(Items.SKELETON_SKULL,TextComponents.SLEEPING_WITH_THE_FISHES, TextComponents.SLEEPING_WITH_THE_FISHES_DESC, null, FrameType.TASK, true, true, true)
                 .addCriterion("killed_by_shark", KilledTrigger.TriggerInstance.entityKilledPlayer(EntityPredicate.Builder.entity().of(ModTags.EntityTypes.SHARKS)))
                 .save(saver, BensFintasticSharkMod.id("sleeping_with_the_fishes").toString());
 
@@ -74,12 +74,12 @@ public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider
         EntityPredicate harborSealPredicate = EntityPredicate.Builder.entity().of(ModEntityTypes.HARBOR_SEAL).build();
 
         Advancement harborSealAdvancement = Advancement.Builder.advancement().parent(root)
-                .display(Blocks.RED_BED,TextComponents.HARBOR_SEAL_ENCOUNTER,TextComponents.HARBOR_SEAL_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
+                .display(ModItems.HARBOR_SEAL_BLOCK,TextComponents.HARBOR_SEAL_ENCOUNTER,TextComponents.HARBOR_SEAL_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
                 .addCriterion("player_found_entity", PlayerFoundEntityTrigger.TriggerInstance.located(harborSealPredicate))
                 .save(saver, BensFintasticSharkMod.id("harbor_seal_encounter").toString());
 
         Advancement stingrayAttacksPlayer = Advancement.Builder.advancement().parent(root)
-                .display(Items.BOW, TextComponents.STINGRAY_ATTACKS_PLAYER, TextComponents.STINGRAY_ATTACKS_PLAYER_DESC, null, FrameType.TASK, true, true, false)
+                .display(ModItems.STINGRAY_PIXEL_ART, TextComponents.STINGRAY_ATTACKS_PLAYER, TextComponents.STINGRAY_ATTACKS_PLAYER_DESC, null, FrameType.TASK, true, true, false)
                 .addCriterion("entity_hurt_player",
                         EntityHurtPlayerTrigger.TriggerInstance.entityHurtPlayer(
                                 DamagePredicate.Builder.damageInstance()
@@ -97,7 +97,7 @@ public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider
                 .subPredicate(EntityVariantPredicates.COMMON_THRESHER_SHARK.createPredicate(CommonThresherSharkEntity.Variant.ALBINO)).build();
 
         Advancement albinoAdvancement = Advancement.Builder.advancement().parent(root)
-                .display(Blocks.RED_BED,TextComponents.ALBINO_ENCOUNTER,TextComponents.ALBINO_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
+                .display(ModItems.ALBINO,TextComponents.ALBINO_ENCOUNTER,TextComponents.ALBINO_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
                 .requirements(RequirementsStrategy.OR)
                 .addCriterion("player_found_albino_great_white", PlayerFoundEntityTrigger.TriggerInstance.located(albinoGreatWhitePredicate))
                 .addCriterion("player_found_albino_hammerhead", PlayerFoundEntityTrigger.TriggerInstance.located(albinoGreatHammerheadPredicate))
@@ -105,19 +105,19 @@ public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider
                 .save(saver, BensFintasticSharkMod.id("albino_encounter").toString());
 
         Advancement illegalPoaching = Advancement.Builder.advancement().parent(root)
-                .display(Items.PAPER, TextComponents.ILLEGAL_POACHING, TextComponents.ILLEGAL_POACHING_DESC, null, FrameType.TASK, true, true, false)
+                .display(ModItems.ILLEGAL_POACHING, TextComponents.ILLEGAL_POACHING, TextComponents.ILLEGAL_POACHING_DESC, null, FrameType.TASK, true, true, false)
                 .addCriterion("player_killed_entity",
                         KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(ModTags.EntityTypes.SHARKS)))
                 .save(saver, BensFintasticSharkMod.id("illegal_poaching").toString());
 
         Advancement unethical = Advancement.Builder.advancement().parent(harborSealAdvancement)
-                .display(Items.PAPER, TextComponents.UNETHICAL, TextComponents.UNETHICAL_DESC, null, FrameType.TASK, true, true, false)
+                .display(ModItems.UNETHICAL, TextComponents.UNETHICAL, TextComponents.UNETHICAL_DESC, null, FrameType.TASK, true, true, false)
                 .addCriterion("player_killed_entity",
                         KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(ModEntityTypes.HARBOR_SEAL)))
                 .save(saver, BensFintasticSharkMod.id("unethical").toString());
 
         Advancement justiceForSteve = Advancement.Builder.advancement().parent(root)
-                .display(Items.PAPER, TextComponents.JUSTICE_FOR_STEVE, TextComponents.JUSTICE_FOR_STEVE_DESC, null, FrameType.TASK, true, true, false)
+                .display(ModItems.JUSTICE_FOR_STEVE, TextComponents.JUSTICE_FOR_STEVE, TextComponents.JUSTICE_FOR_STEVE_DESC, null, FrameType.TASK, true, true, false)
                 .addCriterion("player_killed_entity",
                         KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(ModEntityTypes.COMMON_STINGRAY)))
                 .save(saver, BensFintasticSharkMod.id("justice_for_steve").toString());
@@ -133,7 +133,7 @@ public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider
                 .subPredicate(EntityVariantPredicates.COMMON_THRESHER_SHARK.createPredicate(CommonThresherSharkEntity.Variant.ZIPPY)).build();
 
         Advancement zippyAdvancement = Advancement.Builder.advancement().parent(root)
-                .display(Blocks.RED_BED,TextComponents.ZIPPY_ENCOUNTER,TextComponents.ZIPPY_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
+                .display(ModItems.ZIPPY_PIXEL_ART,TextComponents.ZIPPY_ENCOUNTER,TextComponents.ZIPPY_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
                 .addCriterion("player_found_entity", PlayerFoundEntityTrigger.TriggerInstance.located(zippyPredicate))
                 .save(saver, BensFintasticSharkMod.id("zippy_encounter").toString());
 
@@ -141,7 +141,7 @@ public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider
                 .subPredicate(EntityVariantPredicates.GREAT_WHITE_SHARK.createPredicate(GreatWhiteSharkEntity.Variant.SPECIMEN_8)).build();
 
         Advancement specimen8Advancement = Advancement.Builder.advancement().parent(root)
-                .display(Blocks.RED_BED,TextComponents.SPECIMEN_8_ENCOUNTER,TextComponents.SPECIMEN_8_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
+                .display(Items.REDSTONE,TextComponents.SPECIMEN_8_ENCOUNTER,TextComponents.SPECIMEN_8_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
                 .addCriterion("player_found_entity", PlayerFoundEntityTrigger.TriggerInstance.located(specimen8Predicate))
                 .save(saver, BensFintasticSharkMod.id("specimen_8_encounter").toString());
 
@@ -149,7 +149,7 @@ public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider
                 .subPredicate(EntityVariantPredicates.GREAT_WHITE_SHARK.createPredicate(GreatWhiteSharkEntity.Variant.DEEP_BLUE)).build();
 
         Advancement deepBlueAdvancement = Advancement.Builder.advancement().parent(root)
-                .display(Blocks.RED_BED,TextComponents.DEEP_BLUE_ENCOUNTER,TextComponents.DEEP_BLUE_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
+                .display(ModItems.GREAT_WHITE_SHARK_SPAWN_EGG,TextComponents.DEEP_BLUE_ENCOUNTER,TextComponents.DEEP_BLUE_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
                 .addCriterion("player_found_entity", PlayerFoundEntityTrigger.TriggerInstance.located(deepBluePredicate))
                 .save(saver, BensFintasticSharkMod.id("deep_blue_encounter").toString());
 
@@ -164,7 +164,7 @@ public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider
                 .save(saver, BensFintasticSharkMod.id("lost_manuscript").toString());
 
         Advancement levelSharkCodex = Advancement.Builder.advancement().parent(sharkCodex)
-                .display(ModItems.SHARK_CODEX,TextComponents.LEVEL_SHARK_CODEX, TextComponents.LEVEL_SHARK_CODEX_DESC, null, FrameType.TASK, false, false, false)
+                .display(ModItems.CODEX_VOLUME,TextComponents.LEVEL_SHARK_CODEX, TextComponents.LEVEL_SHARK_CODEX_DESC, null, FrameType.TASK, false, false, false)
                 .addCriterion("level_shark_codex", RecipeCraftedTrigger.TriggerInstance.craftedItem(BensFintasticSharkMod.id("shark_codex")))
                 .save(saver, BensFintasticSharkMod.id("level_shark_codex").toString());
 

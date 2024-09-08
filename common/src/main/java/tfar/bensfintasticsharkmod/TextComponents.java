@@ -62,4 +62,5 @@ public class TextComponents {
     public static final MutableComponent SHARKS_GALORE = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".sharks_galore.title");
     public static final MutableComponent SHARKS_GALORE_DESC = Component.translatable("advancements."+BensFintasticSharkMod.MOD_ID+".sharks_galore.description");
 
+    public static final MutableComponent TAB_TITLE = Component.translatable("itemGroup."+ BensFintasticSharkMod.MOD_ID);
 }
