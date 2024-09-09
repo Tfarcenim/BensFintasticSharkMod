@@ -1,0 +1,13 @@
+{
+  "type": "bensfintasticsharkmod:add_item_chance",
+  "chance": 0.05,
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/buried_treasure"
+    }
+  ],
+  "item": "bensfintasticsharkmod:lost_manuscript",
+  "max": 3,
+  "min": 1
+}

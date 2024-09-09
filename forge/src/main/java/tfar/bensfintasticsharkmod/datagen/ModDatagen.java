@@ -12,6 +12,7 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import tfar.bensfintasticsharkmod.BensFintasticSharkMod;
 import tfar.bensfintasticsharkmod.datagen.data.BensFintasticSharksAdvancements;
 import tfar.bensfintasticsharkmod.datagen.data.ModDataPackProvider;
+import tfar.bensfintasticsharkmod.datagen.data.ModGlobalLootModifierProvider;
 import tfar.bensfintasticsharkmod.datagen.data.tags.ModBiomeTagsProvider;
 import tfar.bensfintasticsharkmod.datagen.data.tags.ModBlockTagsProvider;
 import tfar.bensfintasticsharkmod.datagen.data.tags.ModEntityTypeTagsProvider;
@@ -49,6 +50,7 @@ public class ModDatagen {
             generator.addProvider(true,new ModEntityTypeTagsProvider(output,lookupProvider,helper));
             generator.addProvider(true,new ForgeAdvancementProvider(output,lookupProvider,helper, List.of(new BensFintasticSharksAdvancements())));
             generator.addProvider(true,new ModDataPackProvider(output,lookupProvider));
+            generator.addProvider(true,new ModGlobalLootModifierProvider(output));
         }
     }
 

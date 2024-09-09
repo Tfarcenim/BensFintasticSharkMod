@@ -15,6 +15,7 @@ import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 import org.apache.commons.lang3.tuple.Pair;
 import tfar.bensfintasticsharkmod.client.ModClientForge;
@@ -93,6 +94,7 @@ public class BensFintasticSharkModForge {
                 e.register((ResourceKey<? extends Registry<Object>>)registry.key(),pair.getLeft(),(Supplier<Object>)pair.getValue());
             }
         }
+        e.register(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS,BensFintasticSharkMod.id("add_item_chance"),() -> LootModifiers.ADD_ITEM_CHANCE);
     }
 
 }
