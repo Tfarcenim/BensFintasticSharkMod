@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "d": {
+      "item": "minecraft:diamond"
+    },
+    "p": {
+      "item": "minecraft:prismarine_shard"
+    },
+    "s": {
+      "tag": "bensfintasticsharks:shark_teeth"
+    }
+  },
+  "pattern": [
+    "dpd",
+    "s s"
+  ],
+  "result": {
+    "item": "bensfintasticsharks:prismarine_leggings"
+  },
+  "show_notification": true
+}

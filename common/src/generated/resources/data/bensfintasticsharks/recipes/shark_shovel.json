@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "c": {
+      "item": "bensfintasticsharks:cartilage"
+    },
+    "s": {
+      "tag": "bensfintasticsharks:shark_teeth"
+    }
+  },
+  "pattern": [
+    "s",
+    "c",
+    "c"
+  ],
+  "result": {
+    "item": "bensfintasticsharks:shark_shovel"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,40 @@
+{
+  "parent": "bensfintasticsharks:root",
+  "criteria": {
+    "player_found_entity": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "bensfintasticsharks:great_hammerhead_shark"
+            }
+          }
+        ]
+      },
+      "trigger": "bensfintasticsharks:player_found_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.bensfintasticsharks.great_hammerhead_encounter.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "bensfintasticsharks:great_hammerhead_shark_pixel_art"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.bensfintasticsharks.great_hammerhead_encounter.title"
+    }
+  },
+  "requirements": [
+    [
+      "player_found_entity"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

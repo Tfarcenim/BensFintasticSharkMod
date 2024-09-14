@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "tag": "bensfintasticsharks:shark_teeth"
+    },
+    {
+      "item": "minecraft:blue_dye"
+    },
+    {
+      "item": "minecraft:tropical_fish_bucket"
+    }
+  ],
+  "result": {
+    "item": "bensfintasticsharks:shark_codex"
+  }
+}

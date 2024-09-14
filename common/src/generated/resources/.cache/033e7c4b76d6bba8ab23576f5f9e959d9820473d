@@ -1,7 +1,0 @@
-// 1.20.1	2024-07-21T16:48:14.9199708	Tags for minecraft:item mod id bensfintasticsharkmod
-c749aecfb4543cf751baf1f1a2d3fd7243e0df76 data/bensfintasticsharkmod/tags/items/shark_teeth.json
-8c2905279d2aa23394fc82da0c685bcb7d82b771 data/minecraft/tags/items/axes.json
-785de86a5870c525b9765e4c30fe09ac7059f6db data/minecraft/tags/items/hoes.json
-d0dfd3666d5175cc19f3c92b7613b510335751a3 data/minecraft/tags/items/pickaxes.json
-79e7dc94c87665760f889dc8512fc0da21534507 data/minecraft/tags/items/shovels.json
-460741a9163066ab6e5fba17d9fbe4f977f390ee data/minecraft/tags/items/swords.json

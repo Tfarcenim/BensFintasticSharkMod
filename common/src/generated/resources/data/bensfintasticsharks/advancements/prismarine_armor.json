@@ -1,0 +1,57 @@
+{
+  "parent": "bensfintasticsharks:root",
+  "criteria": {
+    "prismarine_armor": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "bensfintasticsharks:prismarine_helmet"
+            ]
+          },
+          {
+            "items": [
+              "bensfintasticsharks:prismarine_chestplate"
+            ]
+          },
+          {
+            "items": [
+              "bensfintasticsharks:prismarine_leggings"
+            ]
+          },
+          {
+            "items": [
+              "bensfintasticsharks:prismarine_boots"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.bensfintasticsharks.prismarine_armor.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "bensfintasticsharks:prismarine_chestplate",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.bensfintasticsharks.prismarine_armor.title"
+    }
+  },
+  "requirements": [
+    [
+      "prismarine_armor"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,38 @@
+{
+  "parent": "bensfintasticsharks:root",
+  "criteria": {
+    "shark_codex": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "bensfintasticsharks:shark_codex"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.bensfintasticsharks.shark_codex.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "bensfintasticsharks:shark_codex"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.bensfintasticsharks.shark_codex.title"
+    }
+  },
+  "requirements": [
+    [
+      "shark_codex"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

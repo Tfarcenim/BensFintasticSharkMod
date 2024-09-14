@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#bensfintasticsharks:harbor_seal_spawns",
+  "spawners": {
+    "type": "bensfintasticsharks:harbor_seal",
+    "maxCount": 4,
+    "minCount": 1,
+    "weight": 100
+  }
+}

@@ -1,0 +1,6 @@
+// 1.20.1	2024-09-14T17:03:00.0362659	Tags for minecraft:worldgen/biome mod id bensfintasticsharks
+11dddbb5d277fe627996860e49e53a1f817102bc data/bensfintasticsharks/tags/worldgen/biome/common_stingray_spawns.json
+6cdfdcfccfb03c1d2ba445ef9f1b72f874237f6c data/bensfintasticsharks/tags/worldgen/biome/common_thresher_shark_spawns.json
+e014c5db053d4b84a4220222d9988559ec1b1852 data/bensfintasticsharks/tags/worldgen/biome/great_hammerhead_shark_spawns.json
+6cdfdcfccfb03c1d2ba445ef9f1b72f874237f6c data/bensfintasticsharks/tags/worldgen/biome/great_white_shark_spawns.json
+24806f63302808eb580acf87b94f023e64c25620 data/bensfintasticsharks/tags/worldgen/biome/harbor_seal_spawns.json

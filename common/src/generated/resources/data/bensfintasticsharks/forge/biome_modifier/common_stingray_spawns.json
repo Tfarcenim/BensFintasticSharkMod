@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#bensfintasticsharks:common_stingray_spawns",
+  "spawners": {
+    "type": "bensfintasticsharks:common_stingray",
+    "maxCount": 4,
+    "minCount": 1,
+    "weight": 100
+  }
+}

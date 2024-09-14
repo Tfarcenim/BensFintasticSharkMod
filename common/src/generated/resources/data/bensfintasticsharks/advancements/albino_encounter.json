@@ -1,0 +1,79 @@
+{
+  "parent": "bensfintasticsharks:root",
+  "criteria": {
+    "player_found_albino_great_white": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "bensfintasticsharks:great_white_shark",
+              "type_specific": {
+                "variant": "albino"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "bensfintasticsharks:player_found_entity"
+    },
+    "player_found_albino_hammerhead": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "bensfintasticsharks:great_hammerhead_shark",
+              "type_specific": {
+                "variant": "albino"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "bensfintasticsharks:player_found_entity"
+    },
+    "player_found_albino_thresher": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "bensfintasticsharks:common_thresher_shark",
+              "type_specific": {
+                "variant": "albino"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "bensfintasticsharks:player_found_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.bensfintasticsharks.albino_encounter.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "bensfintasticsharks:albino"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.bensfintasticsharks.albino_encounter.title"
+    }
+  },
+  "requirements": [
+    [
+      "player_found_albino_great_white",
+      "player_found_albino_hammerhead",
+      "player_found_albino_thresher"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

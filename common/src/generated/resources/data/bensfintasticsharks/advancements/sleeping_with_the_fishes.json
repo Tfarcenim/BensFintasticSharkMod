@@ -1,0 +1,40 @@
+{
+  "parent": "bensfintasticsharks:root",
+  "criteria": {
+    "killed_by_shark": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "#bensfintasticsharks:sharks"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:entity_killed_player"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.bensfintasticsharks.sleeping_with_the_fishes.description"
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "minecraft:skeleton_skull"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.bensfintasticsharks.sleeping_with_the_fishes.title"
+    }
+  },
+  "requirements": [
+    [
+      "killed_by_shark"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

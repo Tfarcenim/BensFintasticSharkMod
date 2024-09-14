@@ -1,0 +1,74 @@
+{
+  "parent": "bensfintasticsharks:shark_codex",
+  "criteria": {
+    "bensfintasticsharks:common_thresher_shark": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "bensfintasticsharks:common_thresher_shark"
+            }
+          }
+        ]
+      },
+      "trigger": "bensfintasticsharks:player_found_entity"
+    },
+    "bensfintasticsharks:great_hammerhead_shark": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "bensfintasticsharks:great_hammerhead_shark"
+            }
+          }
+        ]
+      },
+      "trigger": "bensfintasticsharks:player_found_entity"
+    },
+    "bensfintasticsharks:great_white_shark": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "bensfintasticsharks:great_white_shark"
+            }
+          }
+        ]
+      },
+      "trigger": "bensfintasticsharks:player_found_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.bensfintasticsharks.sharks_galore.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "bensfintasticsharks:shark_codex"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.bensfintasticsharks.sharks_galore.title"
+    }
+  },
+  "requirements": [
+    [
+      "bensfintasticsharks:great_white_shark"
+    ],
+    [
+      "bensfintasticsharks:great_hammerhead_shark"
+    ],
+    [
+      "bensfintasticsharks:common_thresher_shark"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
