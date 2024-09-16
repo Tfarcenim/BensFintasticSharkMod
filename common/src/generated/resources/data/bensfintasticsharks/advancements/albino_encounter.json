@@ -10,6 +10,7 @@
             "predicate": {
               "type": "bensfintasticsharks:great_white_shark",
               "type_specific": {
+                "type": "bensfintasticsharks:great_white_shark",
                 "variant": "albino"
               }
             }
@@ -27,6 +28,7 @@
             "predicate": {
               "type": "bensfintasticsharks:great_hammerhead_shark",
               "type_specific": {
+                "type": "bensfintasticsharks:great_hammerhead_shark",
                 "variant": "albino"
               }
             }
@@ -44,6 +46,7 @@
             "predicate": {
               "type": "bensfintasticsharks:common_thresher_shark",
               "type_specific": {
+                "type": "bensfintasticsharks:common_thresher_shark",
                 "variant": "albino"
               }
             }

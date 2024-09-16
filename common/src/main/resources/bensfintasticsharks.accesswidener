@@ -12,3 +12,5 @@ accessible method net/minecraft/client/renderer/item/ItemProperties register (Ln
 accessible field net/minecraft/world/item/ArmorMaterials HEALTH_FUNCTION_FOR_TYPE Ljava/util/EnumMap;
 
 accessible method net/minecraft/advancements/CriteriaTriggers register (Lnet/minecraft/advancements/CriterionTrigger;)Lnet/minecraft/advancements/CriterionTrigger;
+
+mutable field net/minecraft/advancements/critereon/EntitySubPredicate$Types TYPES Lcom/google/common/collect/BiMap;

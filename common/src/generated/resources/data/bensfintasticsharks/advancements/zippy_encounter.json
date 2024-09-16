@@ -10,6 +10,7 @@
             "predicate": {
               "type": "bensfintasticsharks:common_thresher_shark",
               "type_specific": {
+                "type": "bensfintasticsharks:common_thresher_shark",
                 "variant": "zippy"
               }
             }

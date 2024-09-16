@@ -10,6 +10,7 @@
             "predicate": {
               "type": "bensfintasticsharks:great_white_shark",
               "type_specific": {
+                "type": "bensfintasticsharks:great_white_shark",
                 "variant": "specimen-8"
               }
             }

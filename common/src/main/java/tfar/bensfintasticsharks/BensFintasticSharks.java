@@ -13,6 +13,7 @@ import net.minecraft.world.item.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tfar.bensfintasticsharks.advancmenets.PlayerFoundEntityTrigger;
+import tfar.bensfintasticsharks.init.EntityVariantPredicates;
 import tfar.bensfintasticsharks.init.ModCreativeTabs;
 import tfar.bensfintasticsharks.init.ModEntityTypes;
 import tfar.bensfintasticsharks.init.ModItems;
@@ -34,6 +35,7 @@ public class BensFintasticSharks {
         Services.PLATFORM.registerAll(ModEntityTypes.class, BuiltInRegistries.ENTITY_TYPE, EntityType.class);
         Services.PLATFORM.registerAll(ModItems.class, BuiltInRegistries.ITEM, Item.class);
         Services.PLATFORM.registerAll(ModCreativeTabs.class, BuiltInRegistries.CREATIVE_MODE_TAB, CreativeModeTab.class);
+        EntityVariantPredicates.poke();
     }
 
     public static ResourceLocation id(String path) {

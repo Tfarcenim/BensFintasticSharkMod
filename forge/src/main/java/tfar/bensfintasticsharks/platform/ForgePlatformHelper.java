@@ -12,7 +12,7 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLLoader;
 import org.apache.commons.lang3.tuple.Pair;
 import tfar.bensfintasticsharks.BensFintasticSharks;
-import tfar.bensfintasticsharks.BensFintasticSharkModForge;
+import tfar.bensfintasticsharks.BensFintasticSharksForge;
 import tfar.bensfintasticsharks.entity.*;
 import tfar.bensfintasticsharks.item.PrismarineArmorItem;
 import tfar.bensfintasticsharks.platform.services.IPlatformHelper;
@@ -45,7 +45,7 @@ public class ForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public <F> void registerAll(Class<?> clazz, Registry<? extends F> registry, Class<F> filter) {
-        List<Pair<ResourceLocation, Supplier<?>>> list = BensFintasticSharkModForge.registerLater.computeIfAbsent(registry, k -> new ArrayList<>());
+        List<Pair<ResourceLocation, Supplier<?>>> list = BensFintasticSharksForge.registerLater.computeIfAbsent(registry, k -> new ArrayList<>());
         for (Field field : clazz.getFields()) {
             MappedRegistry<? extends F> forgeRegistry = (MappedRegistry<? extends F>) registry;
             forgeRegistry.unfreeze();

@@ -40,7 +40,8 @@ public class PlayerFoundEntityTrigger extends SimpleCriterionTrigger<PlayerFound
         }
 
         public boolean matches(ServerPlayer pPlayer, LootContext pContext) {
-            return this.entity.matches(pContext);
+            boolean matches = this.entity.matches(pContext);
+            return matches;
         }
 
         public static TriggerInstance located(EntityPredicate entityPredicate) {
