@@ -6,7 +6,7 @@
     }
   },
   "display": {
-    "announce_to_chat": false,
+    "announce_to_chat": true,
     "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "description": {
       "translate": "advancements.bensfintasticsharks.root.description"
@@ -17,7 +17,7 @@
       "item": "bensfintasticsharks:shark_trident",
       "nbt": "{Damage:0}"
     },
-    "show_toast": false,
+    "show_toast": true,
     "title": {
       "translate": "advancements.bensfintasticsharks.root.title"
     }

@@ -36,7 +36,7 @@ public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider
         Advancement root = Advancement.Builder.advancement()
                 .display(ModItems.SHARK_TRIDENT, TextComponents.ROOT, TextComponents.ROOT_DESC,
                 new ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
-                FrameType.TASK, false, false, false)
+                FrameType.TASK, true, true, false)
                 .requirements(RequirementsStrategy.OR)
                 .addCriterion("unlock_right_away", PlayerTrigger.TriggerInstance.tick())
                 .save(saver, BensFintasticSharks.id("root").toString());
@@ -63,7 +63,7 @@ public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider
                 .save(saver, BensFintasticSharks.id("common_thresher_encounter").toString());
 
         Advancement killedByShark = Advancement.Builder.advancement().parent(root)
-                .display(Items.SKELETON_SKULL,TextComponents.SLEEPING_WITH_THE_FISHES, TextComponents.SLEEPING_WITH_THE_FISHES_DESC, null, FrameType.TASK, true, true, true)
+                .display(ModItems.SLEEPING_WITH_THE_FISHES,TextComponents.SLEEPING_WITH_THE_FISHES, TextComponents.SLEEPING_WITH_THE_FISHES_DESC, null, FrameType.TASK, true, true, false)
                 .addCriterion("killed_by_shark", KilledTrigger.TriggerInstance.entityKilledPlayer(EntityPredicate.Builder.entity().of(ModTags.EntityTypes.SHARKS)))
                 .save(saver, BensFintasticSharks.id("sleeping_with_the_fishes").toString());
 
@@ -161,12 +161,12 @@ public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider
                 .save(saver, BensFintasticSharks.id("lost_manuscript").toString());
 
         Advancement levelSharkCodex = Advancement.Builder.advancement().parent(sharkCodex)
-                .display(ModItems.CODEX_VOLUME,TextComponents.LEVEL_SHARK_CODEX, TextComponents.LEVEL_SHARK_CODEX_DESC, null, FrameType.TASK, false, false, false)
+                .display(ModItems.CODEX_VOLUME,TextComponents.LEVEL_SHARK_CODEX, TextComponents.LEVEL_SHARK_CODEX_DESC, null, FrameType.TASK, true, true, false)
                 .addCriterion("level_shark_codex", RecipeCraftedTrigger.TriggerInstance.craftedItem(BensFintasticSharks.id("shark_codex")))
                 .save(saver, BensFintasticSharks.id("level_shark_codex").toString());
 
         Advancement sharksGalore = addMobsToDiscover(Advancement.Builder.advancement().parent(sharkCodex)
-                .display(ModItems.SHARK_CODEX,TextComponents.SHARKS_GALORE, TextComponents.SHARKS_GALORE_DESC, null, FrameType.CHALLENGE, false, false, false))
+                .display(ModItems.SHARKS_GALORE,TextComponents.SHARKS_GALORE, TextComponents.SHARKS_GALORE_DESC, null, FrameType.CHALLENGE, true, true, false))
                 .save(saver, BensFintasticSharks.id("sharks_galore").toString());
     }
 

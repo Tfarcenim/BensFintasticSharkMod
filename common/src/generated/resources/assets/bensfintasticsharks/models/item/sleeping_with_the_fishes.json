@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "bensfintasticsharks:item/sleeping_with_the_fishes"
+  }
+}

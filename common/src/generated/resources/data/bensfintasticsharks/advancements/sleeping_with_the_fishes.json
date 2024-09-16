@@ -22,9 +22,9 @@
       "translate": "advancements.bensfintasticsharks.sleeping_with_the_fishes.description"
     },
     "frame": "task",
-    "hidden": true,
+    "hidden": false,
     "icon": {
-      "item": "minecraft:skeleton_skull"
+      "item": "bensfintasticsharks:sleeping_with_the_fishes"
     },
     "show_toast": true,
     "title": {

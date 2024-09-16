@@ -12,6 +12,7 @@ import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.loaders.SeparateTransformsModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.fml.common.Mod;
 import tfar.bensfintasticsharks.BensFintasticSharks;
 import tfar.bensfintasticsharks.init.ModItems;
 
@@ -63,6 +64,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         makeOneLayerItem(ModItems.ZIPPY_PIXEL_ART);
         makeOneLayerItem(ModItems.JUSTICE_FOR_STEVE);
         makeOneLayerItem(ModItems.UNETHICAL);
+        makeOneLayerItem(ModItems.SHARKS_GALORE);
+        makeOneLayerItem(ModItems.SLEEPING_WITH_THE_FISHES);
 
         trident(ModItems.SHARK_TRIDENT);
     }

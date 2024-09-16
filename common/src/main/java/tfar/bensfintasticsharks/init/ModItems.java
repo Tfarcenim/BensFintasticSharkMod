@@ -48,6 +48,7 @@ public class ModItems {
     public static final Item GREAT_WHITE_SHARK_PIXEL_ART = new HiddenItem(new Item.Properties());
     public static final Item GREAT_HAMMERHEAD_SHARK_PIXEL_ART = new HiddenItem(new Item.Properties());
     public static final Item COMMON_THRESHER_SHARK_PIXEL_ART = new HiddenItem(new Item.Properties());
+    public static final Item SHARKS_GALORE = new HiddenItem(new Item.Properties());
     public static final Item HARBOR_SEAL_BLOCK = new HiddenItem(new Item.Properties());
     public static final Item STINGRAY_PIXEL_ART = new HiddenItem(new Item.Properties());
     public static final Item ILLEGAL_POACHING = new HiddenItem(new Item.Properties());
@@ -55,4 +56,5 @@ public class ModItems {
     public static final Item ZIPPY_PIXEL_ART = new HiddenItem(new Item.Properties());
     public static final Item JUSTICE_FOR_STEVE = new HiddenItem(new Item.Properties());
     public static final Item UNETHICAL = new HiddenItem(new Item.Properties());
+    public static final Item SLEEPING_WITH_THE_FISHES = new HiddenItem(new Item.Properties());
 }

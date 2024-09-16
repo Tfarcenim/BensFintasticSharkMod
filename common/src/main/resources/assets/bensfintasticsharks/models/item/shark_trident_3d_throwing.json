@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "shark_trident_32",
-		"particle": "shark_trident_32"
+		"0": "bensfintasticsharks:item/shark_trident_3d",
+		"particle": "bensfintasticsharks:item/shark_trident_3d"
 	},
 	"elements": [
 		{

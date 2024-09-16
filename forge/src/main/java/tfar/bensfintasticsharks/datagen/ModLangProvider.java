@@ -72,11 +72,11 @@ public class ModLangProvider extends LanguageProvider {
         addTextComponent(TextComponents.ZIPPY_ENCOUNTER,"Shark of Zeus");
         addTextComponent(TextComponents.ZIPPY_ENCOUNTER_DESC,"Discover Zippy");
 
-        addTextComponent(TextComponents.SPECIMEN_8_ENCOUNTER,"Shark of Zeus");
-        addTextComponent(TextComponents.SPECIMEN_8_ENCOUNTER_DESC,"I’ll be back.");
+        addTextComponent(TextComponents.SPECIMEN_8_ENCOUNTER,"I’ll be back.");
+        addTextComponent(TextComponents.SPECIMEN_8_ENCOUNTER_DESC,"Discover Specimen-8");
 
-        addTextComponent(TextComponents.DEEP_BLUE_ENCOUNTER,"Shark of Zeus");
-        addTextComponent(TextComponents.DEEP_BLUE_ENCOUNTER_DESC,"Mommy Shark");
+        addTextComponent(TextComponents.DEEP_BLUE_ENCOUNTER,"Mommy Shark");
+        addTextComponent(TextComponents.DEEP_BLUE_ENCOUNTER_DESC,"Discover Deep Blue");
 
         addTextComponent(TextComponents.SHARK_CODEX,"Knowledge is power…");
         addTextComponent(TextComponents.SHARK_CODEX_DESC,"Craft a Shark Codex");
