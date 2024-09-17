@@ -1,6 +1,7 @@
 package tfar.bensfintasticsharks.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.AnimalPanic;
@@ -21,9 +22,15 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTar
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
 import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.Animation;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
+import tfar.bensfintasticsharks.ModAnimations;
 
 import java.util.List;
 
@@ -35,8 +42,21 @@ public class HarborSealEntityForge extends HarborSealEntity implements GeoEntity
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, "idle_controller", 0, event -> {
+            boolean isDead = this.dead || this.getHealth() < 0.01 || this.isDeadOrDying();
+            boolean isFastMoving = getDeltaMovement().lengthSqr() > .01;
+            boolean basking = onGround() && !isInWaterOrBubble();
+            if (basking) {
+                return event.setAndContinue(ModAnimations.BASK);
+            }
 
+            if (event.isMoving() && !isDead) {
+                return event.setAndContinue(isFastMoving ? ModAnimations.FAST_SWIM : DefaultAnimations.SWIM);
+            }
+            return event.setAndContinue(DefaultAnimations.SWIM);
+        })
+                .triggerableAnim("death", ModAnimations.DEATH));
     }
 
     @Override
@@ -53,7 +73,7 @@ public class HarborSealEntityForge extends HarborSealEntity implements GeoEntity
     public BrainActivityGroup<? extends HarborSealEntityForge> getCoreTasks() {
         return BrainActivityGroup.coreTasks(
                 new LookAtTarget<>(),                      // Have the entity turn to face and look at its current look target
-                new MoveToWalkTarget<>(),new AnimalPanic(2));
+                new MoveToWalkTarget<>(), new AnimalPanic(2));
     }
 
     @Override
@@ -88,5 +108,16 @@ public class HarborSealEntityForge extends HarborSealEntity implements GeoEntity
         super.customServerAiStep();
         tickBrain(this);
     }
+
+    @Override
+    protected void tickDeath() {
+        ++this.deathTime;
+        this.triggerAnim("idle_controller", "death");
+        if (this.deathTime == 30) {
+            this.remove(Entity.RemovalReason.KILLED);
+            this.dropExperience();
+        }
+    }
+
 
 }

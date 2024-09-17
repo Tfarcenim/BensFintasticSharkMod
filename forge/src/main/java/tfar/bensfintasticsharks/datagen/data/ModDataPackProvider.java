@@ -31,17 +31,17 @@ public class ModDataPackProvider extends DatapackBuiltinEntriesProvider {
         context.register(BiomeModifiers.GREAT_WHITE_SHARK_SPAWNS,
                 new ForgeBiomeModifiers.AddSpawnsBiomeModifier(context.lookup(Registries.BIOME)
                         .getOrThrow(ModTags.Biomes.GREAT_WHITE_SHARK_SPAWNS), List.of(
-                                new MobSpawnSettings.SpawnerData(ModEntityTypes.GREAT_WHITE_SHARK,100,1,4)))
+                                new MobSpawnSettings.SpawnerData(ModEntityTypes.GREAT_WHITE_SHARK,100,1,1)))
         );
         context.register(BiomeModifiers.GREAT_HAMMERHEAD_SHARK_SPAWNS,
                 new ForgeBiomeModifiers.AddSpawnsBiomeModifier(context.lookup(Registries.BIOME)
                         .getOrThrow(ModTags.Biomes.GREAT_HAMMERHEAD_SHARK_SPAWNS), List.of(
-                        new MobSpawnSettings.SpawnerData(ModEntityTypes.GREAT_HAMMERHEAD_SHARK,100,1,4)))
+                        new MobSpawnSettings.SpawnerData(ModEntityTypes.GREAT_HAMMERHEAD_SHARK,100,1,1)))
         );
         context.register(BiomeModifiers.COMMON_THRESHER_SHARK_SPAWNS,
                 new ForgeBiomeModifiers.AddSpawnsBiomeModifier(context.lookup(Registries.BIOME)
                         .getOrThrow(ModTags.Biomes.COMMON_THRESHER_SHARK_SPAWNS), List.of(
-                        new MobSpawnSettings.SpawnerData(ModEntityTypes.COMMON_THRESHER_SHARK,100,1,4)))
+                        new MobSpawnSettings.SpawnerData(ModEntityTypes.COMMON_THRESHER_SHARK,100,1,1)))
         );
         context.register(BiomeModifiers.COMMON_STINGRAY_SHARK_SPAWNS,
                 new ForgeBiomeModifiers.AddSpawnsBiomeModifier(context.lookup(Registries.BIOME)

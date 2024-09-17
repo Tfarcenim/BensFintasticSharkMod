@@ -14,3 +14,4 @@ accessible field net/minecraft/world/item/ArmorMaterials HEALTH_FUNCTION_FOR_TYP
 accessible method net/minecraft/advancements/CriteriaTriggers register (Lnet/minecraft/advancements/CriterionTrigger;)Lnet/minecraft/advancements/CriterionTrigger;
 
 mutable field net/minecraft/advancements/critereon/EntitySubPredicate$Types TYPES Lcom/google/common/collect/BiMap;
+accessible field net/minecraft/world/entity/ai/control/SmoothSwimmingLookControl maxYRotFromCenter I

@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"swim": {
+		"move.swim": {
 			"loop": true,
 			"animation_length": 2,
 			"bones": {
@@ -209,7 +209,7 @@
 				}
 			}
 		},
-		"fastswim": {
+		"move.fast_swim": {
 			"loop": true,
 			"animation_length": 1,
 			"bones": {
@@ -470,7 +470,7 @@
 				}
 			}
 		},
-		"bask": {
+		"misc.bask": {
 			"loop": true,
 			"animation_length": 2,
 			"bones": {
@@ -838,7 +838,7 @@
 				}
 			}
 		},
-		"death": {
+		"misc.death": {
 			"animation_length": 3,
 			"bones": {
 				"Main": {

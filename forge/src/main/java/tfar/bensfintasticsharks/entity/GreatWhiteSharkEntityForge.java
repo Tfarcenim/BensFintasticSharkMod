@@ -42,17 +42,12 @@ import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
+import tfar.bensfintasticsharks.ModAnimations;
 
 import java.util.List;
 
 public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements GeoEntity, SmartBrainOwner<GreatWhiteSharkEntityForge> {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-
-    protected static final RawAnimation FAST_SWIM = RawAnimation.begin().thenLoop("move.fast_swim");
-    protected static final RawAnimation DEATH = RawAnimation.begin().thenPlayAndHold("misc.death");
-    protected static final RawAnimation THRASH = RawAnimation.begin().thenLoop("attack.thrash");
-    protected static final RawAnimation BEACHED = RawAnimation.begin().thenLoop("misc.beached");
-
 
 
     public GreatWhiteSharkEntityForge(EntityType<? extends WaterAnimal> $$0, Level $$1) {
@@ -63,26 +58,26 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        boolean isAttacking = this.swinging;
-        boolean isDead = this.dead || this.getHealth() < 0.01 || this.isDeadOrDying();
-        boolean isFastMoving = getDeltaMovement().lengthSqr() > .01;
-        boolean isBeached = onGround() && !isInWaterOrBubble();
         controllers.add(new AnimationController<>(this, "idle_controller", 0, event -> {
+            boolean isAttacking = this.swinging;
+            boolean isDead = this.dead || this.getHealth() < 0.01 || this.isDeadOrDying();
+            boolean isFastMoving = getDeltaMovement().lengthSqr() > .01;
+            boolean isBeached = onGround() && !isInWaterOrBubble();
             if (isBeached) {
-                return event.setAndContinue(BEACHED);
+                return event.setAndContinue(ModAnimations.BEACHED2);
             }
 
             if (event.isMoving() && !isDead && !isAttacking) {
-                return event.setAndContinue(isFastMoving ? FAST_SWIM : DefaultAnimations.SWIM);
+                return event.setAndContinue(isFastMoving ? ModAnimations.FAST_SWIM : DefaultAnimations.SWIM);
             }
             return event.setAndContinue(DefaultAnimations.IDLE);
         })
                 .triggerableAnim("bite", RawAnimation.begin().then("attack.bite", Animation.LoopType.PLAY_ONCE))
-                .triggerableAnim("death", DEATH));
+                .triggerableAnim("death", ModAnimations.DEATH));
 
         controllers.add(new AnimationController<>(this, "controller", 5, event -> {
             if (!this.getPassengers().isEmpty()) {
-                return event.setAndContinue(THRASH);
+                return event.setAndContinue(ModAnimations.THRASH);
             }
             return PlayState.STOP;
         }));

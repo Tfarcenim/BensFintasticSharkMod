@@ -45,6 +45,7 @@ import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
+import tfar.bensfintasticsharks.ModAnimations;
 
 import java.util.List;
 
@@ -57,26 +58,27 @@ public class GreatHammerheadSharkEntityForge extends GreatHammerheadSharkEntity 
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        boolean isAttacking = this.swinging;
-        boolean isDead = this.dead || this.getHealth() < 0.01 || this.isDeadOrDying();
-        boolean isFastMoving = getDeltaMovement().lengthSqr() > .01;
-        boolean isBeached = onGround() && !isInWaterOrBubble();
+
         controllers.add(new AnimationController<>(this, "idle_controller", 0, event -> {
+            boolean isAttacking = this.swinging;
+            boolean isDead = this.dead || this.getHealth() < 0.01 || this.isDeadOrDying();
+            boolean isFastMoving = getDeltaMovement().lengthSqr() > .01;
+            boolean isBeached = onGround() && !isInWaterOrBubble();
             if (isBeached) {
-                return event.setAndContinue(GreatWhiteSharkEntityForge.BEACHED);
+                return event.setAndContinue(ModAnimations.BEACHED2);
             }
             if (event.isMoving() && !isDead && !isAttacking) {
-                return event.setAndContinue(isFastMoving ? GreatWhiteSharkEntityForge.FAST_SWIM : DefaultAnimations.SWIM);
+                return event.setAndContinue(isFastMoving ? ModAnimations.FAST_SWIM : DefaultAnimations.SWIM);
             }
             return event.setAndContinue(DefaultAnimations.IDLE);
         })
                 .triggerableAnim("bite_right", RawAnimation.begin().then("attack.bite_right", Animation.LoopType.PLAY_ONCE))
                 .triggerableAnim("bite_left", RawAnimation.begin().then("attack.bite_left", Animation.LoopType.PLAY_ONCE))
-                .triggerableAnim("death", GreatWhiteSharkEntityForge.DEATH));
+                .triggerableAnim("death", ModAnimations.DEATH));
 
         controllers.add(new AnimationController<>(this, "controller", 5, event -> {
             if (!this.getPassengers().isEmpty()) {
-                return event.setAndContinue(GreatWhiteSharkEntityForge.THRASH);
+                return event.setAndContinue(ModAnimations.THRASH);
             }
             return PlayState.STOP;
         }));

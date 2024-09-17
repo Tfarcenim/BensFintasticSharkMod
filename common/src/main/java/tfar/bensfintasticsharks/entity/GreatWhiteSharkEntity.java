@@ -34,7 +34,7 @@ public class GreatWhiteSharkEntity extends WaterAnimal implements ConditionalGlo
         super($$0, $$1);
 
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1/10f, .5f/10f, false);
-        this.lookControl = new SmoothSwimmingLookControl(this, 10);
+        this.lookControl = new DontTurnHeadSwimmingLookControl(this, 10);
     }
 
     private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(GreatWhiteSharkEntity.class, EntityDataSerializers.INT);

@@ -22,6 +22,7 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.util.GeckoLibUtil;
+import tfar.bensfintasticsharks.ModAnimations;
 
 import java.util.List;
 
@@ -39,14 +40,14 @@ public class CommonStingrayEntityForge extends CommonStingrayEntity implements G
         boolean isBeached = onGround() && !isInWaterOrBubble();
         controllers.add(new AnimationController<>(this, "idle_controller", 0, event -> {
             if (isBeached) {
-                return event.setAndContinue(GreatWhiteSharkEntityForge.BEACHED);
+                return event.setAndContinue(ModAnimations.BEACHED);
             }
             if (event.isMoving() && !isDead && !isAttacking) {
                 return event.setAndContinue(DefaultAnimations.SWIM);
             }
             return event.setAndContinue(DefaultAnimations.IDLE);
         })
-                .triggerableAnim("death", GreatWhiteSharkEntityForge.DEATH));
+                .triggerableAnim("death", ModAnimations.DEATH));
     }
 
     @Override

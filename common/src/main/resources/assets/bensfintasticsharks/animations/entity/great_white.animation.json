@@ -2257,7 +2257,7 @@
 				}
 			}
 		},
-		"animation.greatwhite.beached2": {
+		"misc.beached2": {
 			"loop": true,
 			"animation_length": 4,
 			"bones": {
