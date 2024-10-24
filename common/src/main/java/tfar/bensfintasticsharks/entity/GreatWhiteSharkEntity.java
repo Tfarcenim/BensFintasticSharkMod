@@ -6,6 +6,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.ByIdMap;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.util.random.SimpleWeightedRandomList;
@@ -33,7 +34,7 @@ public class GreatWhiteSharkEntity extends WaterAnimal implements ConditionalGlo
     protected GreatWhiteSharkEntity(EntityType<? extends WaterAnimal> $$0, Level $$1) {
         super($$0, $$1);
 
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1/10f, .5f/10f, false);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1/10f, 0, false);
         this.lookControl = new DontTurnHeadSwimmingLookControl(this, 10);
     }
 
@@ -80,13 +81,22 @@ public class GreatWhiteSharkEntity extends WaterAnimal implements ConditionalGlo
         return false;
     }
 
+    public boolean isBeached() {
+        return !isInWaterOrBubble() && onGround();
+    }
+
 
     @Override
     protected void positionRider(Entity entity, MoveFunction function) {
-        double offsetX = 4 *Math.sin(getXRot() * Math.PI / 180);
-        double offsetY = 4 * Math.cos(getYRot() * Math.PI / 180);
+        Vec3 look = getLookAngle();
+        double dist = 3;
+        double offsetX = dist * look.x;
+        double offsetZ = dist * look.z;
 
-        function.accept(entity, getX() + offsetX, getY() - 0.15f, getZ() + offsetY);
+        double thisHeight = getDimensions(entity.getPose()).height;
+        double height = entity.getDimensions(entity.getPose()).height;
+
+        function.accept(entity, getX() + offsetX, getY() +thisHeight/2- height/2, getZ() + offsetZ);
     }
 
     @Override
@@ -104,6 +114,10 @@ public class GreatWhiteSharkEntity extends WaterAnimal implements ConditionalGlo
             super.travel(movementInput);
     }
 
+    @Override
+    public void setDeltaMovement(Vec3 $$0) {
+        super.setDeltaMovement($$0);
+    }
 
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {

@@ -35,8 +35,8 @@ public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider
     public void generate(HolderLookup.Provider registries, Consumer<Advancement> saver, ExistingFileHelper existingFileHelper) {
         Advancement root = Advancement.Builder.advancement()
                 .display(ModItems.SHARK_TRIDENT, TextComponents.ROOT, TextComponents.ROOT_DESC,
-                new ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
-                FrameType.TASK, true, true, false)
+                        new ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                        FrameType.TASK, true, true, false)
                 .requirements(RequirementsStrategy.OR)
                 .addCriterion("unlock_right_away", PlayerTrigger.TriggerInstance.tick())
                 .save(saver, BensFintasticSharks.id("root").toString());
@@ -138,7 +138,7 @@ public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider
                 .subPredicate(EntityVariantPredicates.GREAT_WHITE_SHARK.createPredicate(GreatWhiteSharkEntity.Variant.SPECIMEN_8)).build();
 
         Advancement specimen8Advancement = Advancement.Builder.advancement().parent(root)
-                .display(Items.REDSTONE,TextComponents.SPECIMEN_8_ENCOUNTER,TextComponents.SPECIMEN_8_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
+                .display(ModItems.SPECIMEN_8,TextComponents.SPECIMEN_8_ENCOUNTER,TextComponents.SPECIMEN_8_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
                 .addCriterion("player_found_entity", PlayerFoundEntityTrigger.TriggerInstance.located(specimen8Predicate))
                 .save(saver, BensFintasticSharks.id("specimen_8_encounter").toString());
 
@@ -146,17 +146,17 @@ public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider
                 .subPredicate(EntityVariantPredicates.GREAT_WHITE_SHARK.createPredicate(GreatWhiteSharkEntity.Variant.DEEP_BLUE)).build();
 
         Advancement deepBlueAdvancement = Advancement.Builder.advancement().parent(root)
-                .display(ModItems.GREAT_WHITE_SHARK_SPAWN_EGG,TextComponents.DEEP_BLUE_ENCOUNTER,TextComponents.DEEP_BLUE_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
+                .display(ModItems.MOMMY_SHARK,TextComponents.DEEP_BLUE_ENCOUNTER,TextComponents.DEEP_BLUE_ENCOUNTER_DESC, null, FrameType.TASK, true, true, false)
                 .addCriterion("player_found_entity", PlayerFoundEntityTrigger.TriggerInstance.located(deepBluePredicate))
                 .save(saver, BensFintasticSharks.id("deep_blue_encounter").toString());
 
         Advancement sharkCodex = Advancement.Builder.advancement().parent(root)
-                .display(ModItems.SHARK_CODEX,TextComponents.SHARK_CODEX, TextComponents.SHARK_CODEX_DESC, null, FrameType.TASK, false, false, false)
+                .display(ModItems.SHARK_CODEX,TextComponents.SHARK_CODEX, TextComponents.SHARK_CODEX_DESC, null, FrameType.TASK, true, true, false)
                 .addCriterion("shark_codex", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SHARK_CODEX))
                 .save(saver, BensFintasticSharks.id("shark_codex").toString());
 
         Advancement lostManuscript = Advancement.Builder.advancement().parent(root)
-                .display(ModItems.LOST_MANUSCRIPT,TextComponents.LOST_MANUSCRIPT, TextComponents.LOST_MANUSCRIPT_DESC, null, FrameType.TASK, false, false, false)
+                .display(ModItems.LOST_MANUSCRIPT,TextComponents.LOST_MANUSCRIPT, TextComponents.LOST_MANUSCRIPT_DESC, null, FrameType.TASK, true, true, false)
                 .addCriterion("lost_manuscript", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.LOST_MANUSCRIPT))
                 .save(saver, BensFintasticSharks.id("lost_manuscript").toString());
 

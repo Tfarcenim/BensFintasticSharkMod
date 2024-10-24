@@ -114,7 +114,7 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
                         new SetPlayerLookTarget<>(),          // Set the look target for the nearest player
                         new SetRandomLookTarget<>()),         // Set a random look target
                 new OneRandomBehaviour<>(                 // Run a random task from the below options
-                        new SetRandomSwimTarget<>(),          // Set a random walk target to a nearby position
+                        new SetRandomSwimTarget<>().setRadius(30,21),          // Set a random walk target to a nearby position
                         new Idle<>().runFor(entity -> entity.getRandom().nextInt(30, 60)))); // Do nothing for 1.5->3 seconds
     }
 

@@ -15,6 +15,7 @@ import net.tslat.smartbrainlib.api.core.behaviour.FirstApplicableBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.OneRandomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Panic;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTarget;
@@ -46,7 +47,7 @@ public class HarborSealEntityForge extends HarborSealEntity implements GeoEntity
         controllers.add(new AnimationController<>(this, "idle_controller", 0, event -> {
             boolean isDead = this.dead || this.getHealth() < 0.01 || this.isDeadOrDying();
             boolean isFastMoving = getDeltaMovement().lengthSqr() > .01;
-            boolean basking = onGround() && !isInWaterOrBubble();
+            boolean basking = onGround() && !isInWaterOrBubble() && !event.isMoving();
             if (basking) {
                 return event.setAndContinue(ModAnimations.BASK);
             }
@@ -73,7 +74,7 @@ public class HarborSealEntityForge extends HarborSealEntity implements GeoEntity
     public BrainActivityGroup<? extends HarborSealEntityForge> getCoreTasks() {
         return BrainActivityGroup.coreTasks(
                 new LookAtTarget<>(),                      // Have the entity turn to face and look at its current look target
-                new MoveToWalkTarget<>(), new AnimalPanic(2));
+                new MoveToWalkTarget<>(), new Panic<>());
     }
 
     @Override
@@ -85,7 +86,7 @@ public class HarborSealEntityForge extends HarborSealEntity implements GeoEntity
                         new SetRandomLookTarget<>()),         // Set a random look target
                 new OneRandomBehaviour<>(                 // Run a random task from the below options
                         new SetRandomWalkTarget<>(),          // Set a random walk target to a nearby position
-                        new Idle<>().runFor(entity -> entity.getRandom().nextInt(30, 60)))); // Do nothing for 1.5->3 seconds
+                        new Idle<>().runFor(entity -> entity.getRandom().nextInt(60, 120)))); // Do nothing for 1.5->3 seconds
     }
 
     @Override

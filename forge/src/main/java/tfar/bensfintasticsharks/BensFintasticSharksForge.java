@@ -4,6 +4,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraftforge.common.MinecraftForge;
@@ -23,6 +25,7 @@ import tfar.bensfintasticsharks.datagen.ModDatagen;
 import tfar.bensfintasticsharks.entity.*;
 import tfar.bensfintasticsharks.init.ModEntityTypes;
 import tfar.bensfintasticsharks.init.ModItems;
+import tfar.bensfintasticsharks.init.ModTags;
 
 import java.util.HashMap;
 import java.util.List;
@@ -54,8 +57,19 @@ public class BensFintasticSharksForge {
     }
 
     private void playerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase == TickEvent.Phase.START && event.side == LogicalSide.SERVER) {
-            BensFintasticSharks.playerTick((ServerPlayer) event.player);
+        if (event.phase == TickEvent.Phase.START) {
+
+            Entity vehicle = event.player.getVehicle();
+
+            if (vehicle !=  null &&vehicle.getType().is(ModTags.EntityTypes.SHARKS)) {
+                event.player.setForcedPose(Pose.SWIMMING);
+            } else {
+                event.player.setForcedPose(null);
+            }
+
+
+
+            BensFintasticSharks.playerTick(event.player);
         }
     }
 

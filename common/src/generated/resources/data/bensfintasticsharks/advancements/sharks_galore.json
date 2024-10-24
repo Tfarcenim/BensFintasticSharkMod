@@ -45,7 +45,7 @@
     }
   },
   "display": {
-    "announce_to_chat": false,
+    "announce_to_chat": true,
     "description": {
       "translate": "advancements.bensfintasticsharks.sharks_galore.description"
     },
@@ -54,7 +54,7 @@
     "icon": {
       "item": "bensfintasticsharks:sharks_galore"
     },
-    "show_toast": false,
+    "show_toast": true,
     "title": {
       "translate": "advancements.bensfintasticsharks.sharks_galore.title"
     }

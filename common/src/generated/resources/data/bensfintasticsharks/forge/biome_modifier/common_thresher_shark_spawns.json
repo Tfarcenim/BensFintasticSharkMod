@@ -3,7 +3,7 @@
   "biomes": "#bensfintasticsharks:common_thresher_shark_spawns",
   "spawners": {
     "type": "bensfintasticsharks:common_thresher_shark",
-    "maxCount": 4,
+    "maxCount": 1,
     "minCount": 1,
     "weight": 100
   }

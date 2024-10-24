@@ -5,18 +5,17 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tfar.bensfintasticsharks.advancmenets.PlayerFoundEntityTrigger;
-import tfar.bensfintasticsharks.init.EntityVariantPredicates;
-import tfar.bensfintasticsharks.init.ModCreativeTabs;
-import tfar.bensfintasticsharks.init.ModEntityTypes;
-import tfar.bensfintasticsharks.init.ModItems;
+import tfar.bensfintasticsharks.init.*;
 import tfar.bensfintasticsharks.platform.Services;
 
 import java.util.List;
@@ -42,10 +41,13 @@ public class BensFintasticSharks {
         return new ResourceLocation(MOD_ID,path);
     }
 
-    public static void playerTick(ServerPlayer player) {
-        List<LivingEntity> nearby = player.serverLevel().getNearbyEntities(LivingEntity.class, TargetingConditions.DEFAULT,player,player.getBoundingBox().inflate(16));
-        for (LivingEntity living : nearby) {
-            PLAYER_FOUND_ENTITY.trigger(player,living);
+    public static void playerTick(Player player) {
+
+        if (player instanceof ServerPlayer serverPlayer) {
+            List<LivingEntity> nearby = serverPlayer.serverLevel().getNearbyEntities(LivingEntity.class, TargetingConditions.DEFAULT, player, player.getBoundingBox().inflate(16));
+            for (LivingEntity living : nearby) {
+                PLAYER_FOUND_ENTITY.trigger(serverPlayer, living);
+            }
         }
     }
 

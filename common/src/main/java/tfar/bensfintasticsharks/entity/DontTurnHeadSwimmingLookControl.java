@@ -6,22 +6,28 @@ import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 
 public class DontTurnHeadSwimmingLookControl extends SmoothSwimmingLookControl {
     public DontTurnHeadSwimmingLookControl(Mob $$0, int $$1) {
-        super($$0, $$1);
+        super($$0, 0);
     }
 
     @Override
     public void tick() {
+        boolean isBeached = mob.onGround() && !mob.isInWaterOrBubble();
+
+        if (isBeached) {
+            return;
+        }
+
         if (this.lookAtCooldown > 0) {
             --this.lookAtCooldown;
             this.getYRotD().ifPresent(($$0x) -> {
           //      this.mob.yHeadRot = this.rotateTowards(this.mob.yHeadRot, $$0x + 20.0F, this.yMaxRotSpeed);
             });
             this.getXRotD().ifPresent(($$0x) -> {
-                this.mob.setXRot(this.rotateTowards(this.mob.getXRot(), $$0x + 10.0F, this.xMaxRotAngle));
+        //        this.mob.setXRot(this.rotateTowards(this.mob.getXRot(), $$0x + 10.0F, this.xMaxRotAngle));
             });
         } else {
             if (this.mob.getNavigation().isDone()) {
-                this.mob.setXRot(this.rotateTowards(this.mob.getXRot(), 0.0F, 5.0F));
+           //     this.mob.setXRot(this.rotateTowards(this.mob.getXRot(), 0.0F, 5.0F));
             }
 
          //   this.mob.yHeadRot = this.rotateTowards(this.mob.yHeadRot, this.mob.yBodyRot, this.yMaxRotSpeed);
@@ -33,5 +39,7 @@ public class DontTurnHeadSwimmingLookControl extends SmoothSwimmingLookControl {
         } else if ($$0 > (float)this.maxYRotFromCenter) {
             mob.yBodyRot += 4.0F;
         }
+        mob.setXRot(0);
+        mob.yHeadRot = mob.yBodyRot;
     }
 }

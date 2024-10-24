@@ -15,7 +15,7 @@
     }
   },
   "display": {
-    "announce_to_chat": false,
+    "announce_to_chat": true,
     "description": {
       "translate": "advancements.bensfintasticsharks.lost_manuscript.description"
     },
@@ -24,7 +24,7 @@
     "icon": {
       "item": "bensfintasticsharks:lost_manuscript"
     },
-    "show_toast": false,
+    "show_toast": true,
     "title": {
       "translate": "advancements.bensfintasticsharks.lost_manuscript.title"
     }

@@ -32,7 +32,8 @@ public class HarborSealEntity extends WaterAnimal {
     protected HarborSealEntity(EntityType<? extends WaterAnimal> $$0, Level $$1) {
         super($$0, $$1);
 
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1 / 10f, .25f, false);
+        //Mob pMob, int pMaxTurnX, int pMaxTurnY, float pInWaterSpeedModifier, float pOutsideWaterSpeedModifier, boolean pApplyGravity
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1 / 20f, .25f, false);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
 
         this.setMaxUpStep(1);

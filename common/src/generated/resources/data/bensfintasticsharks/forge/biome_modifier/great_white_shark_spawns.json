@@ -3,7 +3,7 @@
   "biomes": "#bensfintasticsharks:great_white_shark_spawns",
   "spawners": {
     "type": "bensfintasticsharks:great_white_shark",
-    "maxCount": 4,
+    "maxCount": 1,
     "minCount": 1,
     "weight": 100
   }

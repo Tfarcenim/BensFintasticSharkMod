@@ -57,4 +57,6 @@ public class ModItems {
     public static final Item JUSTICE_FOR_STEVE = new HiddenItem(new Item.Properties());
     public static final Item UNETHICAL = new HiddenItem(new Item.Properties());
     public static final Item SLEEPING_WITH_THE_FISHES = new HiddenItem(new Item.Properties());
+    public static final Item MOMMY_SHARK = new HiddenItem(new Item.Properties());
+    public static final Item SPECIMEN_8 = new HiddenItem(new Item.Properties());
 }

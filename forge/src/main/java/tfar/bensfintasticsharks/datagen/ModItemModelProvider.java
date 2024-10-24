@@ -66,6 +66,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         makeOneLayerItem(ModItems.UNETHICAL);
         makeOneLayerItem(ModItems.SHARKS_GALORE);
         makeOneLayerItem(ModItems.SLEEPING_WITH_THE_FISHES);
+        makeOneLayerItem(ModItems.MOMMY_SHARK);
+        makeOneLayerItem(ModItems.SPECIMEN_8);
 
         trident(ModItems.SHARK_TRIDENT);
     }
@@ -115,7 +117,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     private void trident(Item tieredTridentItem) {
 
-        String name = BuiltInRegistries.ITEM.getKey(tieredTridentItem).getPath();
+        String name = BuiltInRegistries.ITEM.getKey(tieredTridentItem).getPath();//shark_trident
 
         //trident in hand model
         ItemModelBuilder r3dFile = nested()
@@ -130,7 +132,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         ItemModelBuilder rSpriteFile = makeSpriteModel(name);
 
         ItemModelBuilder throwingBuilder = nested()
-                .parent(getExistingFile(modLoc("item/shark_trident_3d")));
+                .parent(getExistingFile(modLoc("item/shark_trident_3d_throwing")));
 
       /*  ItemModelBuilder end = getBuilder(name + "_throwing").guiLight(BlockModel.GuiLight.FRONT)
                 .customLoader(SeparateTransformsModelBuilder::begin).base(rSpriteFile)
@@ -140,6 +142,13 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .perspective(ItemDisplayContext.THIRD_PERSON_LEFT_HAND, throwingBuilder)
                 .end();*/
 
+        getBuilder(name+"_throwing").guiLight(BlockModel.GuiLight.FRONT)
+                .customLoader(SeparateTransformsModelBuilder::begin).base(rSpriteFile)
+                .perspective(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, throwingBuilder)
+                .perspective(ItemDisplayContext.FIRST_PERSON_LEFT_HAND, throwingBuilder)
+                .perspective(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, throwingBuilder)
+                .perspective(ItemDisplayContext.THIRD_PERSON_LEFT_HAND, throwingBuilder)
+                .end();
 
         getBuilder(name).guiLight(BlockModel.GuiLight.FRONT)
                 .customLoader(SeparateTransformsModelBuilder::begin).base(rSpriteFile)
@@ -148,7 +157,9 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .perspective(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, r3dFile)
                 .perspective(ItemDisplayContext.THIRD_PERSON_LEFT_HAND, r3dFile)
                 .end()
-                .override().model(getExistingFile(modLoc("item/"+name+"_3d_throwing"))).predicate(mcLoc("throwing"), 1).end();
+                .override().model(getExistingFile(modLoc("item/"+name+"_throwing"))).predicate(mcLoc("throwing"), 1).end();
+
+
     }
 
 
