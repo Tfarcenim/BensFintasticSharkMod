@@ -10,14 +10,11 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
 import tfar.bensfintasticsharks.BensFintasticSharks;
-import tfar.bensfintasticsharks.datagen.data.BensFintasticSharksAdvancements;
-import tfar.bensfintasticsharks.datagen.data.ModDataPackProvider;
-import tfar.bensfintasticsharks.datagen.data.ModGlobalLootModifierProvider;
+import tfar.bensfintasticsharks.datagen.data.*;
 import tfar.bensfintasticsharks.datagen.data.tags.ModBiomeTagsProvider;
 import tfar.bensfintasticsharks.datagen.data.tags.ModBlockTagsProvider;
 import tfar.bensfintasticsharks.datagen.data.tags.ModEntityTypeTagsProvider;
 import tfar.bensfintasticsharks.datagen.data.tags.ModItemTagsProvider;
-import tfar.bensfintasticsharks.datagen.data.ModLootTableProvider;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;

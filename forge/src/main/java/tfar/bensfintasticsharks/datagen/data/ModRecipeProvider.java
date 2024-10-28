@@ -1,4 +1,4 @@
-package tfar.bensfintasticsharks.datagen;
+package tfar.bensfintasticsharks.datagen.data;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -96,6 +96,14 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("d d")
                 .pattern("s s")
                 .unlockedBy("has_shark_teeth",has(ModTags.Items.SHARK_TEETH))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CODEX_PAGE)
+                .define('p',ModItems.LOST_MANUSCRIPT)
+                .pattern("ppp")
+                .pattern("ppp")
+                .pattern("ppp")
+                .unlockedBy("has_lost_manuscript",has(ModItems.LOST_MANUSCRIPT))
                 .save(consumer);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.SHARK_CODEX)

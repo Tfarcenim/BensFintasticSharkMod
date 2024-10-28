@@ -162,7 +162,7 @@ public class BensFintasticSharksAdvancements implements ForgeAdvancementProvider
 
         Advancement levelSharkCodex = Advancement.Builder.advancement().parent(sharkCodex)
                 .display(ModItems.CODEX_VOLUME,TextComponents.LEVEL_SHARK_CODEX, TextComponents.LEVEL_SHARK_CODEX_DESC, null, FrameType.TASK, true, true, false)
-                .addCriterion("level_shark_codex", RecipeCraftedTrigger.TriggerInstance.craftedItem(BensFintasticSharks.id("shark_codex")))
+                .addCriterion("level_shark_codex", RecipeCraftedTrigger.TriggerInstance.craftedItem(BensFintasticSharks.id("codex_page")))
                 .save(saver, BensFintasticSharks.id("level_shark_codex").toString());
 
         Advancement sharksGalore = addMobsToDiscover(Advancement.Builder.advancement().parent(sharkCodex)

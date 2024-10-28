@@ -3,7 +3,7 @@
   "criteria": {
     "level_shark_codex": {
       "conditions": {
-        "recipe_id": "bensfintasticsharks:shark_codex"
+        "recipe_id": "bensfintasticsharks:codex_page"
       },
       "trigger": "minecraft:recipe_crafted"
     }

@@ -5,6 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
@@ -77,6 +78,11 @@ public class CommonThresherSharkEntity extends WaterAnimal implements Conditiona
         RandomSource randomsource = pLevel.getRandom();
         this.setVariant(Variant.getSpawnVariant(randomsource));
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+    }
+
+    @Override
+    public void thunderHit(ServerLevel $$0, LightningBolt $$1) {
+        setVariant(Variant.ZIPPY);
     }
 
     @Override
