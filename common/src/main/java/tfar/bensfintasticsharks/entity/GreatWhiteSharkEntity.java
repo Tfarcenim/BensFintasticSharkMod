@@ -34,12 +34,15 @@ public class GreatWhiteSharkEntity extends WaterAnimal implements ConditionalGlo
     protected GreatWhiteSharkEntity(EntityType<? extends WaterAnimal> $$0, Level $$1) {
         super($$0, $$1);
 
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1/10f, 0, false);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1/8f, 0, false);
         this.lookControl = new DontTurnHeadSwimmingLookControl(this, 10);
     }
 
     private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(GreatWhiteSharkEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_DEEP_BLUE = SynchedEntityData.defineId(GreatWhiteSharkEntity.class, EntityDataSerializers.BOOLEAN);
+
+    private static final EntityDataAccessor<Integer> DATA_GRAB_TIMER = SynchedEntityData.defineId(GreatWhiteSharkEntity.class, EntityDataSerializers.INT);
+
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 120).add(Attributes.MOVEMENT_SPEED, 1.2F).add(Attributes.ATTACK_DAMAGE, 8);
@@ -50,6 +53,7 @@ public class GreatWhiteSharkEntity extends WaterAnimal implements ConditionalGlo
         super.defineSynchedData();
         entityData.define(DATA_VARIANT, 0);
         entityData.define(DATA_DEEP_BLUE,false);
+        entityData.define(DATA_GRAB_TIMER,0);
     }
 
     @Override
@@ -65,6 +69,83 @@ public class GreatWhiteSharkEntity extends WaterAnimal implements ConditionalGlo
         } else {
             return super.mobInteract(player, hand);
         }
+    }
+
+    @Override
+    protected void positionRider(Entity entity, MoveFunction function) {
+        Vec3 look = getLookAngle();
+        float dist = 3f;
+
+
+        double angle = computeGrabAngle();
+
+        double rotatedx = look.x * Mth.cos((float) (angle * Math.PI / 180)) - look.z * Mth.sin((float) (angle * Math.PI / 180));
+        double rotatedz = look.x * Mth.sin((float) (angle * Math.PI / 180)) + look.z * Mth.cos((float) (angle * Math.PI / 180));
+
+        double offsetX = dist * rotatedx;
+        double offsetZ = dist * rotatedz;
+
+        double thisHeight = getDimensions(entity.getPose()).height;
+        double height = entity.getDimensions(entity.getPose()).height;
+
+        function.accept(entity, getX() + offsetX, getY() +thisHeight/2- height/2, getZ() + offsetZ);
+    }
+
+    float computeGrabAngle() {
+        int grabTimer = 100000 - getGrabTimer();
+
+        int mod = grabTimer;//(grabTimer + 3) % 40;
+
+        float degrees = mod * 24;
+        float angle =  35 * Mth.sin((float) (degrees * Math.PI /180));
+        return angle;
+
+        //.25 - .1 full wave
+
+    }
+
+    @Override
+    protected void customServerAiStep() {
+        super.customServerAiStep();
+        int grabCountdown = getGrabTimer();
+        if (grabCountdown > 0) {
+            setGrabTimer(--grabCountdown);
+            if (grabCountdown == 0) {
+                ejectPassengers();
+            }
+        }
+    }
+
+
+    void setGrabTimer(int timer) {
+        entityData.set(DATA_GRAB_TIMER,timer);
+    }
+
+    int getGrabTimer() {
+        return entityData.get(DATA_GRAB_TIMER);
+    }
+
+    @Override
+    public double getMeleeAttackRangeSqr(LivingEntity pEntity) {
+        float v = this.getBbWidth() * this.getBbWidth() + pEntity.getBbWidth();
+        return v;//cuts default range in half
+    }
+
+    @Override
+    public double getPerceivedTargetDistanceSquareForMeleeAttack(LivingEntity pEntity) {
+        double v = getAttackPosition().distanceToSqr(pEntity.position());
+        return v;
+        //return Math.max(this.distanceToSqr(pEntity.getMeleeAttackReferencePosition()), this.distanceToSqr(pEntity.position()));
+    }
+
+
+    //this starts at bottom center
+    protected Vec3 getAttackPosition() {
+        Vec3 bottomCenter = position();
+        Vec3 center = bottomCenter.add(0,getBbHeight() / 2,0);
+        Vec3 look = getLookAngle();
+        float scale = 2;
+        return center.add(look.x * scale,0,look.z * scale);
     }
 
     public boolean canTarget(LivingEntity target) {
@@ -83,20 +164,6 @@ public class GreatWhiteSharkEntity extends WaterAnimal implements ConditionalGlo
 
     public boolean isBeached() {
         return !isInWaterOrBubble() && onGround();
-    }
-
-
-    @Override
-    protected void positionRider(Entity entity, MoveFunction function) {
-        Vec3 look = getLookAngle();
-        double dist = 3;
-        double offsetX = dist * look.x;
-        double offsetZ = dist * look.z;
-
-        double thisHeight = getDimensions(entity.getPose()).height;
-        double height = entity.getDimensions(entity.getPose()).height;
-
-        function.accept(entity, getX() + offsetX, getY() +thisHeight/2- height/2, getZ() + offsetZ);
     }
 
     @Override

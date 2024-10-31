@@ -84,9 +84,6 @@ public class GreatHammerheadSharkEntityForge extends GreatHammerheadSharkEntity 
         }));
     }
 
-    protected int grabCountdown;
-
-
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
@@ -168,7 +165,7 @@ public class GreatHammerheadSharkEntityForge extends GreatHammerheadSharkEntity 
             if (entity instanceof ServerPlayer serverPlayer)
                 serverPlayer.connection.send(new ClientboundSetPassengersPacket(entity));
         }
-        grabCountdown = 100;
+        setGrabTimer(100000);
     }
 
 
@@ -181,12 +178,6 @@ public class GreatHammerheadSharkEntityForge extends GreatHammerheadSharkEntity 
     protected void customServerAiStep() {
         super.customServerAiStep();
         tickBrain(this);
-        if (grabCountdown > 0) {
-            grabCountdown--;
-            if (grabCountdown == 0) {
-                ejectPassengers();
-            }
-        }
     }
 
     @Override

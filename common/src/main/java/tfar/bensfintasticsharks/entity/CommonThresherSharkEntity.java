@@ -14,7 +14,6 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
@@ -30,7 +29,7 @@ public class CommonThresherSharkEntity extends WaterAnimal implements Conditiona
     protected CommonThresherSharkEntity(EntityType<? extends WaterAnimal> $$0, Level $$1) {
         super($$0, $$1);
 
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1/10f, 0, false);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1/8f, 0, false);
         this.lookControl = new DontTurnHeadSwimmingLookControl(this, 10);
     }
 
@@ -56,6 +55,29 @@ public class CommonThresherSharkEntity extends WaterAnimal implements Conditiona
         if (target.getHealth() / target.getMaxHealth() <= .5) return true;
 
         return false;
+    }
+
+    @Override
+    public double getMeleeAttackRangeSqr(LivingEntity pEntity) {
+        float v = this.getBbWidth() * this.getBbWidth() + pEntity.getBbWidth();
+        return v;//cuts default range in half
+    }
+
+    @Override
+    public double getPerceivedTargetDistanceSquareForMeleeAttack(LivingEntity pEntity) {
+        double v = getBiteAttackPosition().distanceToSqr(pEntity.position());
+        return v;
+        //return Math.max(this.distanceToSqr(pEntity.getMeleeAttackReferencePosition()), this.distanceToSqr(pEntity.position()));
+    }
+
+
+    //this starts at bottom center
+    protected Vec3 getBiteAttackPosition() {
+        Vec3 bottomCenter = position();
+        Vec3 center = bottomCenter.add(0,getBbHeight() / 2,0);
+        Vec3 look = getLookAngle();
+        float scale = 2;
+        return center.add(look.x * scale,0,look.z * scale);
     }
 
     @Override

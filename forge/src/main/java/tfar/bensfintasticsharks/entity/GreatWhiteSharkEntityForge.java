@@ -54,8 +54,6 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
         super($$0, $$1);
     }
 
-    protected int grabCountdown;
-
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "idle_controller", 0, event -> {
@@ -162,7 +160,7 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
             if (entity instanceof ServerPlayer serverPlayer)
                serverPlayer.connection.send(new ClientboundSetPassengersPacket(entity));
         }
-        grabCountdown = 100;
+        setGrabTimer(100000);
     }
 
     @Override
@@ -174,12 +172,6 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
     protected void customServerAiStep() {
         super.customServerAiStep();
         tickBrain(this);
-        if (grabCountdown > 0) {
-            grabCountdown--;
-            if (grabCountdown == 0) {
-                ejectPassengers();
-            }
-        }
     }
 
     @Override

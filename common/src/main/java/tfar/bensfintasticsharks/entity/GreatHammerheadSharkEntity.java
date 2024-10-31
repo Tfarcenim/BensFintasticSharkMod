@@ -6,6 +6,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.ByIdMap;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.util.random.SimpleWeightedRandomList;
@@ -29,19 +30,24 @@ public class GreatHammerheadSharkEntity extends WaterAnimal {
     protected GreatHammerheadSharkEntity(EntityType<? extends WaterAnimal> $$0, Level $$1) {
         super($$0, $$1);
 
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1/10f, 0, false);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1/8f, 0, false);
         this.lookControl = new DontTurnHeadSwimmingLookControl(this, 10);
     }
 
     private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(GreatHammerheadSharkEntity.class, EntityDataSerializers.INT);
 
+    private static final EntityDataAccessor<Integer> DATA_GRAB_TIMER = SynchedEntityData.defineId(GreatHammerheadSharkEntity.class, EntityDataSerializers.INT);
+
+
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 110).add(Attributes.MOVEMENT_SPEED, 1.2F).add(Attributes.ATTACK_DAMAGE, 8);
     }
 
+    @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_VARIANT, 0);
+        entityData.define(DATA_GRAB_TIMER,0);
     }
 
     public boolean canTarget(LivingEntity target) {
@@ -56,6 +62,29 @@ public class GreatHammerheadSharkEntity extends WaterAnimal {
         if (target.getHealth() / target.getMaxHealth() <= .5) return true;
 
         return false;
+    }
+
+    @Override
+    public double getMeleeAttackRangeSqr(LivingEntity pEntity) {
+        float v = this.getBbWidth() * this.getBbWidth() + pEntity.getBbWidth();
+        return v;//cuts default range in half
+    }
+
+    @Override
+    public double getPerceivedTargetDistanceSquareForMeleeAttack(LivingEntity pEntity) {
+        double v = getAttackPosition().distanceToSqr(pEntity.position());
+        return v;
+        //return Math.max(this.distanceToSqr(pEntity.getMeleeAttackReferencePosition()), this.distanceToSqr(pEntity.position()));
+    }
+
+
+    //this starts at bottom center
+    protected Vec3 getAttackPosition() {
+        Vec3 bottomCenter = position();
+        Vec3 center = bottomCenter.add(0,getBbHeight() / 2,0);
+        Vec3 look = getLookAngle();
+        float scale = 2;
+        return center.add(look.x * scale,0,look.z * scale);
     }
 
     @Override
@@ -80,10 +109,55 @@ public class GreatHammerheadSharkEntity extends WaterAnimal {
 
     @Override
     protected void positionRider(Entity entity, MoveFunction function) {
-        double offsetX = 3.75 *Math.sin(getXRot() * Math.PI / 180);
-        double offsetY = 3.75 * Math.cos(getYRot() * Math.PI / 180);
+        Vec3 look = getLookAngle();
+        float dist = 2.55f;
 
-        function.accept(entity, getX() + offsetX, getY() - 0.15f, getZ() + offsetY);
+
+        double angle = computeGrabAngle();
+
+        double rotatedx = look.x * Mth.cos((float) (angle * Math.PI / 180)) - look.z * Mth.sin((float) (angle * Math.PI / 180));
+        double rotatedz = look.x * Mth.sin((float) (angle * Math.PI / 180)) + look.z * Mth.cos((float) (angle * Math.PI / 180));
+
+        double offsetX = dist * rotatedx;
+        double offsetZ = dist * rotatedz;
+
+        double thisHeight = getDimensions(entity.getPose()).height;
+        double height = entity.getDimensions(entity.getPose()).height;
+
+        function.accept(entity, getX() + offsetX, getY() +thisHeight/2- height/2, getZ() + offsetZ);
+    }
+
+     float computeGrabAngle() {
+        int grabTimer = 100000 - getGrabTimer();
+
+        int mod = grabTimer;//(grabTimer + 3) % 40;
+
+            float degrees = mod * 18;
+            float angle =  35 * Mth.sin((float) (degrees * Math.PI /180));
+            return angle;
+
+        //.25 - .1 full wave
+
+     }
+
+    void setGrabTimer(int timer) {
+        entityData.set(DATA_GRAB_TIMER,timer);
+    }
+
+    int getGrabTimer() {
+        return entityData.get(DATA_GRAB_TIMER);
+    }
+
+    @Override
+    protected void customServerAiStep() {
+        super.customServerAiStep();
+        int grabCountdown = getGrabTimer();
+        if (grabCountdown > 0) {
+            setGrabTimer(--grabCountdown);
+            if (grabCountdown == 0) {
+                ejectPassengers();
+            }
+        }
     }
 
     @Override
@@ -152,6 +226,7 @@ public class GreatHammerheadSharkEntity extends WaterAnimal {
             return this.name;
         }
 
+        @Override
         public String getSerializedName() {
             return this.name;
         }

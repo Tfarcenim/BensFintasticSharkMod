@@ -8,6 +8,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.WaterAnimal;
@@ -33,6 +34,7 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.target.TargetOrRetaliat
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
+import net.tslat.smartbrainlib.util.BrainUtils;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -135,7 +137,16 @@ public class CommonThresherSharkEntityForge extends CommonThresherSharkEntity im
 
                             @Override
                             protected void doDelayedAction(Mob entity) {
-                                super.doDelayedAction(entity);
+                                BrainUtils.setForgettableMemory(entity, MemoryModuleType.ATTACK_COOLING_DOWN, true, this.attackIntervalSupplier.apply(entity));
+
+                                if (this.target == null)
+                                    return;
+
+                                if (!entity.getSensing().hasLineOfSight(this.target) || !entity.getBoundingBox().inflate(.5).intersects(target.getBoundingBox()))
+                                    return;
+
+                                entity.doHurtTarget(this.target);
+
                                 if (target != null) {
                                     target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,200,0));
                                 }
