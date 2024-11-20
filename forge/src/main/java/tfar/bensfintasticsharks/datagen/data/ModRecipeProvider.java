@@ -106,6 +106,14 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_lost_manuscript",has(ModItems.LOST_MANUSCRIPT))
                 .save(consumer);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CODEX_VOLUME)
+                .define('p',ModItems.CODEX_PAGE)
+                .pattern("ppp")
+                .pattern("ppp")
+                .pattern("ppp")
+                .unlockedBy(getHasName(ModItems.CODEX_PAGE),has(ModItems.CODEX_PAGE))
+                .save(consumer);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.SHARK_CODEX)
                 .requires(Items.BOOK).requires(ModTags.Items.SHARK_TEETH)
                 .requires(Items.BLUE_DYE).requires(Items.TROPICAL_FISH_BUCKET)
