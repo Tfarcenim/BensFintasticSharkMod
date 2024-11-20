@@ -39,11 +39,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         makeOneLayerItem(ModItems.COMMON_THRESHER_SHARK_TOOTH);
         makeOneLayerItem(ModItems.CARTILAGE);
 
-        makeOneLayerItem(ModItems.SHARK_AXE);
-        makeOneLayerItem(ModItems.SHARK_HOE);
-        makeOneLayerItem(ModItems.SHARK_PICKAXE);
-        makeOneLayerItem(ModItems.SHARK_SHOVEL);
-        makeOneLayerItem(ModItems.SHARK_SWORD);
+        makeOneLayerItem(ModItems.SHARK_AXE,handheld);
+        makeOneLayerItem(ModItems.SHARK_HOE,handheld);
+        makeOneLayerItem(ModItems.SHARK_PICKAXE,handheld);
+        makeOneLayerItem(ModItems.SHARK_SHOVEL,handheld);
+        makeOneLayerItem(ModItems.SHARK_SWORD,handheld);
 
         makeOneLayerItem(ModItems.PRISMARINE_HELMET);
         makeOneLayerItem(ModItems.PRISMARINE_CHESTPLATE);
@@ -73,6 +73,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
 
     protected ModelFile.ExistingModelFile generated = getExistingFile(mcLoc("item/generated"));
+    protected ModelFile.ExistingModelFile handheld = getExistingFile(mcLoc("item/handheld"));
     protected ModelFile.ExistingModelFile template_spawn_egg = getExistingFile(mcLoc("item/template_spawn_egg"));
 
 
@@ -93,19 +94,27 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
 
     protected void makeOneLayerItem(Item item, ResourceLocation texture) {
+        makeOneLayerItem(item,texture,generated);
+    }
+
+    protected void makeOneLayerItem(Item item, ResourceLocation texture,ModelFile parent) {
         String path = BuiltInRegistries.ITEM.getKey(item).getPath();
-        if (existingFileHelper.exists(new ResourceLocation(texture.getNamespace(), "item/" + texture.getPath())
-                , PackType.CLIENT_RESOURCES, ".png", "textures")) {
-            getBuilder(path).parent(generated)
-                    .texture("layer0", new ResourceLocation(texture.getNamespace(), "item/" + texture.getPath()));
+        if (existingFileHelper.exists(texture, PackType.CLIENT_RESOURCES, ".png", "textures")) {
+            getBuilder(path).parent(parent)
+                    .texture("layer0",texture);
         } else {
             System.out.println("no texture for " + item + " found, skipping");
         }
     }
 
+
     protected void makeOneLayerItem(Item item) {
+        makeOneLayerItem(item,generated);
+    }
+
+    protected void makeOneLayerItem(Item item,ModelFile parent) {
         ResourceLocation texture = BuiltInRegistries.ITEM.getKey(item);
-        makeOneLayerItem(item, texture);
+        makeOneLayerItem(item, texture.withPrefix("item/"),parent);
     }
 
     protected ItemModelBuilder makeSpriteModel(String name) {

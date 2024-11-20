@@ -162,7 +162,12 @@
 			}
 		}
 	],
-	"display": {},
+	"display": {
+		"gui": {
+			"rotation": [-180, 34, -180],
+			"translation": [0, 4.25, 0]
+		}
+	},
 	"groups": [
 		{
 			"name": "Main",
