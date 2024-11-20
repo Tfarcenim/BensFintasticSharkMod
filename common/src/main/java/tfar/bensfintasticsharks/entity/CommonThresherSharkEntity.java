@@ -48,7 +48,7 @@ public class CommonThresherSharkEntity extends SmartWaterAnimal<CommonThresherSh
     protected CommonThresherSharkEntity(EntityType<CommonThresherSharkEntity> $$0, Level $$1) {
         super($$0, $$1);
 
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1/8f, 0, false);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1/10f, 0, false);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
     }
 
