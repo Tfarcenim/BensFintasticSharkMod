@@ -1,5 +1,5 @@
-// 1.20.1	2024-09-14T17:03:00.0432676	Tags for minecraft:entity_type mod id bensfintasticsharks
+// 1.20.1	2024-11-19T22:26:37.0125353	Tags for minecraft:entity_type mod id bensfintasticsharks
 15a52117d1a6f0eccaca4551f9733e6405cad265 data/bensfintasticsharks/tags/entity_types/common_thresher_shark/always_attacks.json
-a6e6d7c43eae36d0e54a4efce54b0ad2f275532e data/bensfintasticsharks/tags/entity_types/great_hammerhead_shark/always_attacks.json
-a6e6d7c43eae36d0e54a4efce54b0ad2f275532e data/bensfintasticsharks/tags/entity_types/great_white_shark/always_attacks.json
+fd5ff3f3e2dd644ef218716bb295eca8c2e611b6 data/bensfintasticsharks/tags/entity_types/great_hammerhead_shark/always_attacks.json
+fd5ff3f3e2dd644ef218716bb295eca8c2e611b6 data/bensfintasticsharks/tags/entity_types/great_white_shark/always_attacks.json
 faa8b373bd278c18916f21745bf98cbb0474bd8c data/bensfintasticsharks/tags/entity_types/sharks.json

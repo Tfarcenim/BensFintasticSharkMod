@@ -21,12 +21,12 @@ public class ModEntityTypeTagsProvider extends EntityTypeTagsProvider {
     protected void addTags(HolderLookup.Provider pProvider) {
 
         tag(ModTags.EntityTypes.GREAT_WHITE_SHARK_ALWAYS_ATTACKS)
-                .add(EntityType.COD,EntityType.COW,EntityType.DOLPHIN,EntityType.GLOW_SQUID,EntityType.PIG,EntityType.SALMON,EntityType.SHEEP,EntityType.SQUID,
+                .add(EntityType.COW,EntityType.DOLPHIN,EntityType.GLOW_SQUID,EntityType.PIG,EntityType.SHEEP,EntityType.SQUID,
                         EntityType.TURTLE,
                         ModEntityTypes.HARBOR_SEAL);
 
         tag(ModTags.EntityTypes.GREAT_HAMMERHEAD_SHARK_ALWAYS_ATTACKS)
-                .add(EntityType.COD,EntityType.COW,EntityType.DOLPHIN,EntityType.GLOW_SQUID,EntityType.PIG,EntityType.SALMON,EntityType.SHEEP,EntityType.SQUID,
+                .add(EntityType.COW,EntityType.DOLPHIN,EntityType.GLOW_SQUID,EntityType.PIG,EntityType.SHEEP,EntityType.SQUID,
                         EntityType.TURTLE,
                         ModEntityTypes.HARBOR_SEAL);
 

@@ -62,27 +62,27 @@ public class ForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public EntityType<GreatHammerheadSharkEntity> registerGreatHammerheadShark() {
-        return EntityType.Builder.<GreatHammerheadSharkEntity>of(GreatHammerheadSharkEntityForge::new, MobCategory.WATER_CREATURE).sized(1.75f, 1.4f).build("");
+        return EntityType.Builder.of(GreatHammerheadSharkEntityForge::new, MobCategory.WATER_CREATURE).sized(1.75f, 1.4f).build("");
     }
 
     @Override
     public EntityType<GreatWhiteSharkEntity> registerGreatWhite() {
-        return EntityType.Builder.<GreatWhiteSharkEntity>of(GreatWhiteSharkEntityForge::new, MobCategory.WATER_CREATURE).sized(2.5f, 1.75f).build("");
+        return EntityType.Builder.of(GreatWhiteSharkEntityForge::new, MobCategory.WATER_CREATURE).sized(2.5f, 1.75f).build("");
     }
 
     @Override
     public EntityType<HarborSealEntity> registerHarborSeal() {
-        return EntityType.Builder.<HarborSealEntity>of(HarborSealEntityForge::new, MobCategory.WATER_CREATURE).sized(1.5f, .75f).build("");
+        return EntityType.Builder.of(HarborSealEntityForge::new, MobCategory.WATER_CREATURE).sized(1.5f, .75f).build("");
     }
 
     @Override
     public EntityType<CommonStingrayEntity> registerStingray() {
-        return EntityType.Builder.<CommonStingrayEntity>of(CommonStingrayEntityForge::new, MobCategory.WATER_CREATURE).sized(1, .25f).build("");
+        return EntityType.Builder.of(CommonStingrayEntityForge::new, MobCategory.WATER_CREATURE).sized(1, .25f).build("");
     }
 
     @Override
     public EntityType<CommonThresherSharkEntity> registerThresherShark() {
-        return EntityType.Builder.<CommonThresherSharkEntity>of(CommonThresherSharkEntityForge::new, MobCategory.WATER_CREATURE).sized(1.25f, 1).build("");
+        return EntityType.Builder.of(CommonThresherSharkEntityForge::new, MobCategory.WATER_CREATURE).sized(1.5f, 1).build("");
     }
 
     @Override

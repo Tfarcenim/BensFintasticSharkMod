@@ -91,7 +91,7 @@ public class CommonThresherSharkEntityForge extends CommonThresherSharkEntity im
                                 if (this.target == null)
                                     return;
 
-                                if (!entity.getSensing().hasLineOfSight(this.target) || !entity.getBoundingBox().inflate(.5).intersects(target.getBoundingBox()))
+                                if (!entity.getSensing().hasLineOfSight(this.target) || !entity.getBoundingBox().intersects(target.getBoundingBox().inflate(12)))
                                     return;
 
                                 entity.doHurtTarget(this.target);
