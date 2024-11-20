@@ -23,7 +23,7 @@ public class GreatHammerheadRenderer extends GeoEntityRenderer<GreatHammerheadSh
 
 
     public GreatHammerheadRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new DefaultedEntityGeoModel<>(BensFintasticSharks.id("great_hammerhead_shark"),true));
+        super(renderManager, new DefaultedEntityGeoModel<>(BensFintasticSharks.id("great_hammerhead_shark")));
     }
 
     @Override

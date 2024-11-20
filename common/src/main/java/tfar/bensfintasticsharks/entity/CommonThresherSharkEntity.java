@@ -14,23 +14,42 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
+import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.phys.Vec3;
+import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
+import net.tslat.smartbrainlib.api.core.behaviour.FirstApplicableBehaviour;
+import net.tslat.smartbrainlib.api.core.behaviour.OneRandomBehaviour;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomSwimTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.target.TargetOrRetaliate;
+import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
+import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
+import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
 import tfar.bensfintasticsharks.init.ModTags;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.function.IntFunction;
 
-public class CommonThresherSharkEntity extends WaterAnimal implements ConditionalGlowing {
-    protected CommonThresherSharkEntity(EntityType<? extends WaterAnimal> $$0, Level $$1) {
+public class CommonThresherSharkEntity extends SmartWaterAnimal<CommonThresherSharkEntity> implements ConditionalGlowing {
+    protected CommonThresherSharkEntity(EntityType<CommonThresherSharkEntity> $$0, Level $$1) {
         super($$0, $$1);
 
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1/8f, 0, false);
-        this.lookControl = new DontTurnHeadSwimmingLookControl(this, 10);
+        this.lookControl = new SmoothSwimmingLookControl(this, 10);
     }
 
     private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(CommonThresherSharkEntity.class, EntityDataSerializers.INT);
@@ -70,6 +89,35 @@ public class CommonThresherSharkEntity extends WaterAnimal implements Conditiona
         //return Math.max(this.distanceToSqr(pEntity.getMeleeAttackReferencePosition()), this.distanceToSqr(pEntity.position()));
     }
 
+    @Override
+    public List<? extends ExtendedSensor<CommonThresherSharkEntity>> getSensors() {
+        NearbyLivingEntitySensor<CommonThresherSharkEntity> nearbyLivingEntitySensor = new NearbyLivingEntitySensor<>();
+        nearbyLivingEntitySensor.setPredicate((target, entity) -> canTarget(target));
+        return List.of(nearbyLivingEntitySensor, // This tracks nearby entities
+                new HurtBySensor<>());
+    }
+
+    @Override
+    public BrainActivityGroup<CommonThresherSharkEntity> getCoreTasks() {
+        return BrainActivityGroup.coreTasks(
+                new LookAtTarget<>(),                      // Have the entity turn to face and look at its current look target
+                new MoveToWalkTarget<>());
+    }
+
+    @Override
+    public BrainActivityGroup<CommonThresherSharkEntity> getIdleTasks() {
+        // These are the tasks that run when the mob isn't doing anything else (usually)
+        return BrainActivityGroup.idleTasks(
+                new FirstApplicableBehaviour<>(      // Run only one of the below behaviours, trying each one in order. Include the generic type because JavaC is silly
+                        new TargetOrRetaliate<>()
+                                .attackablePredicate(entity -> this.isInWaterOrBubble() && entity.isAlive() && (!(entity instanceof Player player) || !player.isCreative())),            // Set the attack target and walk target based on nearby entities
+                        // Set the attack target and walk target based on nearby entities
+                        new SetPlayerLookTarget<>(),          // Set the look target for the nearest player
+                        new SetRandomLookTarget<>()),         // Set a random look target
+                new OneRandomBehaviour<>(                 // Run a random task from the below options
+                        new SetRandomSwimTarget<>(),          // Set a random walk target to a nearby position
+                        new Idle<>().runFor(entity -> entity.getRandom().nextInt(30, 60)))); // Do nothing for 1.5->3 seconds
+    }
 
     //this starts at bottom center
     protected Vec3 getBiteAttackPosition() {
@@ -118,6 +166,23 @@ public class CommonThresherSharkEntity extends WaterAnimal implements Conditiona
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.putInt("Variant", getVariant().getId());
+    }
+
+    @Override
+    protected PathNavigation createNavigation(Level pLevel) {
+        return new WaterBoundPathNavigation(this, pLevel) {
+            @Override
+            protected boolean canUpdatePath() {
+                return true;
+            }
+
+            @Override
+            protected PathFinder createPathFinder(int pMaxVisitedNodes) {
+                nodeEvaluator = new AmphibiousNodeEvaluator(true);
+                nodeEvaluator.setCanOpenDoors(false);
+                return new PathFinder(this.nodeEvaluator, pMaxVisitedNodes);
+            }
+        };
     }
 
 

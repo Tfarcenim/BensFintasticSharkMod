@@ -29,7 +29,7 @@ public class GreatWhiteRenderer extends GeoEntityRenderer<GreatWhiteSharkEntityF
 
 
     public GreatWhiteRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new DefaultedEntityGeoModel<>(BensFintasticSharks.id("great_white"),true));
+        super(renderManager, new DefaultedEntityGeoModel<>(BensFintasticSharks.id("great_white")));
         addRenderLayer(new ConditionalAutoGlowingLayer<>(this));
     }
 

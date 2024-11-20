@@ -26,10 +26,10 @@ import tfar.bensfintasticsharks.ModAnimations;
 
 import java.util.List;
 
-public class CommonStingrayEntityForge extends CommonStingrayEntity implements GeoEntity,SmartBrainOwner<CommonStingrayEntityForge>{
+public class CommonStingrayEntityForge extends CommonStingrayEntity implements GeoEntity{
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    public CommonStingrayEntityForge(EntityType<? extends WaterAnimal> $$0, Level $$1) {
+    public CommonStingrayEntityForge(EntityType<CommonStingrayEntity> $$0, Level $$1) {
         super($$0, $$1);
     }
 
@@ -49,43 +49,6 @@ public class CommonStingrayEntityForge extends CommonStingrayEntity implements G
         })
                 .triggerableAnim("death", ModAnimations.DEATH));
     }
-
-    @Override
-    public List<? extends ExtendedSensor<? extends CommonStingrayEntityForge>> getSensors() {
-        return List.of();
-    }
-
-    @Override
-    public BrainActivityGroup<CommonStingrayEntityForge> getCoreTasks() {
-        return BrainActivityGroup.coreTasks(
-                new LookAtTarget<>(),                      // Have the entity turn to face and look at its current look target
-                new MoveToWalkTarget<>());
-    }
-
-    @Override
-    public BrainActivityGroup<CommonStingrayEntityForge> getIdleTasks() {
-        // These are the tasks that run when the mob isn't doing anything else (usually)
-        return BrainActivityGroup.idleTasks(
-                new FirstApplicableBehaviour<>(      // Run only one of the below behaviours, trying each one in order. Include the generic type because JavaC is silly
-                        new SetPlayerLookTarget<>(),          // Set the look target for the nearest player
-                        new SetRandomLookTarget<>()),         // Set a random look target
-                new OneRandomBehaviour<>(                 // Run a random task from the below options
-                        new SetRandomSwimTarget<>(),          // Set a random walk target to a nearby position
-                        new Idle<>().runFor(entity -> entity.getRandom().nextInt(30, 60)))); // Do nothing for 1.5->3 seconds
-    }
-
-    @Override
-    protected Brain.Provider<?> brainProvider() {
-        return new SmartBrainProvider<>(this);
-    }
-
-    @Override
-    protected void customServerAiStep() {
-        super.customServerAiStep();
-        tickBrain(this);
-    }
-
-
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {

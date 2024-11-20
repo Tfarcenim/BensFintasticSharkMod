@@ -47,10 +47,10 @@ import tfar.bensfintasticsharks.ModAnimations;
 
 import java.util.List;
 
-public class CommonThresherSharkEntityForge extends CommonThresherSharkEntity implements GeoEntity, SmartBrainOwner<CommonThresherSharkEntityForge> {
+public class CommonThresherSharkEntityForge extends CommonThresherSharkEntity implements GeoEntity{
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    public CommonThresherSharkEntityForge(EntityType<? extends WaterAnimal> $$0, Level $$1) {
+    public CommonThresherSharkEntityForge(EntityType<CommonThresherSharkEntity> $$0, Level $$1) {
         super($$0, $$1);
     }
 
@@ -81,37 +81,7 @@ public class CommonThresherSharkEntityForge extends CommonThresherSharkEntity im
     }
 
     @Override
-    public List<? extends ExtendedSensor<CommonThresherSharkEntityForge>> getSensors() {
-        NearbyLivingEntitySensor<CommonThresherSharkEntityForge> nearbyLivingEntitySensor = new NearbyLivingEntitySensor<>();
-        nearbyLivingEntitySensor.setPredicate((target, entity) -> canTarget(target));
-        return List.of(nearbyLivingEntitySensor, // This tracks nearby entities
-                new HurtBySensor<>());
-    }
-
-    @Override
-    public BrainActivityGroup<CommonThresherSharkEntityForge> getCoreTasks() {
-        return BrainActivityGroup.coreTasks(
-                new LookAtTarget<>(),                      // Have the entity turn to face and look at its current look target
-                new MoveToWalkTarget<>());
-    }
-
-    @Override
-    public BrainActivityGroup<CommonThresherSharkEntityForge> getIdleTasks() {
-        // These are the tasks that run when the mob isn't doing anything else (usually)
-        return BrainActivityGroup.idleTasks(
-                new FirstApplicableBehaviour<>(      // Run only one of the below behaviours, trying each one in order. Include the generic type because JavaC is silly
-                        new TargetOrRetaliate<>()
-                                .attackablePredicate(entity -> this.isInWaterOrBubble() && entity.isAlive() && (!(entity instanceof Player player) || !player.isCreative())),            // Set the attack target and walk target based on nearby entities
-                                    // Set the attack target and walk target based on nearby entities
-                        new SetPlayerLookTarget<>(),          // Set the look target for the nearest player
-                        new SetRandomLookTarget<>()),         // Set a random look target
-                new OneRandomBehaviour<>(                 // Run a random task from the below options
-                        new SetRandomSwimTarget<>(),          // Set a random walk target to a nearby position
-                        new Idle<>().runFor(entity -> entity.getRandom().nextInt(30, 60)))); // Do nothing for 1.5->3 seconds
-    }
-
-    @Override
-    public BrainActivityGroup<CommonThresherSharkEntityForge> getFightTasks() { // These are the tasks that handle fighting
+    public BrainActivityGroup<CommonThresherSharkEntity> getFightTasks() { // These are the tasks that handle fighting
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>()
                         .invalidateIf((entity, target) -> !isInWaterOrBubble() || target instanceof Player pl && (pl.isCreative() || pl.isSpectator())) // Cancel fighting if the target is no longer valid
@@ -153,36 +123,6 @@ public class CommonThresherSharkEntityForge extends CommonThresherSharkEntity im
                             }
                         },1))
         ); // Melee attack the target if close enough
-    }
-
-
-
-    @Override
-    protected Brain.Provider<?> brainProvider() {
-        return new SmartBrainProvider<>(this);
-    }
-
-    @Override
-    protected void customServerAiStep() {
-        super.customServerAiStep();
-        tickBrain(this);
-    }
-
-    @Override
-    protected PathNavigation createNavigation(Level pLevel) {
-        return new WaterBoundPathNavigation(this, pLevel) {
-            @Override
-            protected boolean canUpdatePath() {
-                return true;
-            }
-
-            @Override
-            protected PathFinder createPathFinder(int pMaxVisitedNodes) {
-                nodeEvaluator = new AmphibiousNodeEvaluator(true);
-                nodeEvaluator.setCanOpenDoors(false);
-                return new PathFinder(this.nodeEvaluator, pMaxVisitedNodes);
-            }
-        };
     }
 
     @Override

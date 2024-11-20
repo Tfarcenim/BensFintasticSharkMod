@@ -24,7 +24,7 @@ public class CommonThresherRenderer extends GeoEntityRenderer<CommonThresherShar
 
 
     public CommonThresherRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new DefaultedEntityGeoModel<>(BensFintasticSharks.id("common_thresher_shark"),true));
+        super(renderManager, new DefaultedEntityGeoModel<>(BensFintasticSharks.id("common_thresher_shark")));
         addRenderLayer(new ConditionalAutoGlowingLayer<>(this));
     }
 

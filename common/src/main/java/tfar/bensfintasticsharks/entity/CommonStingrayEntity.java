@@ -29,12 +29,23 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
 import net.minecraft.world.level.pathfinder.PathFinder;
+import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
+import net.tslat.smartbrainlib.api.core.behaviour.FirstApplicableBehaviour;
+import net.tslat.smartbrainlib.api.core.behaviour.OneRandomBehaviour;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomSwimTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
+import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
-public class CommonStingrayEntity extends WaterAnimal {
+public class CommonStingrayEntity extends SmartWaterAnimal<CommonStingrayEntity> {
 
 
     private static final Predicate<LivingEntity> DANGEROUS = living -> {
@@ -50,7 +61,7 @@ public class CommonStingrayEntity extends WaterAnimal {
 
     protected boolean stinging;
 
-    protected CommonStingrayEntity(EntityType<? extends WaterAnimal> $$0, Level $$1) {
+    protected CommonStingrayEntity(EntityType<CommonStingrayEntity> $$0, Level $$1) {
         super($$0, $$1);
 
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1 / 8f, 0, false);
@@ -86,6 +97,30 @@ public class CommonStingrayEntity extends WaterAnimal {
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.putInt("Variant", getVariant().getId());
+    }
+
+    @Override
+    public List<? extends ExtendedSensor<? extends CommonStingrayEntity>> getSensors() {
+        return List.of();
+    }
+
+    @Override
+    public BrainActivityGroup<CommonStingrayEntity> getCoreTasks() {
+        return BrainActivityGroup.coreTasks(
+                new LookAtTarget<>(),                      // Have the entity turn to face and look at its current look target
+                new MoveToWalkTarget<>());
+    }
+
+    @Override
+    public BrainActivityGroup<CommonStingrayEntity> getIdleTasks() {
+        // These are the tasks that run when the mob isn't doing anything else (usually)
+        return BrainActivityGroup.idleTasks(
+                new FirstApplicableBehaviour<>(      // Run only one of the below behaviours, trying each one in order. Include the generic type because JavaC is silly
+                        new SetPlayerLookTarget<>(),          // Set the look target for the nearest player
+                        new SetRandomLookTarget<>()),         // Set a random look target
+                new OneRandomBehaviour<>(                 // Run a random task from the below options
+                        new SetRandomSwimTarget<>(),          // Set a random walk target to a nearby position
+                        new Idle<>().runFor(entity -> entity.getRandom().nextInt(30, 60)))); // Do nothing for 1.5->3 seconds
     }
 
 

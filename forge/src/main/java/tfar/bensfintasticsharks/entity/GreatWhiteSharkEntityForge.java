@@ -46,11 +46,10 @@ import tfar.bensfintasticsharks.ModAnimations;
 
 import java.util.List;
 
-public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements GeoEntity, SmartBrainOwner<GreatWhiteSharkEntityForge> {
+public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements GeoEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-
-    public GreatWhiteSharkEntityForge(EntityType<? extends WaterAnimal> $$0, Level $$1) {
+    public GreatWhiteSharkEntityForge(EntityType<GreatWhiteSharkEntity> $$0, Level $$1) {
         super($$0, $$1);
     }
 
@@ -87,37 +86,7 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
     }
 
     @Override
-    public List<? extends ExtendedSensor<GreatWhiteSharkEntityForge>> getSensors() {
-        NearbyLivingEntitySensor<GreatWhiteSharkEntityForge> nearbyLivingEntitySensor = new NearbyLivingEntitySensor<>();
-        nearbyLivingEntitySensor.setPredicate((target, entity) -> canTarget(target));
-        return List.of(nearbyLivingEntitySensor, // This tracks nearby entities
-                new HurtBySensor<>());
-    }
-
-    @Override
-    public BrainActivityGroup<? extends GreatWhiteSharkEntityForge> getCoreTasks() {
-        return BrainActivityGroup.coreTasks(
-                new LookAtTarget<>(),                      // Have the entity turn to face and look at its current look target
-                new MoveToWalkTarget<>());
-    }
-
-    @Override
-    public BrainActivityGroup<GreatWhiteSharkEntityForge> getIdleTasks() {
-        // These are the tasks that run when the mob isn't doing anything else (usually)
-        return BrainActivityGroup.idleTasks(
-                new FirstApplicableBehaviour<>(      // Run only one of the below behaviours, trying each one in order. Include the generic type because JavaC is silly
-                        new TargetOrRetaliate<>()
-                                .attackablePredicate(entity -> this.isInWaterOrBubble() && entity.isAlive() && (!(entity instanceof Player player) || !player.isCreative())),            // Set the attack target and walk target based on nearby entities
-                                    // Set the attack target and walk target based on nearby entities
-                        new SetPlayerLookTarget<>(),          // Set the look target for the nearest player
-                        new SetRandomLookTarget<>()),         // Set a random look target
-                new OneRandomBehaviour<>(                 // Run a random task from the below options
-                        new SetRandomSwimTarget<>().setRadius(30,21),          // Set a random walk target to a nearby position
-                        new Idle<>().runFor(entity -> entity.getRandom().nextInt(30, 60)))); // Do nothing for 1.5->3 seconds
-    }
-
-    @Override
-    public BrainActivityGroup<GreatWhiteSharkEntityForge> getFightTasks() { // These are the tasks that handle fighting
+    public BrainActivityGroup<GreatWhiteSharkEntity> getFightTasks() { // These are the tasks that handle fighting
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>()
                         .invalidateIf((entity, target) -> !isInWaterOrBubble() || target instanceof Player pl && (pl.isCreative() || pl.isSpectator())), // Cancel fighting if the target is no longer valid
@@ -152,34 +121,6 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
                            }
                        },1))
         ); // Melee attack the target if close enough
-    }
-
-    @Override
-    protected Brain.Provider<?> brainProvider() {
-        return new SmartBrainProvider<>(this);
-    }
-
-    @Override
-    protected void customServerAiStep() {
-        super.customServerAiStep();
-        tickBrain(this);
-    }
-
-    @Override
-    protected PathNavigation createNavigation(Level pLevel) {
-        return new WaterBoundPathNavigation(this, pLevel) {
-            @Override
-            protected boolean canUpdatePath() {
-                return true;
-            }
-
-            @Override
-            protected PathFinder createPathFinder(int pMaxVisitedNodes) {
-                nodeEvaluator = new AmphibiousNodeEvaluator(true);
-                nodeEvaluator.setCanOpenDoors(false);
-                return new PathFinder(this.nodeEvaluator, pMaxVisitedNodes);
-            }
-        };
     }
 
     @Override

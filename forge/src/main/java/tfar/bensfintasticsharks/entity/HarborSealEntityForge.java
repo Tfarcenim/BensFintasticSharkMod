@@ -35,10 +35,10 @@ import tfar.bensfintasticsharks.ModAnimations;
 
 import java.util.List;
 
-public class HarborSealEntityForge extends HarborSealEntity implements GeoEntity, SmartBrainOwner<HarborSealEntityForge> {
+public class HarborSealEntityForge extends HarborSealEntity implements GeoEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    public HarborSealEntityForge(EntityType<? extends WaterAnimal> $$0, Level $$1) {
+    public HarborSealEntityForge(EntityType<HarborSealEntity> $$0, Level $$1) {
         super($$0, $$1);
     }
 
@@ -66,51 +66,6 @@ public class HarborSealEntityForge extends HarborSealEntity implements GeoEntity
     }
 
     @Override
-    public List<? extends ExtendedSensor<? extends HarborSealEntityForge>> getSensors() {
-        return List.of(new HurtBySensor<>());
-    }
-
-    @Override
-    public BrainActivityGroup<? extends HarborSealEntityForge> getCoreTasks() {
-        return BrainActivityGroup.coreTasks(
-                new LookAtTarget<>(),                      // Have the entity turn to face and look at its current look target
-                new MoveToWalkTarget<>(), new Panic<>());
-    }
-
-    @Override
-    public BrainActivityGroup<? extends HarborSealEntityForge> getIdleTasks() {
-        // These are the tasks that run when the mob isn't doing anything else (usually)
-        return BrainActivityGroup.idleTasks(
-                new FirstApplicableBehaviour<>(      // Run only one of the below behaviours, trying each one in order. Include the generic type because JavaC is silly
-                        new SetPlayerLookTarget<>(),          // Set the look target for the nearest player
-                        new SetRandomLookTarget<>()),         // Set a random look target
-                new OneRandomBehaviour<>(                 // Run a random task from the below options
-                        new SetRandomWalkTarget<>(),          // Set a random walk target to a nearby position
-                        new Idle<>().runFor(entity -> entity.getRandom().nextInt(60, 120)))); // Do nothing for 1.5->3 seconds
-    }
-
-    @Override
-    public float getWalkTargetValue(BlockPos pPos, LevelReader pLevel) {
-        return 0.0F;
-    }
-
-    @Override
-    protected void handleAirSupply(int pAirSupply) {
-
-    }
-
-    @Override
-    protected Brain.Provider<?> brainProvider() {
-        return new SmartBrainProvider<>(this);
-    }
-
-    @Override
-    protected void customServerAiStep() {
-        super.customServerAiStep();
-        tickBrain(this);
-    }
-
-    @Override
     protected void tickDeath() {
         ++this.deathTime;
         this.triggerAnim("idle_controller", "death");
@@ -119,6 +74,4 @@ public class HarborSealEntityForge extends HarborSealEntity implements GeoEntity
             this.dropExperience();
         }
     }
-
-
 }
