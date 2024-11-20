@@ -45,6 +45,7 @@ import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
+import tfar.bensfintasticsharks.BensFintasticSharks;
 import tfar.bensfintasticsharks.ModAnimations;
 
 import java.util.List;
@@ -159,14 +160,7 @@ public class GreatHammerheadSharkEntityForge extends GreatHammerheadSharkEntity 
     }
 
 
-    public void grabMob(LivingEntity entity) {
-        if (entity == this.getTarget() && !entity.hasPassenger(this) && this.isInWater()) {
-            entity.startRiding(this);
-            if (entity instanceof ServerPlayer serverPlayer)
-                serverPlayer.connection.send(new ClientboundSetPassengersPacket(entity));
-        }
-        setGrabTimer(100000);
-    }
+
 
 
     @Override

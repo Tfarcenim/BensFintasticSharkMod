@@ -154,15 +154,6 @@ public class GreatWhiteSharkEntityForge extends GreatWhiteSharkEntity implements
         ); // Melee attack the target if close enough
     }
 
-    public void grabMob(LivingEntity entity) {
-        if (entity == this.getTarget() && !entity.hasPassenger(this) && this.isInWater()) {
-            entity.startRiding(this);
-            if (entity instanceof ServerPlayer serverPlayer)
-               serverPlayer.connection.send(new ClientboundSetPassengersPacket(entity));
-        }
-        setGrabTimer(100000);
-    }
-
     @Override
     protected Brain.Provider<?> brainProvider() {
         return new SmartBrainProvider<>(this);

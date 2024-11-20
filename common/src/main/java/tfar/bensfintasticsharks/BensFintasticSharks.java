@@ -29,6 +29,7 @@ public class BensFintasticSharks {
 
     public static final PlayerFoundEntityTrigger PLAYER_FOUND_ENTITY = CriteriaTriggers.register(new PlayerFoundEntityTrigger());
 
+    public static final int GRAB_TIMER = 100000;
 
     public static void init() {
         Services.PLATFORM.registerAll(ModEntityTypes.class, BuiltInRegistries.ENTITY_TYPE, EntityType.class);

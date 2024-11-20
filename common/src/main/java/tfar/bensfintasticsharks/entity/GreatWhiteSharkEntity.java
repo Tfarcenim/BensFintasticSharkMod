@@ -2,9 +2,11 @@ package tfar.bensfintasticsharks.entity;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -25,6 +27,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
+import tfar.bensfintasticsharks.BensFintasticSharks;
 import tfar.bensfintasticsharks.init.ModTags;
 
 import javax.annotation.Nullable;
@@ -71,6 +74,15 @@ public class GreatWhiteSharkEntity extends WaterAnimal implements ConditionalGlo
         }
     }
 
+    public void grabMob(LivingEntity entity) {
+        if (entity == this.getTarget() && !entity.hasPassenger(this) && this.isInWater()) {
+            entity.startRiding(this);
+            if (entity instanceof ServerPlayer serverPlayer)
+                serverPlayer.connection.send(new ClientboundSetPassengersPacket(entity));
+        }
+        setGrabTimer(BensFintasticSharks.GRAB_TIMER);
+    }
+
     @Override
     protected void positionRider(Entity entity, MoveFunction function) {
         Vec3 look = getLookAngle();
@@ -92,7 +104,7 @@ public class GreatWhiteSharkEntity extends WaterAnimal implements ConditionalGlo
     }
 
     float computeGrabAngle() {
-        int grabTimer = 100000 - getGrabTimer();
+        int grabTimer = BensFintasticSharks.GRAB_TIMER - getGrabTimer();
 
         int mod = grabTimer;//(grabTimer + 3) % 40;
 

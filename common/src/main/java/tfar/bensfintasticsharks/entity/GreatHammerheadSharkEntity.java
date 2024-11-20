@@ -2,9 +2,11 @@ package tfar.bensfintasticsharks.entity;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -21,6 +23,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
+import tfar.bensfintasticsharks.BensFintasticSharks;
 import tfar.bensfintasticsharks.init.ModTags;
 
 import javax.annotation.Nullable;
@@ -87,6 +90,15 @@ public class GreatHammerheadSharkEntity extends WaterAnimal {
         return center.add(look.x * scale,0,look.z * scale);
     }
 
+    public void grabMob(LivingEntity entity) {
+        if (entity == this.getTarget() && !entity.hasPassenger(this) && this.isInWater()) {
+            entity.startRiding(this);
+            if (entity instanceof ServerPlayer serverPlayer)
+                serverPlayer.connection.send(new ClientboundSetPassengersPacket(entity));
+        }
+        setGrabTimer(BensFintasticSharks.GRAB_TIMER);
+    }
+
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
         RandomSource randomsource = pLevel.getRandom();
@@ -128,7 +140,7 @@ public class GreatHammerheadSharkEntity extends WaterAnimal {
     }
 
      float computeGrabAngle() {
-        int grabTimer = 100000 - getGrabTimer();
+        int grabTimer = BensFintasticSharks.GRAB_TIMER - getGrabTimer();
 
         int mod = grabTimer;//(grabTimer + 3) % 40;
 
