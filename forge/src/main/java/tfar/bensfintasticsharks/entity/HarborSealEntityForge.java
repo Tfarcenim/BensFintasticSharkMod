@@ -20,16 +20,19 @@ public class HarborSealEntityForge extends HarborSealEntity implements GeoEntity
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "idle_controller", 0, event -> {
-            boolean isDead = this.dead || this.getHealth() < 0.01 || this.isDeadOrDying();
+        controllers.add(new AnimationController<>(this, "controller", 5, event -> {
+            boolean isDead = this.dead || this.isDeadOrDying();
             boolean isFastMoving = getDeltaMovement().lengthSqr() > .01;
             boolean basking = onGround() && !isInWaterOrBubble() && !event.isMoving();
             if (basking) {
-                return event.setAndContinue(ModAnimations.BASK);
+                return event.setAndContinue(ModAnimations.BASK3);
             }
-
             if (event.isMoving() && !isDead) {
-                return event.setAndContinue(isFastMoving ? ModAnimations.FAST_SWIM : DefaultAnimations.SWIM);
+                if (isInWaterOrBubble()) {
+                    return event.setAndContinue(isFastMoving ? ModAnimations.FAST_SWIM : DefaultAnimations.SWIM);
+                } else {
+                    return event.setAndContinue(DefaultAnimations.WALK);
+                }
             }
             return event.setAndContinue(DefaultAnimations.SWIM);
         })
@@ -44,7 +47,7 @@ public class HarborSealEntityForge extends HarborSealEntity implements GeoEntity
     @Override
     protected void tickDeath() {
         ++this.deathTime;
-        this.triggerAnim("idle_controller", "death");
+        this.triggerAnim("controller", "death");
         if (this.deathTime == 30) {
             this.remove(Entity.RemovalReason.KILLED);
             this.dropExperience();

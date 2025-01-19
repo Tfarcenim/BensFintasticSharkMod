@@ -48,7 +48,7 @@ public class HarborSealEntity extends SmartWaterAnimal<HarborSealEntity> {
         super($$0, $$1);
 
         //Mob pMob, int pMaxTurnX, int pMaxTurnY, float pInWaterSpeedModifier, float pOutsideWaterSpeedModifier, boolean pApplyGravity
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1 / 20f, .25f, false);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1 / 20f, 1/5f, false);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
 
         this.setMaxUpStep(1);

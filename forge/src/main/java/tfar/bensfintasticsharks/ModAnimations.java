@@ -10,4 +10,7 @@ public class ModAnimations {
     public static final RawAnimation BEACHED2 = RawAnimation.begin().thenLoop("misc.beached2");
 
     public static final RawAnimation BASK = RawAnimation.begin().thenLoop("misc.bask");
+    public static final RawAnimation BASK2 = RawAnimation.begin().thenLoop("bask2");
+    public static final RawAnimation BASK3 = RawAnimation.begin().thenLoop("bask3");
+    public static final RawAnimation BASK4 = RawAnimation.begin().thenLoop("bask4");
 }
